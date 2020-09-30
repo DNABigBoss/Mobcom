@@ -1,10 +1,10 @@
 # Sprint Backlog
-1. [Membuat Halaman Home](https://github.com/DNABigBoss/Mobcom/issues/1)
-2. [Membuat Halaman Login](https://github.com/DNABigBoss/Mobcom/issues/2)
-3. [Membuat Halaman Register](https://github.com/DNABigBoss/Mobcom/issues/3)
-4. [Membuat Halaman Splash Screen](https://github.com/DNABigBoss/Mobcom/issues/4)
-5. [Mencari Informasi Resep Jajanan](https://github.com/DNABigBoss/Mobcom/issues/5)
-6. [Mencari Informasi Harga Jual Produk Jajanan](https://github.com/DNABigBoss/Mobcom/issues/6)
+1. [Membuat Layout Halaman Resep](https://github.com/DNABigBoss/Mobcom/issues/8)
+2. [Membuat Layout Halaman Step Resep](https://github.com/DNABigBoss/Mobcom/issues/9)
+3. [Membuat Layout Halaman Bookmark](https://github.com/DNABigBoss/Mobcom/issues/10)
+4. [Membuat Layout Halaman Profile](https://github.com/DNABigBoss/Mobcom/issues/11)
+5. [Merancang Database](https://github.com/DNABigBoss/Mobcom/issues/12)
+6. [Membuat Fungsi Get Resep Menggunakan Web Service](https://github.com/DNABigBoss/Mobcom/issues/13)
 
-# Sprint 2
-21 September -> 27 September 2020 (Minggu ke-4 Mobile Computing 13)
+# Sprint 3
+28 September -> 04 Oktober 2020 (Minggu ke-5 Mobile Computing 13)
