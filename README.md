@@ -5,15 +5,11 @@ Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113
 [Link Webservice](https://github.com/DNABigBoss/Mobcom-WebService)
 
 ## Product Backlog
-* Mencari Informasi Resep Jajanan
-* Mencari Informasi Harga Jual Produk Jajanan 
-* Membuat Register
-* Membuat Login
-* Membuat Splash Screen
-* Membuat Halaman Home
+[Link Product Backlog](https://docs.google.com/spreadsheets/d/1r3WDJ89zlLCm-d7Z5S2Uula23L_xRIfaPz61qAkNM74/edit?usp=sharing)
 
 ## Sprint 
 * [Sprint 2](https://github.com/DNABigBoss/Mobcom/tree/sprint2)
+* [Sprint 3](https://github.com/DNABigBoss/Mobcom/tree/sprint3)
 
 ## Author
 * Dwiki Sulthon Saputra Marbi - 1313617015 - [DNABigBoss](https://github.com/DNABigBoss)
