@@ -13,7 +13,7 @@ Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113
 * Membuat Halaman Home
 
 ## Sprint 
-* [Sprint 2](https://github.com/DNABigBoss/Mobcom/blob/sprint2/sprint2.md)
+* [Sprint 2](https://github.com/DNABigBoss/Mobcom/tree/sprint2)
 
 ## Author
 * Dwiki Sulthon Saputra Marbi - 1313617015 - [DNABigBoss](https://github.com/DNABigBoss)
