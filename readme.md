@@ -7,4 +7,4 @@
 6. [Membuat Fungsi Get Resep Menggunakan Web Service](https://github.com/DNABigBoss/Mobcom/issues/13)
 
 # Sprint 3
-28 September -> 04 Oktober 2020 (Minggu ke-5 Mobile Computing 13)
+28 September -> 04 Oktober 2020 (Minggu ke-5 Mobile Computing 113)
