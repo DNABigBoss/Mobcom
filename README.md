@@ -5,7 +5,7 @@ Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113
 [Link Webservice](https://github.com/DNABigBoss/Mobcom-WebService)
 
 ## Product Backlog
-[Link Product Backlog](https://docs.google.com/spreadsheets/d/1r3WDJ89zlLCm-d7Z5S2Uula23L_xRIfaPz61qAkNM74/edit?usp=sharing)
+[Link Product Backlog](https://docs.google.com/spreadsheets/d/17UESCjCuMqcH6AoVo_Gtnt-EjXaEHkXbpOpHY_e4tcw/edit?usp=sharing)
 
 ## Project Sprint Cards
 [Link Project Sprint Cards](https://github.com/DNABigBoss/Mobcom/projects/2)
