@@ -2,7 +2,7 @@
 Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113
 
 ## Author
-* [Dwiki Sulthon Saputra Marbi](https://github.com/DNABigBoss) - 1313617015
+* [Dwiki Sulthon Saputra Marbi](https://github.com/DNABigBoss) - 1313617015 - *Project Leader*
 * [Faqihuddin Al Farisi](https://github.com/falfisme) - 1313617025
 * [Razka Agniatara](https://github.com/Razka173) - 1313617023
 
