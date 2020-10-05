@@ -1,6 +1,11 @@
 # Mobcom - Resep Jajanan Kekinian
 Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113
 
+## Author
+* Dwiki Sulthon Saputra Marbi - 1313617015 - [DNABigBoss](https://github.com/DNABigBoss)
+* Faqihuddin Al Farisi - 1313617025 - [falfisme](https://github.com/falfisme)
+* Razka Agniatara - 1313617023 - [Razka173](https://github.com/Razka173)
+
 ## Link Webservice
 [Link Webservice](https://github.com/DNABigBoss/Mobcom-WebService)
 
@@ -13,8 +18,3 @@ Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113
 ## Sprint 
 * [Sprint 2](https://github.com/DNABigBoss/Mobcom/tree/sprint2)
 * [Sprint 3](https://github.com/DNABigBoss/Mobcom/tree/sprint3)
-
-## Author
-* Dwiki Sulthon Saputra Marbi - 1313617015 - [DNABigBoss](https://github.com/DNABigBoss)
-* Faqihuddin Al Farisi - 1313617025 - [falfisme](https://github.com/falfisme)
-* Razka Agniatara - 1313617023 - [Razka173](https://github.com/Razka173)
