@@ -92,6 +92,7 @@
                         android:layout_height="128dp"
                         android:layout_marginStart="10dp">
                         <ImageView
+                            android:id="@+id/cheesecake"
                             android:cropToPadding="false"
                             android:src="@drawable/oreocheesecake"
                             android:layout_width="match_parent"
