@@ -11,17 +11,13 @@ import android.widget.TextView;
 public class login extends AppCompatActivity {
 
     private TextView textView;
+    private Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Button button_login = (Button) findViewById(R.id.button2);
-        button_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(login.this, MainActivity.class));
-            }
-        });
+
         textView = (TextView) findViewById(R.id.daftar);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,10 +25,23 @@ public class login extends AppCompatActivity {
                 openDaftar();
             }
         });
+
+        button = (Button) findViewById(R.id.login);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMain();
+            }
+        });
     }
 
     public void openDaftar(){
         Intent intent = new Intent(this, daftar.class);
+        startActivity(intent);
+    }
+
+    public void openMain(){
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

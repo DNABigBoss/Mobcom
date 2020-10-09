@@ -4,214 +4,251 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".resep">
 
-    <ImageView
-        android:id="@+id/gambar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/oreo" />
+        android:background="@color/colorPrimary"
+        tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/gradient"
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gradiengambar" />
-
-    <ImageView
-        android:id="@+id/tombolback"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/titik3kanan" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="30dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView8"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/tombolback"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/save" />
-
-    <LinearLayout
-        android:layout_width="417dp"
-        android:layout_height="415dp"
-        android:layout_marginTop="316dp"
-        android:background="@drawable/bground"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="202dp"
-                    android:layout_height="80dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="79dp"
-                    android:layout_toStartOf="@+id/imageView10"
-                    android:fontFamily="@font/poppins_medium"
-                    android:lineSpacingExtra="-8sp"
-                    android:text="@string/judulresep"
-                    android:textSize="30sp" />
-
-                <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="55.83dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="35dp"
-                    android:layout_marginEnd="42dp"
-                    app:srcCompat="@drawable/mulai" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="64dp"
-                    android:layout_height="36dp"
-                    android:layout_below="@+id/imageView10"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="37dp"
-                    android:text="Mulai Memasak"
-                    android:textAlignment="center"
-                    android:textColor="#EC407A"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/imageView11"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_below="@+id/textView5"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="11dp"
-                    app:srcCompat="@drawable/view" />
-
-                <TextView
-                    android:id="@+id/numberview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/textView5"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_toEndOf="@+id/imageView11"
-                    android:text="@string/viewerresep"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/imageView12"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_below="@+id/textView5"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_toEndOf="@+id/numberview"
-                    app:srcCompat="@drawable/bookmark" />
-
-                <TextView
-                    android:id="@+id/numberbookmark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/textView5"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_toEndOf="@+id/imageView12"
-                    android:text="@string/savedresep"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/imageView13"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_below="@+id/textView5"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_toEndOf="@+id/numberbookmark"
-                    app:srcCompat="@drawable/comment" />
-
-                <TextView
-                    android:id="@+id/numbercomment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/textView5"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_toEndOf="@+id/imageView13"
-                    android:text="@string/commentresep"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/imageView15"
-                    android:layout_width="334dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageView11"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginEnd="25dp"
-                    app:srcCompat="@drawable/line" />
-
-            </RelativeLayout>
-
-
-        </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="254dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView3"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="-6dp"
-                android:layout_marginBottom="49dp"
-                android:text="TextView" />
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/oreo" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="123dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:lineSpacingExtra="-8sp"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:text="Oreo Cheesecake"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="126dp"
+                    android:baselineAligned="false"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="10dp"
+                        app:cardCornerRadius="10dp">
+
+                        <ImageView
+                            android:id="@+id/cheesecake"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/populer"
+                            android:cropToPadding="false"
+                            android:src="@drawable/mulai"></ImageView>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Mulai Memasak"
+                        android:textColor="@color/colorPrimary"></TextView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#EDEDED"
+                android:padding="8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_gravity = "center"
+                        android:layout_height="50dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/show"></ImageView>
+
+                        <TextView
+                            android:layout_width="68dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:text="2200"
+                            android:textColor="#898787"
+                            android:textSize="18sp"></TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_gravity = "center"
+                        android:layout_height="50dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            app:srcCompat="@drawable/star"></ImageView>
+
+                        <TextView
+                            android:layout_width="68dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:text="2200"
+                            android:textColor="#898787"
+                            android:textSize="18sp"></TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_gravity = "center"
+                        android:layout_height="50dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            app:srcCompat="@drawable/chat"></ImageView>
+
+                        <TextView
+                            android:layout_width="68dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:text="2200"
+                            android:textColor="#898787"
+                            android:textSize="18sp"></TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="34dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/caramembuat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Cara Membuat"
+                    android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/penjelasancaramembuat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="1. Tumbuk oreo bagian hitamnya hingga hancur dan cukup halus.
+
+\n2. Masak air hingga mendidih, masukkan gula putih dari oreo, keju parut, kental manis, susu bubuk dan gula halus, aduk rata.
+
+\n3. Jika sudah mendidih, tuangkan larutan maizena sedikit demi sedikit sambil diaduk-aduk hingga mengental dan jadi krim."
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#EDEDED"
+                android:padding="16dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:orientation="horizontal"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="34dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/bahanbahan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Bahan Bahan"
+                    android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/penjelasanbahanbahan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="\n110 keping oreo, pisahkan dengan gula putihnya
+\n75 gr keju parut
+\n2 sdm kental manis putih
+\n2 sdm susu bubuk putih
+\n3 sdm gula halus/bubuk
+\n500 ml air untuk melarutkan 5 sdm tepung maizena dan 6 sdm air"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
-
-
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
