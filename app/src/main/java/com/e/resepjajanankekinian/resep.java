@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class resep extends AppCompatActivity {
 
     Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +28,5 @@ public class resep extends AppCompatActivity {
             }
         });
     }
-
 
 }
