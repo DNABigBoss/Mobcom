@@ -24,9 +24,11 @@ public class profil extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.home:
                         startActivity(new Intent(profil.this, MainActivity.class));
+                        finish();
                         break;
                     case R.id.kulkas:
                         startActivity(new Intent(profil.this, kulkas.class));
+                        finish();
                         break;
                     case R.id.bookmark:
                         break;
@@ -41,6 +43,7 @@ public class profil extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(profil.this, login.class));
+                finish();
             }
         });
     }
