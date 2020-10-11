@@ -1,5 +1,7 @@
 # Mobcom - Resep Jajanan Kekinian :pizza: :hamburger: :fries:
-Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113
+Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113. 
+
+Ide kami dalam pembuatan aplikasi ini adalah meningkatnya tren masak-memasak pada era pandemi seperti ini, dikarenakan masyarakat lebih aktif di rumah bersama keluarga. Masyarakat lebih sering mencari resep masakan di youtube, bisa dilihat pada video yang berkaitan dengan resep-resep masakan  di youtube mendulang view yang banyak akhir-akhir ini.  karena banyaknya macam-macam video dan artikel mengenai berbagai jenis masakan sehingga tidak terstrukturnya jenis jenis masakan yang ada, aplikasi ini dapat membantu masyarakat dalam memasak masakan yang sejenis guna mempermudah pencarian pemakainya. Aplikasi ini sekiranya dapat juga memulihkan perekonomian keluarga bagi mereka yang terdampak agar dapat berjualan di sekitar rumahnya demi memenuhi kebutuhan harian
 
 ## Author :construction_worker: :construction_worker: :construction_worker:
 * [Dwiki Sulthon Saputra Marbi](https://github.com/DNABigBoss) - 1313617015 - *Project Leader*
