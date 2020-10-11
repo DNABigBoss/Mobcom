@@ -1,23 +1,22 @@
 package com.e.resepjajanankekinian;
 
-import android.os.Bundle;
-import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
 
-public class resep extends AppCompatActivity {
+public class comment extends AppCompatActivity {
 
     Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resep);
+        setContentView(R.layout.activity_comment);
 
         //View
         toolbar = (Toolbar)findViewById(R.id.toolbar);
-        toolbar.setTitle("Diskusi");
+        toolbar.setTitle("Resep");
         setSupportActionBar(toolbar);
 
         //Set icon to toolbar
@@ -29,6 +28,4 @@ public class resep extends AppCompatActivity {
             }
         });
     }
-
-
 }
