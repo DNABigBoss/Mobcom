@@ -1,9 +1,12 @@
 package com.e.resepjajanankekinian;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,11 +14,6 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.e.resepjajanankekinian.adapter.Adapter;
-import com.e.resepjajanankekinian.adapter.StepResepAdapter;
 import com.e.resepjajanankekinian.model.StepResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.GetResep;
@@ -29,7 +27,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class resep extends AppCompatActivity {
-    private StepResepAdapter adapter;
     ProgressDialog progressDialog;
     Integer id;
 
@@ -46,10 +43,22 @@ public class resep extends AppCompatActivity {
         final TextView penjelasanbahan = findViewById(R.id.penjelasanbahanbahan);
         final TextView stepmembuat = findViewById(R.id.penjelasancaramembuat);
 
+        ImageView mulaimemasak = findViewById(R.id.buttonMulaimasak);
+
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             id = extras.getInt("id");
         }
+
+        /* Ketika memulai memasak */
+        mulaimemasak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(resep.this, step_resep.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading....");
