@@ -26,5 +26,9 @@
     <string name="viewerresep">2200</string>
     <string name="savedresep">5</string>
     <string name="commentresep">20</string>
-  <string name="almond">Almond</string>
+    <string name="almond">Almond</string>
+    <string name="favorit">Favorit</string>
+    <string name="dilihat">Dilihat</string>
+    <string name="diskusi">Diskusi</string>
+    <string name="mulai_memasak">Mulai Memasak</string>
 </resources>

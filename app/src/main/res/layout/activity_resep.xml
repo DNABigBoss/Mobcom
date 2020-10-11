@@ -31,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/imagejajanan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -41,31 +41,33 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/namajajanan"
                     android:layout_width="wrap_content"
                     android:layout_height="123dp"
-                    android:layout_weight="1"
                     android:fontFamily="@font/poppins_medium"
                     android:lineSpacingExtra="-8sp"
-                    android:paddingLeft="20dp"
                     android:paddingTop="10dp"
-                    android:text="Oreo Cheesecake"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:text="@string/oreo_cheesecake"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:layout_weight="5"
+                    tools:ignore="NestedWeights" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="126dp"
+                    android:layout_height="wrap_content"
                     android:baselineAligned="false"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingLeft="10dp">
+                    tools:ignore="RtlSymmetry"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="56dp"
@@ -78,7 +80,7 @@
                             android:layout_height="match_parent"
                             android:contentDescription="@string/populer"
                             android:cropToPadding="false"
-                            android:src="@drawable/mulai"></ImageView>
+                            android:src="@drawable/mulai" />
                     </androidx.cardview.widget.CardView>
 
                     <TextView
@@ -86,8 +88,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Mulai Memasak"
-                        android:textColor="@color/colorPrimary"></TextView>
+                        android:text="@string/mulai_memasak"
+                        android:textColor="@color/colorPrimary" />
 
                 </LinearLayout>
 
@@ -98,127 +100,86 @@
                 android:layout_height="match_parent"
                 android:background="#EDEDED"
                 android:padding="8dp"
-                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_gravity = "center"
-                        android:layout_weight="1"
-                        android:layout_height="50dp">
+                        android:layout_height="50dp"
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/show"></ImageView>
+                            app:srcCompat="@drawable/show"
+                            android:contentDescription="@string/dilihat" />
 
                         <TextView
+                            android:id="@+id/dilihat"
                             android:layout_width="68dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="20dp"
-                            android:text="2200"
-                            android:textColor="#898787"
-                            android:textSize="18sp"></TextView>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_gravity = "center"
-                        android:layout_weight="1"
-                        android:layout_height="50dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="10dp"
-                            app:srcCompat="@drawable/star"></ImageView>
-
-                        <TextView
-                            android:layout_width="68dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="20dp"
                             android:text="2200"
                             android:textColor="#898787"
-                            android:textSize="18sp"></TextView>
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_gravity = "center"
                         android:layout_height="50dp"
+                        tools:ignore="UseCompoundDrawables"
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="10dp"
-                            app:srcCompat="@drawable/chat"></ImageView>
+                            app:srcCompat="@drawable/star"
+                            android:contentDescription="@string/favorit" />
+
+                        <TextView
+                            android:id="@+id/favorit"
+                            android:layout_width="68dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:text="2200"
+                            android:textColor="#898787"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_gravity = "center"
+                        android:layout_height="50dp"
+                        tools:ignore="UseCompoundDrawables"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="20dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            app:srcCompat="@drawable/chat"
+                            android:contentDescription="@string/diskusi" />
 
                         <TextView
                             android:layout_width="68dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="10dp"
                             android:text="2200"
                             android:textColor="#898787"
-                            android:textSize="18sp"></TextView>
+                            android:textSize="14sp" />
                     </LinearLayout>
 
-                </LinearLayout>
-
             </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="34dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/caramembuat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Cara Membuat"
-                    android:textSize="24sp" />
-                <TextView
-                    android:id="@+id/penjelasancaramembuat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="1. Tumbuk oreo bagian hitamnya hingga hancur dan cukup halus.
-
-\n2. Masak air hingga mendidih, masukkan gula putih dari oreo, keju parut, kental manis, susu bubuk dan gula halus, aduk rata.
-
-\n3. Jika sudah mendidih, tuangkan larutan maizena sedikit demi sedikit sambil diaduk-aduk hingga mengental dan jadi krim."
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#EDEDED"
-                android:padding="16dp"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:orientation="horizontal"></LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -248,7 +209,43 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="34dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/caramembuat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Cara Membuat"
+                    android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/penjelasancaramembuat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="1. Tumbuk oreo bagian hitamnya hingga hancur dan cukup halus.
+
+\n\n2. Masak air hingga mendidih, masukkan gula putih dari oreo, keju parut, kental manis, susu bubuk dan gula halus, aduk rata.
+
+\n\n3. Jika sudah mendidih, tuangkan larutan maizena sedikit demi sedikit sambil diaduk-aduk hingga mengental dan jadi krim."
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#EDEDED"
+                android:padding="20dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal" />
         </LinearLayout>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

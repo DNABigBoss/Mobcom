@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".step_resep"></activity>
+        <activity android:name=".test"></activity>
+        <activity android:name=".profil" />
+        <activity android:name=".kulkas" />
         <activity android:name=".BookmarkActivity"></activity>
         <activity android:name=".comment">
         </activity>
@@ -30,4 +34,7 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>
