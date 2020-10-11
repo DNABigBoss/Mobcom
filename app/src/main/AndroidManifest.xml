@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".BookmarkActivity"></activity>
         <activity
             android:name=".splash_screen"
             android:theme="@style/AppTheme.NoActionBar">
@@ -18,12 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.e.resepjajanankekinian.daftar"></activity>
-        <activity android:name="com.e.resepjajanankekinian.login" />
+        <activity android:name=".daftar" />
+        <activity android:name=".login" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
