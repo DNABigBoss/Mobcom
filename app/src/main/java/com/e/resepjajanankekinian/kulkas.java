@@ -23,6 +23,7 @@ public class kulkas extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.home:
                         startActivity(new Intent(kulkas.this, MainActivity.class));
+                        finish();
                         break;
                     case R.id.kulkas:
                         break;
@@ -30,6 +31,7 @@ public class kulkas extends AppCompatActivity {
                         break;
                     case R.id.profile:
                         startActivity(new Intent(kulkas.this, profil.class));
+                        finish();
                         break;
                 }
                 return true;
