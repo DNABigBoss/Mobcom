@@ -20,4 +20,11 @@
     <string name="lihat_semua">Lihat Semua</string>
     <string name="oreo_cheesecake">Oreo Cheesecake</string>
     <string name="pencarian_terakhirmu">Pencarian Terakhirmu</string>
+
+    <!--    Resep-->
+    <string name="judulresep">Oreo Cheesecake</string>
+    <string name="viewerresep">2200</string>
+    <string name="savedresep">5</string>
+    <string name="commentresep">20</string>
+  <string name="almond">Almond</string>
 </resources>

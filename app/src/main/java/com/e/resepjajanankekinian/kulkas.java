@@ -9,13 +9,12 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class kulkas extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_kulkas);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -23,14 +22,16 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.home:
+                        startActivity(new Intent(kulkas.this, MainActivity.class));
+                        finish();
                         break;
                     case R.id.kulkas:
-                        startActivity(new Intent(MainActivity.this, kulkas.class));
                         break;
                     case R.id.bookmark:
                         break;
                     case R.id.profile:
-                        startActivity(new Intent(MainActivity.this, profil.class));
+                        startActivity(new Intent(kulkas.this, profil.class));
+                        finish();
                         break;
                 }
                 return true;
