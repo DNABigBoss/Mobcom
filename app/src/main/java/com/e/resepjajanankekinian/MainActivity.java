@@ -1,11 +1,13 @@
 package com.e.resepjajanankekinian;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,13 +16,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView showResep = (ImageView) findViewById(R.id.cheesecake);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
-        showResep.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, resep.class);
-                startActivity(intent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        break;
+                    case R.id.kulkas:
+                        startActivity(new Intent(MainActivity.this, kulkas.class));
+                        break;
+                    case R.id.bookmark:
+                        break;
+                    case R.id.profile:
+                        startActivity(new Intent(MainActivity.this, profil.class));
+                        break;
+                }
+                return true;
             }
         });
     }
