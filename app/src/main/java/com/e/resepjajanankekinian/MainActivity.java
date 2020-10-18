@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, kulkas.class));
                         break;
                     case R.id.bookmark:
+                        startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
                         break;
                     case R.id.profile:
                         startActivity(new Intent(MainActivity.this, profil.class));
