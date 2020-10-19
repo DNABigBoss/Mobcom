@@ -1,6 +1,7 @@
 package com.e.resepjajanankekinian;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 public class BookmarkActivity extends AppCompatActivity {
 
     private ImageButton btnBack;
+    private CardView imageBookmark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +25,23 @@ public class BookmarkActivity extends AppCompatActivity {
                 goBack();
             }
         });
+
+        imageBookmark = findViewById(R.id.imageBookmark);
+        imageBookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goResep();
+            }
+        });
     }
 
     public void goBack(){
         Intent intent = new Intent(BookmarkActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goResep(){
+        Intent intent = new Intent(BookmarkActivity.this, resep.class);
         startActivity(intent);
     }
 }

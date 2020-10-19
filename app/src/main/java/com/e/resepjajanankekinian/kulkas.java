@@ -82,6 +82,7 @@ public class kulkas extends AppCompatActivity {
                     case R.id.kulkas:
                         break;
                     case R.id.bookmark:
+                        startActivity(new Intent(kulkas.this, BookmarkActivity.class));
                         break;
                     case R.id.profile:
                         startActivity(new Intent(kulkas.this, profil.class));
