@@ -4,43 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kulkas">
-
+    tools:context=".search_resep_bahan">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        tools:ignore="MissingConstraints" />
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:ignore="MissingConstraints">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="32sp"
-                android:text="@string/kulkas"
-                android:layout_weight="10">
-            </TextView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:text="@string/temukan_resep_makanan_berdasarkan_bahan_yang_kamu_punya"
-                android:layout_weight="10">
-            </TextView>
-        </LinearLayout>
-
         <LinearLayout
             android:id="@+id/layoutToolbar"
             android:layout_width="match_parent"
@@ -56,7 +33,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/customRecyclerViewKulkas"
@@ -68,7 +45,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="50dp"/>
     </LinearLayout>
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

@@ -17,7 +17,8 @@
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/x" />
+        app:srcCompat="@drawable/x"
+        android:contentDescription="@string/keluar" />
 
     <TextView
         android:id="@+id/textView4"
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Daftar"
+        android:text="@string/daftar"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -40,7 +41,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="33dp"
-        android:text="Login"
+        android:text="@string/login"
         android:textColor="#EC407A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.91"
@@ -48,63 +49,81 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/daftarNama"
         android:layout_width="344dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/input_bg"
         android:ems="10"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="textPersonName"
         android:paddingStart="30dp"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="RtlSymmetry"
+        android:importantForAutofill="no" />
 
-    <EditText
-        android:id="@+id/editTextTextPassword3"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_layout"
         android:layout_width="344dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/input_bg"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingStart="30dp"
-        android:textSize="16dp"
+        app:passwordToggleEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+        app:layout_constraintTop_toBottomOf="@+id/daftarEmail">
+        <EditText
+            android:id="@+id/daftarPass"
+            android:layout_width="344dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/input_bg"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingStart="30dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/daftarEmail"
+            tools:ignore="RtlSymmetry"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <EditText
-        android:id="@+id/editTextTextPersonName5"
+        android:id="@+id/daftarEmail"
         android:layout_width="343dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/input_bg"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textPersonName"
         android:paddingStart="30dp"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+        app:layout_constraintTop_toBottomOf="@+id/daftarNama"
+        tools:ignore="RtlSymmetry,TextFields"
+        android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/style"
+        android:id="@+id/buttonDaftar"
         android:layout_width="343dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/btn_pinkbg"
-        android:text="Daftar Sekarang"
+        android:text="@string/daftar_sekarang"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.459"
@@ -117,12 +136,13 @@
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Saya senang jika menerima informasi dari aplikasi ini seperti promosi dan kabar melalui email"
+        android:text="@string/saya_senang_jika_menerima_informasi_dari_aplikasi_ini_seperti_promosi_dan_kabar_melalui_email"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3"
+        app:layout_constraintTop_toBottomOf="@+id/password_layout"
         app:layout_constraintVertical_bias="0.002" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

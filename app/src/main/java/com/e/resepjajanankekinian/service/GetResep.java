@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public  interface GetResep {
-    @GET("/resep/")
+    @GET("resep")
     Call<StepResepData> getResep(@Query("id") Integer id);
 }
