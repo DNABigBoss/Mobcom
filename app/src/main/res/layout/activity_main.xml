@@ -22,12 +22,13 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
-                <SearchView
+                <Button
                     android:id="@+id/search_bar"
                     android:layout_width="248dp"
                     android:layout_height="32dp"
-                    android:queryHint="Mau bikin apa hari ini ?"
+                    android:drawableLeft="@drawable/ic_action_search"
                     android:background="#fff"
+                    android:drawablePadding="16dp"
                     android:layout_marginStart="15dp"
                     android:layout_gravity="center" />
                 <Button
@@ -106,6 +107,8 @@
                                 <ImageView
                                     android:cropToPadding="false"
                                     android:src="@drawable/oreocheesecake"
+                                    android:scaleType="centerCrop"
+                                    android:adjustViewBounds="true"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:contentDescription="@string/populer">
@@ -136,6 +139,8 @@
                                     android:src="@drawable/oreocheesecake"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"
+                                    android:adjustViewBounds="true"
                                     android:contentDescription="@string/populer">
                                 </ImageView>
                             </androidx.cardview.widget.CardView>
@@ -164,6 +169,8 @@
                                     android:src="@drawable/oreocheesecake"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"
+                                    android:adjustViewBounds="true"
                                     android:contentDescription="@string/populer">
                                 </ImageView>
                             </androidx.cardview.widget.CardView>
