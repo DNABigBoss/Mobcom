@@ -15,6 +15,6 @@ import retrofit2.http.GET;
 //    Call<List<MovieData>> getAllMovie();
 //}
 public  interface GetService {
-    @GET("/resep")
+    @GET("resep")
     Call<List<ResepData>> getAllResep();
 }

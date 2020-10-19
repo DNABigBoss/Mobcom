@@ -32,4 +32,12 @@
     <string name="diskusi">Diskusi</string>
     <string name="mulai_memasak">Mulai Memasak</string>
     <string name="step_resep_1">Tumbuk oreo bagian hitamnya hingga hancur dan cukup halus.</string>
+    <string name="temukan_resep_makanan_berdasarkan_bahan_yang_kamu_punya">Temukan resep makanan berdasarkan bahan yang kamu punya</string>
+    <string name="kulkas">KULKAS</string>
+    <string name="_2200">2200</string>
+    <string name="keluar">Keluar</string>
+    <string name="daftar">Daftar</string>
+    <string name="email">Email</string>
+    <string name="daftar_sekarang">Daftar Sekarang</string>
+    <string name="saya_senang_jika_menerima_informasi_dari_aplikasi_ini_seperti_promosi_dan_kabar_melalui_email">Saya senang jika menerima informasi dari aplikasi ini seperti promosi dan kabar melalui email</string>
 </resources>

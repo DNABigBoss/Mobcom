@@ -11,13 +11,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.e.resepjajanankekinian.adapter.Adapter;
+import com.e.resepjajanankekinian.adapter.SearchResepBahanAdapter;
 import com.e.resepjajanankekinian.model.ResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
+import com.e.resepjajanankekinian.service.GetSearchResep;
 import com.e.resepjajanankekinian.service.GetService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -38,17 +41,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        CardView cardView = findViewById(R.id.cardView);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        TextView textViewPencarianSemua = findViewById(R.id.pencarianSemua);
         Button button = (Button) findViewById(R.id.search_bar);
-        CardView cardView = (CardView) findViewById(R.id.cardView);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
         /*Create handle for the RetrofitInstance interface*/
-        GetService service = ApiClient.getRetrofitInstance().create(GetService.class);
-        Call<List<ResepData>> call = service.getAllResep();
+        GetSearchResep service = ApiClient.getRetrofitInstance().create(GetSearchResep.class);
+        Call<List<ResepData>> call = service.getResep(null, null, null, 10);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, resep.class));
+            }
+        });
+
+        /* Ketika mengklik lihat semua */
+        textViewPencarianSemua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, search_resep_bahan.class));
             }
         });
 
@@ -90,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.bookmark:
                         startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
+                        finish();
                         break;
                     case R.id.profile:
                         startActivity(new Intent(MainActivity.this, profil.class));
