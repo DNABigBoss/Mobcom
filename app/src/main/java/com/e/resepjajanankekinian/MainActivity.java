@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.e.resepjajanankekinian.adapter.Adapter;
@@ -31,6 +33,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private Adapter adapter;
     private RecyclerView recyclerView;
+    private Button button;
     ProgressDialog progressDialog;
 
     @Override
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         CardView cardView = findViewById(R.id.cardView);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         TextView textViewPencarianSemua = findViewById(R.id.pencarianSemua);
+        Button button = (Button) findViewById(R.id.search_bar);
 
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Loading....");
@@ -49,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
         /*Create handle for the RetrofitInstance interface*/
         GetSearchResep service = ApiClient.getRetrofitInstance().create(GetSearchResep.class);
         Call<List<ResepData>> call = service.getResep(null, null, null, 10);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, search.class));
+            }
+        });
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
