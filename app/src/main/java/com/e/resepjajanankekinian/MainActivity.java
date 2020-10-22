@@ -13,17 +13,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.e.resepjajanankekinian.adapter.Adapter;
-import com.e.resepjajanankekinian.adapter.SearchResepBahanAdapter;
 import com.e.resepjajanankekinian.model.ResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
-import com.e.resepjajanankekinian.service.GetSearchResep;
-import com.e.resepjajanankekinian.service.GetService;
+import com.e.resepjajanankekinian.service.ApiRequest;
+import com.e.resepjajanankekinian.service.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,31 +32,41 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private Adapter adapter;
     private RecyclerView recyclerView;
-    private Button button;
+    private Button button, buttonFav;
     ProgressDialog progressDialog;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CardView cardView = findViewById(R.id.cardView);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        TextView textViewPencarianSemua = findViewById(R.id.pencarianSemua);
-        Button button = (Button) findViewById(R.id.search_bar);
+        sessionManager = new SessionManager(this);
+        sessionManager.checkLogin();
+        HashMap<String, String> user = sessionManager.getUserDetail();
 
-        progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("Loading....");
-        progressDialog.show();
+        CardView cardView = findViewById(R.id.cardView);
+        TextView textViewPencarianSemua = findViewById(R.id.pencarianSemua);
+        button = findViewById(R.id.search_bar);
+        buttonFav = findViewById(R.id.buttonFavorite);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.home);
 
         /*Create handle for the RetrofitInstance interface*/
-        GetSearchResep service = ApiClient.getRetrofitInstance().create(GetSearchResep.class);
-        Call<List<ResepData>> call = service.getResep(null, null, null, 10);
+        ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<List<ResepData>> call = apiRequest.getResep(null, null, null, 10, "dilihat");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, search.class));
+            }
+        });
+
+        buttonFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
             }
         });
 
@@ -79,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<ResepData>>() {
             @Override
             public void onResponse(Call<List<ResepData>> call, Response<List<ResepData>> response) {
+                progressDialog = new ProgressDialog(MainActivity.this);
+                progressDialog.setMessage("Loading....");
+                progressDialog.show();
                 progressDialog.dismiss();
                 generateDataList(response.body());
             }

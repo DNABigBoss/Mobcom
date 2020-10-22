@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,9 +11,7 @@ import android.widget.Toast;
 
 import com.e.resepjajanankekinian.model.StepResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
-import com.e.resepjajanankekinian.service.GetResep;
-import com.jakewharton.picasso.OkHttp3Downloader;
-import com.squareup.picasso.Picasso;
+import com.e.resepjajanankekinian.service.ApiRequest;
 
 import java.util.List;
 
@@ -44,8 +41,8 @@ public class step_resep extends AppCompatActivity {
         progressDialog.show();
 
         /*Create handle for the RetrofitInstance interface*/
-        GetResep service = ApiClient.getRetrofitInstance().create(GetResep.class);
-        Call<StepResepData> call = service.getResep(id);
+        ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<StepResepData> call = apiRequest.getStepResep(id);
 
         call.enqueue(new Callback<StepResepData>() {
             @Override
