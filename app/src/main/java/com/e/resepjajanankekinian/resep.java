@@ -4,9 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,27 +12,40 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.e.resepjajanankekinian.model.StepResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
-import com.e.resepjajanankekinian.service.GetResep;
+import com.e.resepjajanankekinian.service.ApiRequest;
+import com.e.resepjajanankekinian.service.SessionManager;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class resep extends AppCompatActivity {
     ProgressDialog progressDialog;
-    Integer id;
-
+    SessionManager sessionManager;
+    Integer resep_id;
     Toolbar toolbar;
+    Integer user_id;
+    ApiRequest apiRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resep);
+
+        sessionManager = new SessionManager(this);
+        sessionManager.checkLogin();
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        String ids = user.get(SessionManager.ID);
+        user_id = Integer.valueOf(ids);
 
         final TextView namajajanan = findViewById(R.id.namajajanan);
         final ImageView imagejajanan = findViewById(R.id.imagejajanan);
@@ -42,12 +53,13 @@ public class resep extends AppCompatActivity {
         final TextView favorit = findViewById(R.id.favorit);
         final TextView penjelasanbahan = findViewById(R.id.penjelasanbahanbahan);
         final TextView stepmembuat = findViewById(R.id.penjelasancaramembuat);
+        final ImageView buttonFav = findViewById(R.id.btnFav);
 
         ImageView mulaimemasak = findViewById(R.id.buttonMulaimasak);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            id = extras.getInt("id");
+            resep_id = extras.getInt("id");
         }
 
         /* Ketika memulai memasak */
@@ -55,7 +67,7 @@ public class resep extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(resep.this, step_resep.class);
-                intent.putExtra("id", id);
+                intent.putExtra("id", resep_id);
                 startActivity(intent);
             }
         });
@@ -65,8 +77,8 @@ public class resep extends AppCompatActivity {
         progressDialog.show();
 
         /*Create handle for the RetrofitInstance interface*/
-        GetResep service = ApiClient.getRetrofitInstance().create(GetResep.class);
-        Call<StepResepData> call = service.getResep(id);
+        apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<StepResepData> call = apiRequest.getStepResep(resep_id);
 
         call.enqueue(new Callback<StepResepData>() {
             @Override
@@ -109,6 +121,31 @@ public class resep extends AppCompatActivity {
             public void onFailure(Call<StepResepData> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(resep.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
+            }
+        });
+        /*
+        Click Favorit
+         */
+        buttonFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog = new ProgressDialog(resep.this);
+                progressDialog.setMessage("Loading....");
+                progressDialog.show();
+                Call<ResponseBody> call1 = apiRequest.postBookmark(user_id, resep_id);
+                call1.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        progressDialog.dismiss();
+                        Toast.makeText(resep.this, "Berhasil menjadi favorit", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        progressDialog.dismiss();
+                        Toast.makeText(resep.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

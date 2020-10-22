@@ -13,7 +13,8 @@ import android.widget.Toast;
 
 import com.e.resepjajanankekinian.model.UserData;
 import com.e.resepjajanankekinian.service.ApiClient;
-import com.e.resepjajanankekinian.service.GetUser;
+import com.e.resepjajanankekinian.service.ApiRequest;
+import com.e.resepjajanankekinian.service.SessionManager;
 
 import java.util.List;
 
@@ -28,11 +29,18 @@ public class login extends AppCompatActivity {
     private EditText editText;
     private EditText pass;
     ProgressDialog progressDialog;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sessionManager = new SessionManager(this);
+        if (sessionManager.isLogin()){
+            finish();
+            startActivity(new Intent(login.this, MainActivity.class));
+        }
 
         textView = findViewById(R.id.daftar);
         button = findViewById(R.id.login);
@@ -58,8 +66,8 @@ public class login extends AppCompatActivity {
                     progressDialog.setMessage("Loading....");
                     progressDialog.show();
                     if(txtLogin.matches(emailPattern)) {
-                        GetUser getUser = ApiClient.getRetrofitInstance().create(GetUser.class);
-                        Call<List<UserData>> call = getUser.getUser(null, txtLogin, txtPass);
+                        ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+                        Call<List<UserData>> call = apiRequest.getUser(null, txtLogin, txtPass);
                         call.enqueue(new Callback<List<UserData>>() {
                             @Override
                             public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response) {
@@ -67,7 +75,7 @@ public class login extends AppCompatActivity {
                                 String code = String.valueOf(response.code());
                                 switch (code) {
                                     case "200":
-                                        openMain();
+                                        openMain(response.body());
                                     case "400":
                                         Toast.makeText(login.this, code, Toast.LENGTH_SHORT).show();
                                     case "404":
@@ -82,8 +90,8 @@ public class login extends AppCompatActivity {
                             }
                         });
                     } else {
-                        GetUser getUser = ApiClient.getRetrofitInstance().create(GetUser.class);
-                        Call<List<UserData>> call = getUser.getUser(txtLogin, null, txtPass);
+                        ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+                        Call<List<UserData>> call = apiRequest.getUser(txtLogin, null, txtPass);
                         call.enqueue(new Callback<List<UserData>>() {
                             @Override
                             public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response) {
@@ -91,7 +99,7 @@ public class login extends AppCompatActivity {
                                 String code = String.valueOf(response.code());
                                 switch (code) {
                                     case "200":
-                                        openMain();
+                                        openMain(response.body());
                                     case "400":
                                         Toast.makeText(login.this, code, Toast.LENGTH_SHORT).show();
                                     case "404":
@@ -118,8 +126,13 @@ public class login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openMain(){
-        Intent intent = new Intent(this, MainActivity.class);
+    public void openMain(List<UserData> userDataList){
+        String nama = userDataList.get(0).getNama();
+        String email = userDataList.get(0).getEmail();
+        Integer id = userDataList.get(0).getId();
+        String idx = String.valueOf(id);
+        sessionManager.createSession(nama, email, idx);
+        Intent intent = new Intent(this, profil.class);
         startActivity(intent);
         finish();
     }

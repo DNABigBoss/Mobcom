@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,9 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.e.resepjajanankekinian.service.ApiClient;
-import com.e.resepjajanankekinian.service.PostUsers;
-
-import java.util.List;
+import com.e.resepjajanankekinian.service.ApiRequest;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -59,8 +55,8 @@ public class daftar extends AppCompatActivity {
                             progressDialog = new ProgressDialog(daftar.this);
                             progressDialog.setMessage("Loading....");
                             progressDialog.show();
-                            PostUsers postUsers = ApiClient.getRetrofitInstance().create(PostUsers.class);
-                            Call<ResponseBody> call = postUsers.postUser(namaPendaftar, emailPendaftar, passPendaftar);
+                            ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+                            Call<ResponseBody> call = apiRequest.postUser(namaPendaftar, emailPendaftar, passPendaftar);
                             call.enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

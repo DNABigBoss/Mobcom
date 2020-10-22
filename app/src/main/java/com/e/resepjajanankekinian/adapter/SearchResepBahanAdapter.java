@@ -24,8 +24,8 @@ import java.util.List;
  * Created by Dwiki Sulthon Saputra Marbi on 14/10/2020.
  */
 public class SearchResepBahanAdapter extends RecyclerView.Adapter<SearchResepBahanAdapter.CustomViewHolder> {
-    private List<ResepData> dataList;
-    private Context context;
+    private final List<ResepData> dataList;
+    private final Context context;
 
     public SearchResepBahanAdapter(Context context, List<ResepData> dataList){
         this.context = context;
@@ -34,11 +34,11 @@ public class SearchResepBahanAdapter extends RecyclerView.Adapter<SearchResepBah
     static class CustomViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
 
-        private TextView textViewName;
-        private TextView textViewDilihat;
-        private TextView textViewFavorit;
-        private ImageView imageView;
-        private CardView cardView;
+        private final TextView textViewName;
+        private final TextView textViewDilihat;
+        private final TextView textViewFavorit;
+        private final ImageView imageView;
+        private final CardView cardView;
 
         CustomViewHolder(View itemView){
             super(itemView);
@@ -64,7 +64,7 @@ public class SearchResepBahanAdapter extends RecyclerView.Adapter<SearchResepBah
         holder.textViewName.setText(ResepData.getNama());
         holder.textViewDilihat.setText(String.valueOf(ResepData.getDilihat()));
         holder.textViewFavorit.setText(String.valueOf(ResepData.getFavorit()));
-        final Integer idx = (Integer) ResepData.getId();
+        final Integer idx = ResepData.getId();
         Picasso.Builder builder = new Picasso.Builder(context);
         builder.downloader(new OkHttp3Downloader(context));
         builder.build().load(ResepData.getGambar())

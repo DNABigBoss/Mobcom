@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.e.resepjajanankekinian.adapter.BahanAdapter;
 import com.e.resepjajanankekinian.model.BahanData;
 import com.e.resepjajanankekinian.service.ApiClient;
-import com.e.resepjajanankekinian.service.GetBahan;
+import com.e.resepjajanankekinian.service.ApiRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -33,14 +33,15 @@ public class kulkas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kulkas);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.kulkas);
 
         progressDialog = new ProgressDialog(kulkas.this);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
         /*Create handle for the RetrofitInstance interface*/
-        GetBahan service = ApiClient.getRetrofitInstance().create(GetBahan.class);
-        Call<List<BahanData>> call = service.getAllBahan("Asc");
+        ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<List<BahanData>> call = apiRequest.getAllBahan("Asc");
 
         call.enqueue(new Callback<List<BahanData>>() {
             @Override
@@ -57,6 +58,7 @@ public class kulkas extends AppCompatActivity {
 
         /* search */
         SearchView searchView = findViewById(R.id.search_bar_kulkas);
+        searchView.setIconified(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -83,6 +85,7 @@ public class kulkas extends AppCompatActivity {
                         break;
                     case R.id.bookmark:
                         startActivity(new Intent(kulkas.this, BookmarkActivity.class));
+                        finish();
                         break;
                     case R.id.profile:
                         startActivity(new Intent(kulkas.this, profil.class));
