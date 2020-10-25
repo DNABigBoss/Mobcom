@@ -12,447 +12,86 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         tools:ignore="MissingConstraints" />
-
-    <ScrollView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:ignore="MissingConstraints">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewTambahComment"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="20dp">
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="8dp">
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
+                android:orientation="horizontal"
+                android:padding="8dp">
 
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_margin="8dp"
-                        app:cardCornerRadius="180dp">
-
-                        <ImageView
-                            android:id="@+id/avatar1"
-                            android:layout_width="56dp"
-                            android:layout_height="56dp"
-                            android:cropToPadding="false"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-
-                    </androidx.cardview.widget.CardView>
-
-                    <EditText
-                        android:id="@+id/editTextTextPersonName2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="Tuliskan Komentar Anda "
-                        android:inputType="textPersonName"
-                        android:paddingTop="16dp" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="180dp">
 
                     <ImageView
-                        android:id="@+id/send"
-                        android:layout_width="24dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="20dp"
-                        app:srcCompat="@android:drawable/ic_menu_send" />
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:background="#ededed"
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingTop="8dp">
-
-                    <androidx.cardview.widget.CardView
+                        android:id="@+id/avatar1"
                         android:layout_width="56dp"
                         android:layout_height="56dp"
-                        android:layout_weight="1"
-                        android:padding="8dp"
-                        app:cardCornerRadius="180dp">
-
-                        <ImageView
-                            android:id="@+id/imageView4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:cropToPadding="false"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-                    </androidx.cardview.widget.CardView>
+                        android:cropToPadding="false"
+                        tools:srcCompat="@tools:sample/avatars" />
 
 
-                </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="280"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/nama1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="Dwiki Sulton Saputra Marbi" />
-
-                    <TextView
-                        android:id="@+id/komen1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Eh ini enak keliatannya, nnt dicoba dahjjwdkwqjd nsijqnsisiqsnswqnsins pengen banget bikin"
-                        android:textSize="8pt" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:background="#ededed"
-
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <LinearLayout
+                <EditText
+                    android:id="@+id/editTextDiskusi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp">
+                    android:ems="10"
+                    android:hint="Tuliskan Komentar Anda "
+                    android:inputType="textPersonName"
+                    android:paddingTop="16dp" />
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="180dp">
-
-                        <ImageView
-                            android:id="@+id/avatar2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:cropToPadding="false"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-                    </androidx.cardview.widget.CardView>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="22"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/nama2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="Faqihuddin Al Farisi" />
-
-                    <TextView
-                        android:id="@+id/komen2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Eh ini enak kelites satu duatiga"
-                        android:textSize="8pt" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:background="#ededed"
-
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/send"
+                    android:layout_width="24dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="180dp">
-
-                        <ImageView
-                            android:id="@+id/avatar3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:cropToPadding="false"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-                    </androidx.cardview.widget.CardView>
+                    android:paddingTop="20dp"
+                    app:srcCompat="@android:drawable/ic_menu_send" />
 
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="22"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/nama3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="Razka Agniatara" />
-
-                    <TextView
-                        android:id="@+id/komen3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Eh ini enak keliatannya, nnt dicoba dahjjwdkwqjd
-    tes satu duatiga"
-                        android:textSize="8pt" />
-
-                </LinearLayout>
             </LinearLayout>
 
+        </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:background="#ededed"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/customRecyclerViewDiskusi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewTambahComment" />
+    <TextView
+        android:id="@+id/TextViewKosong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewTambahComment" />
 
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="180dp">
-
-                        <ImageView
-                            android:id="@+id/avatar4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:cropToPadding="false"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-                    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="22"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/nama4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="Dwiki Sulton Saputra Marbi" />
-
-                    <TextView
-                        android:id="@+id/komen4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Eh ini enak keliatannya, nnt dicoba dahjjwdkwqjd
-    tes satu duatiga"
-                        android:textSize="8pt" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:background="#ededed"
-
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="180dp">
-
-                        <ImageView
-                            android:id="@+id/avatar5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:cropToPadding="false"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-                    </androidx.cardview.widget.CardView>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="22"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/nama5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="Faqihuddin Al Farisi" />
-
-                    <TextView
-                        android:id="@+id/komen5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Eh ini enak keliatannya, nnt dicoba dahjjwdkwqjd
-    tes satu duatiga"
-                        android:textSize="8pt" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:background="#ededed"
-
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="180dp">
-
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:cropToPadding="false"
-                            tools:srcCompat="@tools:sample/avatars" />
-
-                    </androidx.cardview.widget.CardView>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="22"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="Razka Agniatara" />
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="Eh ini enak keliatannya, nnt dicoba dahjjwdkwqjd
-    tes satu duatiga"
-                        android:textSize="8pt" />
-
-                </LinearLayout>
-            </LinearLayout>
-            <!--            End-->
-        </LinearLayout>
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.e.resepjajanankekinian.service;
 
 import com.e.resepjajanankekinian.model.BahanData;
+import com.e.resepjajanankekinian.model.DiskusiData;
 import com.e.resepjajanankekinian.model.ResepData;
 import com.e.resepjajanankekinian.model.StepResepData;
 import com.e.resepjajanankekinian.model.UserData;
@@ -57,6 +58,12 @@ public interface ApiRequest {
     Call<List<ResepData>> getBookmark(@Query("user_id") Integer user_id);
 
     /*
+     * Get data bookmark
+     */
+    @GET("diskusi")
+    Call<List<DiskusiData>> getDiskusi(@Query("id") Integer id, @Query("resep_id") Integer resep_id);
+
+    /*
      * Post data user
      */
     @FormUrlEncoded
@@ -64,23 +71,30 @@ public interface ApiRequest {
     Call<ResponseBody> postUser(@Field("nama") String nama, @Field("email") String email, @Field("pass") String pass);
 
     /*
-     * Post data user
+     * Post data Bookmark
      */
     @FormUrlEncoded
     @POST("bookmark")
-    Call<ResponseBody> postBookmark(@Query("user_id") Integer user_id, @Query("resep_id") Integer resep_id);
+    Call<ResponseBody> postBookmark(@Field("user_id") Integer user_id, @Field("resep_id") Integer resep_id);
+
+    /*
+     * Post data diskusi
+     */
+    @FormUrlEncoded
+    @POST("diskusi")
+    Call<ResponseBody> postDiskusi(@Field("isi") String isi, @Field("user_id") Integer user_id, @Field("resep_id") Integer resep_id, @Field("disukai") Integer disukai, @Field("tanggal") String tanggal);
 
     /*
      * Put data resep
      */
     @FormUrlEncoded
     @PUT("resep")
-    Call<ResponseBody> putFavorit(@Query("id") Integer id, @Query("favorit") Integer favorit);
+    Call<ResponseBody> putFavorit(@Field("id") Integer id, @Field("favorit") Integer favorit);
 
     /*
      * Put data resep
      */
     @FormUrlEncoded
     @PUT("resep")
-    Call<ResponseBody> putResep(@Query("id") Integer id, @Field("nama") String nama, @Field("waktu_memasak") String waktu_memasak,@Query("porsi") Integer porsi, @Query("harga") Double harga, @Query("favorit") Integer favorit, @Query("dilihat") Integer dilihat, @Field("gambar") String gambar);
+    Call<ResponseBody> putResep(@Field("id") Integer id, @Field("nama") String nama, @Field("waktu_memasak") String waktu_memasak,@Field("porsi") Integer porsi, @Field("harga") Double harga, @Field("favorit") Integer favorit, @Field("dilihat") Integer dilihat, @Field("gambar") String gambar);
 }

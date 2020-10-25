@@ -2,13 +2,18 @@ package com.e.resepjajanankekinian;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.e.resepjajanankekinian.adapter.Adapter;
+import com.e.resepjajanankekinian.adapter.StepResepAdapter;
 import com.e.resepjajanankekinian.model.StepResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
@@ -20,6 +25,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class step_resep extends AppCompatActivity {
+    StepResepAdapter adapter;
+    RecyclerView recyclerView;
     ProgressDialog progressDialog;
     Integer id;
 
@@ -27,9 +34,6 @@ public class step_resep extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_resep);
-
-        final TextView nomorstep = findViewById(R.id.nomorstepresep);
-        final TextView stepresep = findViewById(R.id.stepresep);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -48,15 +52,9 @@ public class step_resep extends AppCompatActivity {
             @Override
             public void onResponse(Call<StepResepData> call, Response<StepResepData> response) {
                 progressDialog.dismiss();
-//                generateDataList(response.body());
                 StepResepData resource = response.body();
-                assert resource != null;
                 List<StepResepData.DatumStep> datumSteps = resource.getStep();
-                for (StepResepData.DatumStep datumStep: datumSteps) {
-                    String nomor_step = String.valueOf(datumStep.getNomor_step());
-                    nomorstep.setText(nomor_step);
-                    stepresep.setText(datumStep.getIntruksi());
-                }
+                generateDataList(datumSteps);
             }
 
             @Override
@@ -67,7 +65,9 @@ public class step_resep extends AppCompatActivity {
         });
 
         //View
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Step Resep");
+        toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
         //Set icon to toolbar
@@ -78,5 +78,13 @@ public class step_resep extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void generateDataList(List<StepResepData.DatumStep> stepResepData) {
+        recyclerView = findViewById(R.id.customRecyclerViewStep);
+        adapter = new StepResepAdapter(this, stepResepData);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(step_resep.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
     }
 }

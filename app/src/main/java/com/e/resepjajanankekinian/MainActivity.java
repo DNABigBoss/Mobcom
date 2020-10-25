@@ -45,16 +45,20 @@ public class MainActivity extends AppCompatActivity {
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetail();
 
-        CardView cardView = findViewById(R.id.cardView);
         TextView textViewPencarianSemua = findViewById(R.id.pencarianSemua);
         button = findViewById(R.id.search_bar);
         buttonFav = findViewById(R.id.buttonFavorite);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
 
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Loading....");
+        progressDialog.show();
+
         /*Create handle for the RetrofitInstance interface*/
         ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
         Call<List<ResepData>> call = apiRequest.getResep(null, null, null, 10, "dilihat");
+        Call<List<ResepData>> call1 = apiRequest.getResep(null, null, null, 10, "id");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,13 +74,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, resep.class));
-            }
-        });
-
         /* Ketika mengklik lihat semua */
         textViewPencarianSemua.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,14 +82,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Recyler View Populer
+         */
         call.enqueue(new Callback<List<ResepData>>() {
             @Override
             public void onResponse(Call<List<ResepData>> call, Response<List<ResepData>> response) {
-                progressDialog = new ProgressDialog(MainActivity.this);
-                progressDialog.setMessage("Loading....");
-                progressDialog.show();
                 progressDialog.dismiss();
-                generateDataList(response.body());
+                recyclerView = findViewById(R.id.customRecyclerView);
+                generateDataList(response.body(), recyclerView);
+            }
+
+            @Override
+            public void onFailure(Call<List<ResepData>> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(MainActivity.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*
+        Recyler View Baru ditambahkan
+         */
+        call1.enqueue(new Callback<List<ResepData>>() {
+            @Override
+            public void onResponse(Call<List<ResepData>> call, Response<List<ResepData>> response) {
+                progressDialog.dismiss();
+                recyclerView = findViewById(R.id.customRecyclerViewBaru);
+                generateDataList(response.body(), recyclerView);
             }
 
             @Override
@@ -128,8 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**generate data list method()
      */
-    private void generateDataList(List<ResepData> ResepDataList){
-        recyclerView = findViewById(R.id.customRecyclerView);
+    private void generateDataList(List<ResepData> ResepDataList, RecyclerView recyclerView){
         adapter = new Adapter(this, ResepDataList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
