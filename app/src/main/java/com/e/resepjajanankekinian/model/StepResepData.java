@@ -15,12 +15,16 @@ public class StepResepData {
     public List<DatumBahan> bahan;
 
     @SerializedName("step")
-    public   List<DatumStep> step;
+    public List<DatumStep> step;
 
-    public StepResepData(List<DatumInfo> info, List<DatumBahan> bahan, List<DatumStep> step) {
+    @SerializedName("diskusi")
+    public List<DatumDiskusi> diskusi;
+
+    public StepResepData(List<DatumInfo> info, List<DatumBahan> bahan, List<DatumStep> step, List<DatumDiskusi> diskusi) {
         this.info = info;
         this.bahan = bahan;
         this.step = step;
+        this.diskusi = diskusi;
     }
 
     public List<DatumInfo> getInfo() {
@@ -45,6 +49,14 @@ public class StepResepData {
 
     public void setStep(List<DatumStep> step) {
         this.step = step;
+    }
+
+    public List<DatumDiskusi> getDiskusi() {
+        return diskusi;
+    }
+
+    public void setDiskusi(List<DatumDiskusi> diskusi) {
+        this.diskusi = diskusi;
     }
 
     public class DatumBahan {
@@ -194,6 +206,78 @@ public class StepResepData {
 
         public void setGambar(String gambar) {
             this.gambar = gambar;
+        }
+    }
+
+    public class DatumDiskusi {
+        @SerializedName("id")
+        public Integer id;
+        @SerializedName("isi")
+        public String isi;
+        @SerializedName("user_id")
+        public Integer user_id;
+        @SerializedName("nama")
+        public String nama;
+        @SerializedName("disukai")
+        public Integer disukai;
+        @SerializedName("tanggal")
+        public String tanggal;
+
+        public DatumDiskusi(Integer id, String isi, Integer user_id, String nama, Integer disukai, String tanggal) {
+            this.id = id;
+            this.isi = isi;
+            this.user_id = user_id;
+            this.nama = nama;
+            this.disukai = disukai;
+            this.tanggal = tanggal;
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getIsi() {
+            return isi;
+        }
+
+        public void setIsi(String isi) {
+            this.isi = isi;
+        }
+
+        public Integer getUser_id() {
+            return user_id;
+        }
+
+        public void setUser_id(Integer user_id) {
+            this.user_id = user_id;
+        }
+
+        public String getNama() {
+            return nama;
+        }
+
+        public void setNama(String nama) {
+            this.nama = nama;
+        }
+
+        public Integer getDisukai() {
+            return disukai;
+        }
+
+        public void setDisukai(Integer disukai) {
+            this.disukai = disukai;
+        }
+
+        public String getTanggal() {
+            return tanggal;
+        }
+
+        public void setTanggal(String tanggal) {
+            this.tanggal = tanggal;
         }
     }
 

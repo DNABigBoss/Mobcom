@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,6 @@ public class resep extends AppCompatActivity {
     ProgressDialog progressDialog;
     SessionManager sessionManager;
     Integer resep_id;
-    Toolbar toolbar;
     Integer user_id;
     ApiRequest apiRequest;
 
@@ -54,6 +54,8 @@ public class resep extends AppCompatActivity {
         final TextView penjelasanbahan = findViewById(R.id.penjelasanbahanbahan);
         final TextView stepmembuat = findViewById(R.id.penjelasancaramembuat);
         final ImageView buttonFav = findViewById(R.id.btnFav);
+        final TextView diskusicount = findViewById(R.id.resepDiskusiCount);
+        final LinearLayout resepdiskusi = findViewById(R.id.resepDiskusi);
 
         ImageView mulaimemasak = findViewById(R.id.buttonMulaimasak);
 
@@ -84,12 +86,11 @@ public class resep extends AppCompatActivity {
             @Override
             public void onResponse(Call<StepResepData> call, Response<StepResepData> response) {
                 progressDialog.dismiss();
-//                generateDataList(response.body());
                 StepResepData resource = response.body();
-                assert resource != null;
                 List<StepResepData.DatumInfo> datumInfos = resource.getInfo();
                 List<StepResepData.DatumBahan> datumBahans = resource.getBahan();
                 List<StepResepData.DatumStep> datumSteps = resource.getStep();
+                List<StepResepData.DatumDiskusi> datumDiskusis = resource.getDiskusi();
 
                 for (StepResepData.DatumInfo datumInfo : datumInfos) {
                     namajajanan.setText(datumInfo.getNama());
@@ -115,12 +116,15 @@ public class resep extends AppCompatActivity {
                     step = step + nomor_step + ". " + datumStep.getIntruksi() + "\n\n";
                 }
                 stepmembuat.setText(step);
+
+                Integer countDiskusi = datumDiskusis.size();
+                diskusicount.setText(String.valueOf(countDiskusi));
             }
 
             @Override
             public void onFailure(Call<StepResepData> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(resep.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
+                Toast.makeText(resep.this, "Gagal Memuat Resep", Toast.LENGTH_SHORT).show();
             }
         });
         /*
@@ -138,19 +142,33 @@ public class resep extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         progressDialog.dismiss();
                         Toast.makeText(resep.this, "Berhasil menjadi favorit", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(resep.this, resep.class);
+                        intent.putExtra("resep_id", resep_id);
+                        startActivity(intent);
+                        finish();
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         progressDialog.dismiss();
-                        Toast.makeText(resep.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(resep.this, "Gagal menjadi Favorit", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
 
+        // Click untuk diskusi
+        resepdiskusi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(resep.this, comment.class);
+                intent.putExtra("resep_id", resep_id);
+                startActivity(intent);
+            }
+        });
+
         //View
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Resep");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
@@ -164,12 +182,5 @@ public class resep extends AppCompatActivity {
             }
         });
     }
-
-    /**generate data list method()
-
-    private void generateDataList(List<StepResepData> ResepDataList){
-
-    }
-     */
 
 }
