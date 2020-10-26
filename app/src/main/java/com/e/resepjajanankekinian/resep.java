@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class resep extends AppCompatActivity {
+    private static final String TAG = "Resep Activity";
     ProgressDialog progressDialog;
     SessionManager sessionManager;
     Integer resep_id;
@@ -85,16 +87,18 @@ public class resep extends AppCompatActivity {
         call.enqueue(new Callback<StepResepData>() {
             @Override
             public void onResponse(Call<StepResepData> call, Response<StepResepData> response) {
-                progressDialog.dismiss();
+                Log.d(TAG, "server contacted and has file");
                 StepResepData resource = response.body();
                 List<StepResepData.DatumInfo> datumInfos = resource.getInfo();
                 List<StepResepData.DatumBahan> datumBahans = resource.getBahan();
                 List<StepResepData.DatumStep> datumSteps = resource.getStep();
                 List<StepResepData.DatumDiskusi> datumDiskusis = resource.getDiskusi();
 
+                Integer dilihat_count = 0;
                 for (StepResepData.DatumInfo datumInfo : datumInfos) {
+                    dilihat_count =datumInfo.getDilihat();
                     namajajanan.setText(datumInfo.getNama());
-                    dilihat.setText(String.valueOf(datumInfo.getDilihat()));
+                    dilihat.setText(String.valueOf(dilihat_count));
                     favorit.setText(String.valueOf(datumInfo.getFavorit()));
                     Picasso.Builder builder = new Picasso.Builder(resep.this);
                     builder.downloader(new OkHttp3Downloader(resep.this));
@@ -119,6 +123,19 @@ public class resep extends AppCompatActivity {
 
                 Integer countDiskusi = datumDiskusis.size();
                 diskusicount.setText(String.valueOf(countDiskusi));
+
+                Call<ResponseBody> call2 = apiRequest.putView(resep_id, dilihat_count+1);
+                call2.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e(TAG, "error");
+                    }
+                });
             }
 
             @Override
@@ -142,9 +159,7 @@ public class resep extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         progressDialog.dismiss();
                         Toast.makeText(resep.this, "Berhasil menjadi favorit", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(resep.this, resep.class);
-                        intent.putExtra("resep_id", resep_id);
-                        startActivity(intent);
+
                         finish();
                     }
 
