@@ -77,9 +77,9 @@ public class login extends AppCompatActivity {
                                     case "200":
                                         openMain(response.body());
                                     case "400":
-                                        Toast.makeText(login.this, code, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
                                     case "404":
-                                        Toast.makeText(login.this, code, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -101,9 +101,9 @@ public class login extends AppCompatActivity {
                                     case "200":
                                         openMain(response.body());
                                     case "400":
-                                        Toast.makeText(login.this, code, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
                                     case "404":
-                                        Toast.makeText(login.this, code, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -132,7 +132,7 @@ public class login extends AppCompatActivity {
         Integer id = userDataList.get(0).getId();
         String idx = String.valueOf(id);
         sessionManager.createSession(nama, email, idx);
-        Intent intent = new Intent(this, profil.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

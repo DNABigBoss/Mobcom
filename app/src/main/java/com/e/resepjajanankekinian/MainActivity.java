@@ -6,9 +6,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -30,6 +33,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "Main Activity";
     private Adapter adapter;
     private RecyclerView recyclerView;
     private Button button, buttonFav;
@@ -87,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
          */
         call.enqueue(new Callback<List<ResepData>>() {
             @Override
-            public void onResponse(Call<List<ResepData>> call, Response<List<ResepData>> response) {
+            public void onResponse(Call<List<ResepData>> call, final Response<List<ResepData>> response) {
+                Log.d(TAG, "server contacted and has file");
                 progressDialog.dismiss();
                 recyclerView = findViewById(R.id.customRecyclerView);
                 generateDataList(response.body(), recyclerView);
@@ -96,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<ResepData>> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "error");
             }
         });
 
@@ -105,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
          */
         call1.enqueue(new Callback<List<ResepData>>() {
             @Override
-            public void onResponse(Call<List<ResepData>> call, Response<List<ResepData>> response) {
+            public void onResponse(Call<List<ResepData>> call, final Response<List<ResepData>> response) {
+                Log.d(TAG, "server contacted and has file");
                 progressDialog.dismiss();
                 recyclerView = findViewById(R.id.customRecyclerViewBaru);
                 generateDataList(response.body(), recyclerView);
@@ -114,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<ResepData>> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "error");
             }
         });
 
