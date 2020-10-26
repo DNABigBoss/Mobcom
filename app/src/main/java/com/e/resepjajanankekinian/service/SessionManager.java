@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.e.resepjajanankekinian.MainActivity;
 import com.e.resepjajanankekinian.login;
 import com.e.resepjajanankekinian.profil;
 
@@ -45,7 +46,7 @@ public class SessionManager {
         if(!this.isLogin()){
             Intent intent = new Intent(context, login.class);
             context.startActivity(intent);
-            ((profil) context).finish();
+            ((MainActivity) context).finish();
         }
     }
 
