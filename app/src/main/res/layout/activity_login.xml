@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Belum Punya Akun? "
+        android:text="Belum Punya Akun?"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/btn_pinkbg"
-        android:text="Login"
+        android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="@color/design_default_color_background"
         android:textSize="16sp"
@@ -35,38 +35,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTextPassword2"
-        android:layout_width="343dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/input_bg"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:paddingStart="30dp"
-        android:textColor="#bdbdbd"
-        android:textSize="16sp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_layout"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:passwordToggleEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="RtlSymmetry">
+
+        <EditText
+            android:id="@+id/loginPass"
+            android:layout_width="343dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/input_bg"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingStart="30dp"
+            android:textColor="#bdbdbd"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="RtlSymmetry"
+            android:importantForAutofill="no" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextLogin"
         android:layout_width="343dp"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/input_bg"
         android:ems="10"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="textPersonName"
         android:paddingStart="30dp"
         android:textColor="#bdbdbd"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
+        app:layout_constraintBottom_toTopOf="@+id/password_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="RtlSymmetry"
+        android:importantForAutofill="no" />
 
 
     <ImageView
@@ -77,10 +96,11 @@
         android:layout_marginEnd="170dp"
         android:layout_marginBottom="112dp"
         android:elevation="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/logo2" />
+        app:srcCompat="@drawable/logo2"
+        android:contentDescription="Logo" />
 
     <TextView
         android:id="@+id/daftar"
