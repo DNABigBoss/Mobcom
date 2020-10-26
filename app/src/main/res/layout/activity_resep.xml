@@ -135,6 +135,7 @@
                         tools:ignore="UseCompoundDrawables"
                         android:layout_weight="1">
                         <ImageView
+                            android:id="@+id/btnFav"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -154,6 +155,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/resepDiskusi"
                         android:layout_width="wrap_content"
                         android:layout_gravity = "center"
                         android:layout_height="50dp"
@@ -170,6 +172,7 @@
                             android:contentDescription="@string/diskusi" />
 
                         <TextView
+                            android:id="@+id/resepDiskusiCount"
                             android:layout_width="68dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"

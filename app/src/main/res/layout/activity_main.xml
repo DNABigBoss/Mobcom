@@ -54,6 +54,7 @@
             android:layout_height="100dp"
             android:background="@color/colorPrimary">
         </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,131 +78,6 @@
                         android:layout_gravity="center">
                     </TextView>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lihat_semua"
-                        android:textSize="14sp"
-                        android:layout_weight="1"
-                        android:layout_marginStart="20dp"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_gravity="center">
-                    </TextView>
-                </LinearLayout>
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/cardView"
-                                app:cardCornerRadius="10dp"
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                android:layout_marginStart="10dp">
-                                <ImageView
-                                    android:cropToPadding="false"
-                                    android:src="@drawable/oreocheesecake"
-                                    android:scaleType="centerCrop"
-                                    android:adjustViewBounds="true"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:contentDescription="@string/populer">
-                                </ImageView>
-                            </androidx.cardview.widget.CardView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginStart="10dp"
-                                android:textColor="@color/colorBlack"
-                                android:textStyle="bold"
-                                android:text="@string/oreo_cheesecake">
-                            </TextView>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <androidx.cardview.widget.CardView
-                                app:cardCornerRadius="10dp"
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                android:layout_marginStart="10dp">
-                                <ImageView
-                                    android:cropToPadding="false"
-                                    android:src="@drawable/oreocheesecake"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="centerCrop"
-                                    android:adjustViewBounds="true"
-                                    android:contentDescription="@string/populer">
-                                </ImageView>
-                            </androidx.cardview.widget.CardView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginStart="10dp"
-                                android:textColor="@color/colorBlack"
-                                android:textStyle="bold"
-                                android:text="@string/oreo_cheesecake">
-                            </TextView>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <androidx.cardview.widget.CardView
-                                app:cardCornerRadius="10dp"
-                                android:layout_width="128dp"
-                                android:layout_height="128dp"
-                                android:layout_marginStart="10dp">
-                                <ImageView
-                                    android:cropToPadding="false"
-                                    android:src="@drawable/oreocheesecake"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="centerCrop"
-                                    android:adjustViewBounds="true"
-                                    android:contentDescription="@string/populer">
-                                </ImageView>
-                            </androidx.cardview.widget.CardView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginStart="10dp"
-                                android:textColor="@color/colorBlack"
-                                android:textStyle="bold"
-                                android:text="@string/oreo_cheesecake">
-                            </TextView>
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </HorizontalScrollView>
-                <LinearLayout
-                    android:layout_marginTop="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pencarian_terakhirmu"
-                        android:textSize="18sp"
-                        android:layout_weight="3"
-                        android:layout_marginStart="10dp"
-                        android:textColor="@color/colorBlack"
-                        android:layout_gravity="center">
-                    </TextView>
-                    <TextView
                         android:id="@+id/pencarianSemua"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -215,6 +91,40 @@
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/customRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Baru Ditambahkan"
+                        android:textSize="18sp"
+                        android:layout_weight="3"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/colorBlack"
+                        android:layout_gravity="center">
+                    </TextView>
+                    <TextView
+                        android:id="@+id/pencarianSemuaBaru"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lihat_semua"
+                        android:textSize="14sp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center">
+                    </TextView>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/customRecyclerViewBaru"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_constraintBottom_toBottomOf="parent"

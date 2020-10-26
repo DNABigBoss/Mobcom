@@ -12,12 +12,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.e.resepjajanankekinian.adapter.SearchResepBahanAdapter;
 import com.e.resepjajanankekinian.model.ResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
-import com.e.resepjajanankekinian.service.GetSearchResep;
+import com.e.resepjajanankekinian.service.ApiRequest;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -36,7 +37,12 @@ public class search_resep_bahan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_resep_bahan);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.kulkas);
+        
+        SearchView searchView = findViewById(R.id.search_bar_search);
+        searchView.setIconified(false);
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             bahan = extras.getString("bahan");
@@ -49,8 +55,8 @@ public class search_resep_bahan extends AppCompatActivity {
 
 
         /*Create handle for the RetrofitInstance interface*/
-        GetSearchResep getSearchResep = ApiClient.getRetrofitInstance().create(GetSearchResep.class);
-        Call<List<ResepData>> call = getSearchResep.getResep(null, null, bahan, null);
+        ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<List<ResepData>> call = apiRequest.getResep(null, null, bahan, null, null);
 
         call.enqueue(new Callback<List<ResepData>>() {
             @Override

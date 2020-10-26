@@ -1,13 +1,14 @@
 package com.e.resepjajanankekinian;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
+
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 import com.e.resepjajanankekinian.adapter.PencarianAdapter;
 import com.e.resepjajanankekinian.model.ResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
-import com.e.resepjajanankekinian.service.GetService;
+import com.e.resepjajanankekinian.service.ApiRequest;
 
 import java.util.List;
 
@@ -26,12 +27,10 @@ import retrofit2.Response;
 public class search extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private List<ResepData> ResepDatas;
     private PencarianAdapter adapter;
-    private GetService GetService;
+    private ApiRequest apiRequest;
     ProgressBar progressBar;
-    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +56,27 @@ public class search extends AppCompatActivity {
         });
 
         fetchUsers(); //without keyword
+
+        //View
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Search");
+        toolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolbar);
+
+        //Set icon to toolbar
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 
     public void fetchUsers(){
-        GetService = ApiClient.getRetrofitInstance().create(GetService.class);
-        Call<List<ResepData>> call = GetService.getAllResep();
+        apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<List<ResepData>> call = apiRequest.getAllResep();
 
         call.enqueue(new Callback<List<ResepData>>() {
             @Override

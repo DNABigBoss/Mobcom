@@ -10,6 +10,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,17 +20,15 @@ import com.e.resepjajanankekinian.resep;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class PencarianAdapter extends RecyclerView.Adapter<PencarianAdapter.MyViewHolder> implements Filterable {
 
-    private List<ResepData> reseps;
-    private List<ResepData> resepscopy;
-    private Context context;
-    private Instant Glide;
+    private final List<ResepData> reseps;
+    private final List<ResepData> resepscopy;
+    private final Context context;
 
     public PencarianAdapter(List<ResepData> reseps, Context context){
         this.reseps = reseps;
@@ -83,6 +82,7 @@ public class PencarianAdapter extends RecyclerView.Adapter<PencarianAdapter.MyVi
         }
     }
 
+    @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itempencarian, parent, false); // masukin ke item.xml
