@@ -16,10 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
-<<<<<<< HEAD
-import android.widget.SearchView;
-=======
->>>>>>> 92faae0f9e5bbb40183f86584b0b4c719d227bba
 import android.widget.Toast;
 
 import com.e.resepjajanankekinian.adapter.Adapter;
@@ -40,11 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Main Activity";
     private Adapter adapter;
     private RecyclerView recyclerView;
-<<<<<<< HEAD
-    private Button button;
-=======
     private Button button, buttonFav;
->>>>>>> 92faae0f9e5bbb40183f86584b0b4c719d227bba
     ProgressDialog progressDialog;
     SessionManager sessionManager;
 
@@ -58,14 +50,10 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
 
         TextView textViewPencarianSemua = findViewById(R.id.pencarianSemua);
-<<<<<<< HEAD
-        Button button = (Button) findViewById(R.id.search_bar);
-=======
         button = findViewById(R.id.search_bar);
         buttonFav = findViewById(R.id.buttonFavorite);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
->>>>>>> 92faae0f9e5bbb40183f86584b0b4c719d227bba
 
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Loading....");
@@ -77,16 +65,6 @@ public class MainActivity extends AppCompatActivity {
         Call<List<ResepData>> call1 = apiRequest.getResep(null, null, null, 10, "id");
 
         button.setOnClickListener(new View.OnClickListener() {
-<<<<<<< HEAD
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, search.class));
-            }
-        });
-
-        cardView.setOnClickListener(new View.OnClickListener() {
-=======
->>>>>>> 92faae0f9e5bbb40183f86584b0b4c719d227bba
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, search.class));

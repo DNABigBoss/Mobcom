@@ -3,11 +3,8 @@ package com.e.resepjajanankekinian;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-<<<<<<< HEAD
-=======
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
->>>>>>> 92faae0f9e5bbb40183f86584b0b4c719d227bba
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -36,13 +33,10 @@ public class BookmarkActivity extends AppCompatActivity {
 
     private ImageButton btnBack;
     private CardView imageBookmark;
-<<<<<<< HEAD
-=======
     private SessionManager sessionManager;
     private RecyclerView recyclerView;
     private BookmarkAdapter adapter;
     ProgressDialog progressDialog;
->>>>>>> 92faae0f9e5bbb40183f86584b0b4c719d227bba
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +58,6 @@ public class BookmarkActivity extends AppCompatActivity {
                 goBack();
             }
         });
-<<<<<<< HEAD
-
-        imageBookmark = findViewById(R.id.imageBookmark);
-        imageBookmark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goResep();
-=======
         /*
         * Prosess dulu
          */
@@ -130,7 +116,6 @@ public class BookmarkActivity extends AppCompatActivity {
                         break;
                 }
                 return true;
->>>>>>> 92faae0f9e5bbb40183f86584b0b4c719d227bba
             }
         });
     }
@@ -140,17 +125,11 @@ public class BookmarkActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-<<<<<<< HEAD
-    public void goResep(){
-        Intent intent = new Intent(BookmarkActivity.this, resep.class);
-        startActivity(intent);
-=======
     private void generateDataList(List<ResepData> ResepDataList){
         recyclerView = findViewById(R.id.customRecyclerViewBookmark);
         adapter = new BookmarkAdapter(this, ResepDataList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
->>>>>>> 92faae0f9e5bbb40183f86584b0b4c719d227bba
     }
 }

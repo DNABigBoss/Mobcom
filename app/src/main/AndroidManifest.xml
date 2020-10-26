@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.e.resepjajanankekinian">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -15,12 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".selesai_daftar"></activity>
         <activity android:name=".search_resep_bahan" />
-<<<<<<< HEAD
-        <activity android:name=".search">
-        </activity>
-=======
         <activity android:name=".search"></activity>
->>>>>>> 92faae0f9e5bbb40183f86584b0b4c719d227bba
         <activity android:name=".step_resep" />
         <activity android:name=".test" />
         <activity android:name=".profil" />
@@ -45,5 +38,7 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
