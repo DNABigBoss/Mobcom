@@ -10,11 +10,14 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 
@@ -110,4 +113,12 @@ public interface ApiRequest {
     @FormUrlEncoded
     @PUT("resep")
     Call<ResponseBody> putResep(@Field("id") Integer id, @Field("nama") String nama, @Field("waktu_memasak") String waktu_memasak,@Field("porsi") Integer porsi, @Field("harga") Double harga, @Field("favorit") Integer favorit, @Field("dilihat") Integer dilihat, @Field("gambar") String gambar);
+
+    /*
+     * Delete data Bookmark
+     */
+    @Streaming
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "bookmark", hasBody = true)
+    Call<ResponseBody> deleteBookmark(@Field("user_id") Integer user_id, @Field("resep_id") Integer resep_id);
 }

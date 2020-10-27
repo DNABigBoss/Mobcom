@@ -134,14 +134,17 @@
                         android:layout_height="50dp"
                         tools:ignore="UseCompoundDrawables"
                         android:layout_weight="1">
-                        <ImageView
-                            android:id="@+id/btnFav"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+
+                        <ToggleButton
                             android:layout_gravity="center"
-                            android:layout_marginStart="10dp"
-                            app:srcCompat="@drawable/star"
-                            android:contentDescription="@string/favorit" />
+                            android:id="@+id/tgbFav"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:background="@drawable/fav_checked"
+                            android:textOff=""
+                            android:textOn=""/>
 
                         <TextView
                             android:id="@+id/favorit"
