@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:cropToPadding="false"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:src="@drawable/user"/>
 
             </androidx.cardview.widget.CardView>
 

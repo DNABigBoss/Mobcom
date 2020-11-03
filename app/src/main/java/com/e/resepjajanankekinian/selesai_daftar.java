@@ -48,7 +48,7 @@ public class selesai_daftar extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
                                       @Override
                                       public void run() {
-                                          Call<List<UserData>> call = apiRequest.getUser(username, null, pass);
+                                          Call<List<UserData>> call = apiRequest.getUser(null, username, null, pass);
                                           call.enqueue(new Callback<List<UserData>>() {
                                               @Override
                                               public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response) {
@@ -73,8 +73,9 @@ public class selesai_daftar extends AppCompatActivity {
         String nama = userDataList.get(0).getNama();
         String email = userDataList.get(0).getEmail();
         Integer id = userDataList.get(0).getId();
+        String foto = userDataList.get(0).getFoto();
         String idx = String.valueOf(id);
-        sessionManager.createSession(nama, email, idx);
+        sessionManager.createSession(nama, email, idx, foto);
         progressBar.setVisibility(View.GONE);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
