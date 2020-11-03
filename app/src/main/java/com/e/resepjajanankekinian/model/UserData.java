@@ -58,7 +58,7 @@ public class UserData {
     }
 
     public String getFoto() {
-        return foto;
+        return "https://resepjajanankekinian.my.id/assets/img/users/"+foto;
     }
 
     public void setFoto(String foto) {

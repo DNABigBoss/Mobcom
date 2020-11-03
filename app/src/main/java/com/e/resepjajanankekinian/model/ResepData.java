@@ -91,7 +91,7 @@ public class ResepData {
     }
 
     public String getGambar() {
-        return gambar;
+        return "https://resepjajanankekinian.my.id/assets/img/thumbs/"+gambar;
     }
 
     public void setGambar(String gambar) {

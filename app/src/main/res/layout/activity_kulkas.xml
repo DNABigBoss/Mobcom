@@ -25,7 +25,7 @@
                 android:layout_marginTop="40dp"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
-                android:textSize="32sp"
+                android:textSize="26sp"
                 android:text="@string/kulkas"
                 android:layout_weight="10">
             </TextView>
@@ -35,7 +35,7 @@
                 android:layout_marginStart="20dp"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="@string/temukan_resep_makanan_berdasarkan_bahan_yang_kamu_punya"
                 android:layout_weight="10">
             </TextView>
@@ -75,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:itemBackground="@color/colorPrimary"
+        android:background="@color/colorPrimary"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -37,6 +37,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:layout_margin="8dp"
+                    android:background="@color/colorBlack"
                     app:cardCornerRadius="180dp">
 
                     <ImageView
@@ -44,7 +45,7 @@
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         android:cropToPadding="false"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        android:src="@drawable/user" />
 
 
                 </androidx.cardview.widget.CardView>
@@ -80,15 +81,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardViewTambahComment" />
-    <TextView
-        android:id="@+id/TextViewKosong"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewTambahComment" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/TextViewKosong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewTambahComment" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

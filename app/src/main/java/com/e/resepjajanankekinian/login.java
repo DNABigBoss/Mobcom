@@ -67,7 +67,7 @@ public class login extends AppCompatActivity {
                     progressDialog.show();
                     if(txtLogin.matches(emailPattern)) {
                         ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
-                        Call<List<UserData>> call = apiRequest.getUser(null, txtLogin, txtPass);
+                        Call<List<UserData>> call = apiRequest.getUser(null, null, txtLogin, txtPass);
                         call.enqueue(new Callback<List<UserData>>() {
                             @Override
                             public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response) {
@@ -76,10 +76,13 @@ public class login extends AppCompatActivity {
                                 switch (code) {
                                     case "200":
                                         openMain(response.body());
+                                        break;
                                     case "400":
-                                        Toast.makeText(login.this, code, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
+                                        break;
                                     case "404":
-                                        Toast.makeText(login.this, code, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
+                                        break;
                                 }
                             }
 
@@ -91,7 +94,7 @@ public class login extends AppCompatActivity {
                         });
                     } else {
                         ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
-                        Call<List<UserData>> call = apiRequest.getUser(txtLogin, null, txtPass);
+                        Call<List<UserData>> call = apiRequest.getUser(null, txtLogin, null, txtPass);
                         call.enqueue(new Callback<List<UserData>>() {
                             @Override
                             public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response) {
@@ -100,10 +103,13 @@ public class login extends AppCompatActivity {
                                 switch (code) {
                                     case "200":
                                         openMain(response.body());
+                                        break;
                                     case "400":
-                                        Toast.makeText(login.this, code, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
+                                        break;
                                     case "404":
-                                        Toast.makeText(login.this, code, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
+                                        break;
                                 }
                             }
 
@@ -130,9 +136,10 @@ public class login extends AppCompatActivity {
         String nama = userDataList.get(0).getNama();
         String email = userDataList.get(0).getEmail();
         Integer id = userDataList.get(0).getId();
+        String foto = userDataList.get(0).getFoto();
         String idx = String.valueOf(id);
-        sessionManager.createSession(nama, email, idx);
-        Intent intent = new Intent(this, profil.class);
+        sessionManager.createSession(nama, email, idx, foto);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,8 @@ public class step_resep extends AppCompatActivity {
     RecyclerView recyclerView;
     ProgressDialog progressDialog;
     Integer id;
+    List<StepResepData.DatumStep> datumSteps;
+    TextToSpeech t1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +58,7 @@ public class step_resep extends AppCompatActivity {
             public void onResponse(Call<StepResepData> call, Response<StepResepData> response) {
                 progressDialog.dismiss();
                 StepResepData resource = response.body();
-                List<StepResepData.DatumStep> datumSteps = resource.getStep();
+                datumSteps = resource.getStep();
                 generateDataList(datumSteps);
             }
 
@@ -63,6 +68,7 @@ public class step_resep extends AppCompatActivity {
                 Toast.makeText(step_resep.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         //View
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -78,6 +84,15 @@ public class step_resep extends AppCompatActivity {
                 finish();
             }
         });
+
+    }
+
+    public void onPause() {
+        if(t1 !=null){
+            t1.stop();
+            t1.shutdown();
+        }
+        super.onPause();
     }
 
     private void generateDataList(List<StepResepData.DatumStep> stepResepData) {
