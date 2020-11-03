@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="30sp"
+            android:fontFamily="@font/poppins_medium"
             android:textAlignment="center"
             android:text="Terima Kasih Sudah Mendaftar"/>
 

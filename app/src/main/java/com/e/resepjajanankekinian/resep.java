@@ -4,12 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -55,14 +57,14 @@ public class resep extends AppCompatActivity {
         final TextView favorit = findViewById(R.id.favorit);
         final TextView penjelasanbahan = findViewById(R.id.penjelasanbahanbahan);
         final TextView stepmembuat = findViewById(R.id.penjelasancaramembuat);
-        final ImageView buttonFav = findViewById(R.id.btnFav);
+        final ToggleButton buttonFav = findViewById(R.id.tgbFav);
         final TextView diskusicount = findViewById(R.id.resepDiskusiCount);
         final LinearLayout resepdiskusi = findViewById(R.id.resepDiskusi);
 
         ImageView mulaimemasak = findViewById(R.id.buttonMulaimasak);
 
         Bundle extras = getIntent().getExtras();
-        if(extras != null) {
+        if (extras != null) {
             resep_id = extras.getInt("id");
         }
 
@@ -93,10 +95,11 @@ public class resep extends AppCompatActivity {
                 List<StepResepData.DatumBahan> datumBahans = resource.getBahan();
                 List<StepResepData.DatumStep> datumSteps = resource.getStep();
                 List<StepResepData.DatumDiskusi> datumDiskusis = resource.getDiskusi();
+                List<StepResepData.DatumBookmark> datumBookmarks = resource.getBookmark();
 
                 Integer dilihat_count = 0;
                 for (StepResepData.DatumInfo datumInfo : datumInfos) {
-                    dilihat_count =datumInfo.getDilihat();
+                    dilihat_count = datumInfo.getDilihat();
                     namajajanan.setText(datumInfo.getNama());
                     dilihat.setText(String.valueOf(dilihat_count));
                     favorit.setText(String.valueOf(datumInfo.getFavorit()));
@@ -115,16 +118,24 @@ public class resep extends AppCompatActivity {
                 penjelasanbahan.setText(bahanbahan);
 
                 String step = "";
-                for (StepResepData.DatumStep datumStep: datumSteps) {
+                for (StepResepData.DatumStep datumStep : datumSteps) {
                     String nomor_step = String.valueOf(datumStep.getNomor_step());
                     step = step + nomor_step + ". " + datumStep.getIntruksi() + "\n\n";
                 }
                 stepmembuat.setText(step);
 
+                buttonFav.setChecked(false);
+                for (StepResepData.DatumBookmark datumBookmark : datumBookmarks) {
+                    if (datumBookmark.getUser_id().equals(user_id)) buttonFav.setChecked(true);
+                }
+
                 Integer countDiskusi = datumDiskusis.size();
                 diskusicount.setText(String.valueOf(countDiskusi));
 
-                Call<ResponseBody> call2 = apiRequest.putView(resep_id, dilihat_count+1);
+                /*
+                Membuat fungsi perhitungan view
+                 */
+                Call<ResponseBody> call2 = apiRequest.putView(resep_id, dilihat_count + 1);
                 call2.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -153,22 +164,51 @@ public class resep extends AppCompatActivity {
                 progressDialog = new ProgressDialog(resep.this);
                 progressDialog.setMessage("Loading....");
                 progressDialog.show();
-                Call<ResponseBody> call1 = apiRequest.postBookmark(user_id, resep_id);
-                call1.enqueue(new Callback<ResponseBody>() {
+                new Handler().postDelayed(new Runnable() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        progressDialog.dismiss();
-                        Toast.makeText(resep.this, "Berhasil menjadi favorit", Toast.LENGTH_SHORT).show();
+                    public void run() {
+                        if (buttonFav.isChecked()) {
+                            Call<ResponseBody> call1 = apiRequest.postBookmark(user_id, resep_id);
+                            call1.enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(resep.this, "Berhasil menjadi favorit", Toast.LENGTH_SHORT).show();
+                                    buttonFav.setChecked(true);
+                                }
 
-                        finish();
-                    }
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(resep.this, "Gagal menjadi Favorit", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            Call<ResponseBody> call1 = apiRequest.deleteBookmark(user_id, resep_id);
+                            call1.enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    String code = String.valueOf(response.code());
+                                    switch (code) {
+                                        case "202" :
+                                            progressDialog.dismiss();
+                                            Toast.makeText(resep.this, "Fav Dihapus", Toast.LENGTH_SHORT).show();
+                                            buttonFav.setChecked(false);
+                                            break;
+                                    }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        progressDialog.dismiss();
-                        Toast.makeText(resep.this, "Gagal menjadi Favorit", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(resep.this, "Gagal menghapus Favorit", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
                     }
-                });
+                }, 1000);
+
             }
         });
 

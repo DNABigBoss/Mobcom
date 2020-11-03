@@ -20,11 +20,15 @@ public class StepResepData {
     @SerializedName("diskusi")
     public List<DatumDiskusi> diskusi;
 
-    public StepResepData(List<DatumInfo> info, List<DatumBahan> bahan, List<DatumStep> step, List<DatumDiskusi> diskusi) {
+    @SerializedName("bookmark")
+    public List<DatumBookmark> bookmark;
+
+    public StepResepData(List<DatumInfo> info, List<DatumBahan> bahan, List<DatumStep> step, List<DatumDiskusi> diskusi, List<DatumBookmark> bookmark) {
         this.info = info;
         this.bahan = bahan;
         this.step = step;
         this.diskusi = diskusi;
+        this.bookmark = bookmark;
     }
 
     public List<DatumInfo> getInfo() {
@@ -57,6 +61,14 @@ public class StepResepData {
 
     public void setDiskusi(List<DatumDiskusi> diskusi) {
         this.diskusi = diskusi;
+    }
+
+    public List<DatumBookmark> getBookmark() {
+        return bookmark;
+    }
+
+    public void setBookmark(List<DatumBookmark> bookmark) {
+        this.bookmark = bookmark;
     }
 
     public class DatumBahan {
@@ -201,7 +213,7 @@ public class StepResepData {
         }
 
         public String getGambar() {
-            return gambar;
+            return "https://resepjajanankekinian.my.id/assets/img/"+gambar;
         }
 
         public void setGambar(String gambar) {
@@ -278,6 +290,34 @@ public class StepResepData {
 
         public void setTanggal(String tanggal) {
             this.tanggal = tanggal;
+        }
+    }
+
+    public class DatumBookmark {
+        @SerializedName("user_id")
+        public Integer user_id;
+        @SerializedName("nama")
+        public String nama;
+
+        public DatumBookmark(Integer user_id, String nama) {
+            this.user_id = user_id;
+            this.nama = nama;
+        }
+
+        public Integer getUser_id() {
+            return user_id;
+        }
+
+        public void setUser_id(Integer user_id) {
+            this.user_id = user_id;
+        }
+
+        public String getNama() {
+            return nama;
+        }
+
+        public void setNama(String nama) {
+            this.nama = nama;
         }
     }
 

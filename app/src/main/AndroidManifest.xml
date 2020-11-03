@@ -11,9 +11,10 @@
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".selesai_daftar"></activity>
+        <activity android:name=".edit_profil"></activity>
+        <activity android:name=".selesai_daftar" />
         <activity android:name=".search_resep_bahan" />
-        <activity android:name=".search"></activity>
+        <activity android:name=".search" />
         <activity android:name=".step_resep" />
         <activity android:name=".test" />
         <activity android:name=".profil" />
