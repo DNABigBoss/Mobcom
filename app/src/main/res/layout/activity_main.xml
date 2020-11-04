@@ -39,7 +39,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:background="@drawable/like" />
+                    android:background="@drawable/like2" />
 
                 <Button
                     android:id="@+id/buttonNotif"

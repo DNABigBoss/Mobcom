@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -59,9 +60,9 @@ public class resep extends AppCompatActivity {
         final TextView stepmembuat = findViewById(R.id.penjelasancaramembuat);
         final ToggleButton buttonFav = findViewById(R.id.tgbFav);
         final TextView diskusicount = findViewById(R.id.resepDiskusiCount);
-        final LinearLayout resepdiskusi = findViewById(R.id.resepDiskusi);
+        final RelativeLayout resepdiskusi = findViewById(R.id.resepDiskusi);
 
-        ImageView mulaimemasak = findViewById(R.id.buttonMulaimasak);
+        RelativeLayout mulaimemasak = findViewById(R.id.buttonMulaimasak);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
