@@ -36,7 +36,7 @@ public class BahanData {
     }
 
     public String getGambar() {
-        return gambar;
+        return "https://resepjajanankekinian.my.id/assets/img/bahan/thumbs/"+gambar;
     }
 
     public void setGambar(String gambar) {

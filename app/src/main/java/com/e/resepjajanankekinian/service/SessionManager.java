@@ -23,6 +23,7 @@ public class SessionManager {
     public static final String NAME = "NAME";
     public static final String EMAIL = "EMAIL";
     public static final String ID = "ID";
+    public static final String FOTO = "FOTO";
 
     public SessionManager(Context context) {
         this.context = context;
@@ -30,11 +31,12 @@ public class SessionManager {
         editor = sharedPreferences.edit();
     }
 
-    public void createSession(String name, String email, String id) {
+    public void createSession(String name, String email, String id, String foto) {
         editor.putBoolean(LOGIN, true);
         editor.putString(NAME, name);
         editor.putString(EMAIL, email);
         editor.putString(ID, id);
+        editor.putString(FOTO, foto);
         editor.apply();
     }
 
@@ -55,10 +57,16 @@ public class SessionManager {
         user.put(NAME, sharedPreferences.getString(NAME, null));
         user.put(EMAIL, sharedPreferences.getString(EMAIL, null));
         user.put(ID, sharedPreferences.getString(ID, null));
+        user.put(FOTO, sharedPreferences.getString(FOTO, null));
         return user;
     }
 
-    public void logut() {
+    public void refresh() {
+        editor.clear();
+        editor.commit();
+    }
+
+    public void logout() {
         editor.clear();
         editor.commit();
         Intent intent = new Intent(context, login.class);

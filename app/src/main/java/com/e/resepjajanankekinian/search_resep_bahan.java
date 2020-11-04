@@ -32,6 +32,7 @@ public class search_resep_bahan extends AppCompatActivity {
     private RecyclerView recyclerView;
     ProgressDialog progressDialog;
     String bahan;
+    String order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,13 @@ public class search_resep_bahan extends AppCompatActivity {
         searchView.setIconified(false);
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            bahan = extras.getString("bahan");
-        } else {
-            bahan = null; 
+            if (extras.getString("bahan") == null || extras.getString("order") == null ) {
+                bahan = null;
+                order = null;
+            } else {
+                if (extras.getString("bahan") != null) bahan = extras.getString("bahan");
+                if (extras.getString("order") != null) order = extras.getString("order");
+            }
         }
         progressDialog = new ProgressDialog(search_resep_bahan.this);
         progressDialog.setMessage("Loading....");
@@ -56,7 +61,7 @@ public class search_resep_bahan extends AppCompatActivity {
 
         /*Create handle for the RetrofitInstance interface*/
         ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
-        Call<List<ResepData>> call = apiRequest.getResep(null, null, bahan, null, null);
+        Call<List<ResepData>> call = apiRequest.getResep(null, null, bahan, null, order);
 
         call.enqueue(new Callback<List<ResepData>>() {
             @Override

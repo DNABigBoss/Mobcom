@@ -2,18 +2,18 @@ package com.e.resepjajanankekinian;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.e.resepjajanankekinian.adapter.Adapter;
 import com.e.resepjajanankekinian.model.ResepData;
@@ -22,20 +22,26 @@ import com.e.resepjajanankekinian.service.ApiRequest;
 import com.e.resepjajanankekinian.service.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "Main Activity";
     private Adapter adapter;
     private RecyclerView recyclerView;
     private Button button, buttonFav;
     ProgressDialog progressDialog;
     SessionManager sessionManager;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetail();
+        String userName = user.get(sessionManager.NAME);
 
-        TextView textViewPencarianSemua = findViewById(R.id.pencarianSemua);
+        TextView textViewPencarianSemuaBaru = findViewById(R.id.pencarianSemuaBaru);
+        TextView textViewPencarianSemuaPopuler = findViewById(R.id.pencarianSemuaPopuler);
+        TextView textViewUcapan = findViewById(R.id.textViewUcapan);
         button = findViewById(R.id.search_bar);
         buttonFav = findViewById(R.id.buttonFavorite);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -74,11 +83,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* Ketika mengklik lihat semua */
-        textViewPencarianSemua.setOnClickListener(new View.OnClickListener() {
+        /* Ketika mengklik lihat semua yang terpopuler */
+        textViewPencarianSemuaPopuler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, search_resep_bahan.class));
+                pencarianSemua("dilihat");
+            }
+        });
+
+        /* Ketika mengklik lihat semua yang terbaru */
+        textViewPencarianSemuaBaru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pencarianSemua("id");
             }
         });
 
@@ -87,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
          */
         call.enqueue(new Callback<List<ResepData>>() {
             @Override
-            public void onResponse(Call<List<ResepData>> call, Response<List<ResepData>> response) {
+            public void onResponse(Call<List<ResepData>> call, final Response<List<ResepData>> response) {
+                Log.d(TAG, "server contacted and has file");
                 progressDialog.dismiss();
                 recyclerView = findViewById(R.id.customRecyclerView);
                 generateDataList(response.body(), recyclerView);
@@ -96,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<ResepData>> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "error");
             }
         });
 
@@ -105,7 +123,8 @@ public class MainActivity extends AppCompatActivity {
          */
         call1.enqueue(new Callback<List<ResepData>>() {
             @Override
-            public void onResponse(Call<List<ResepData>> call, Response<List<ResepData>> response) {
+            public void onResponse(Call<List<ResepData>> call, final Response<List<ResepData>> response) {
+                Log.d(TAG, "server contacted and has file");
                 progressDialog.dismiss();
                 recyclerView = findViewById(R.id.customRecyclerViewBaru);
                 generateDataList(response.body(), recyclerView);
@@ -114,9 +133,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<ResepData>> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "error");
             }
         });
+
+        /*
+        Text view ucapan
+         */
+        Locale locale = new java.util.Locale("id","ID","id-ID");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("EEEE", locale);
+        String date = dateFormat.format(Calendar.getInstance().getTime());
+        textViewUcapan.setText("Selamat Hari "+ date + ", " + userName);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -142,6 +169,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void pencarianSemua(String id) {
+        Intent intent = new Intent(MainActivity.this, search_resep_bahan.class);
+        intent.putExtra("order", id);
+        startActivity(intent);
+    }
+
     /**generate data list method()
      */
     private void generateDataList(List<ResepData> ResepDataList, RecyclerView recyclerView){
@@ -150,4 +183,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
+
+
 }

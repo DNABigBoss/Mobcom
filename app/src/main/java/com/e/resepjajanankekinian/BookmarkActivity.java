@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.e.resepjajanankekinian.adapter.BookmarkAdapter;
@@ -47,6 +48,8 @@ public class BookmarkActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         String id = user.get(SessionManager.ID);
         Integer idx = Integer.valueOf(id);
+        final TextView textViewKosong = findViewById(R.id.TextViewKosongBookmark);
+        recyclerView = findViewById(R.id.customRecyclerViewBookmark);
 
         btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +75,17 @@ public class BookmarkActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ResepData>> call, Response<List<ResepData>> response) {
                 progressDialog.dismiss();
-                generateDataList(response.body());
+                List<ResepData> resepDataList = response.body();
+                String code = String.valueOf(response.code());
+                switch (code) {
+                    case "200":
+                        generateDataList(resepDataList);
+                        break;
+                    case "404":
+                        recyclerView.setVisibility(View.GONE);
+                        textViewKosong.setVisibility(View.VISIBLE);
+                        break;
+                }
             }
 
             @Override
