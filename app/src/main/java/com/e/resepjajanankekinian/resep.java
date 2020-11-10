@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -52,6 +53,7 @@ public class resep extends AppCompatActivity {
         user_id = Integer.valueOf(ids);
 
         final TextView namajajanan = findViewById(R.id.namajajanan);
+        final TextView hargajajanan = findViewById(R.id.harga);
         final ImageView imagejajanan = findViewById(R.id.imagejajanan);
         final TextView dilihat = findViewById(R.id.dilihat);
         final TextView favorit = findViewById(R.id.favorit);
@@ -59,9 +61,9 @@ public class resep extends AppCompatActivity {
         final TextView stepmembuat = findViewById(R.id.penjelasancaramembuat);
         final ToggleButton buttonFav = findViewById(R.id.tgbFav);
         final TextView diskusicount = findViewById(R.id.resepDiskusiCount);
-        final LinearLayout resepdiskusi = findViewById(R.id.resepDiskusi);
+        final RelativeLayout resepdiskusi = findViewById(R.id.resepDiskusi);
 
-        ImageView mulaimemasak = findViewById(R.id.buttonMulaimasak);
+        RelativeLayout mulaimemasak = findViewById(R.id.buttonMulaimasak);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -101,6 +103,7 @@ public class resep extends AppCompatActivity {
                 for (StepResepData.DatumInfo datumInfo : datumInfos) {
                     dilihat_count = datumInfo.getDilihat();
                     namajajanan.setText(datumInfo.getNama());
+                    hargajajanan.setText(String.format("Rp. %s",datumInfo.getHarga()));
                     dilihat.setText(String.valueOf(dilihat_count));
                     favorit.setText(String.valueOf(datumInfo.getFavorit()));
                     Picasso.Builder builder = new Picasso.Builder(resep.this);
@@ -189,14 +192,14 @@ public class resep extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     String code = String.valueOf(response.code());
-                                    switch (code) {
-                                        case "202" :
-                                            progressDialog.dismiss();
-                                            Toast.makeText(resep.this, "Fav Dihapus", Toast.LENGTH_SHORT).show();
-                                            buttonFav.setChecked(false);
-                                            break;
+                                    if ("202".equals(code)) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(resep.this, "Fav Dihapus", Toast.LENGTH_SHORT).show();
+                                        buttonFav.setChecked(false);
+                                    } else {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(resep.this, "Gagal menghapus Favorit", Toast.LENGTH_SHORT).show();
                                     }
-
                                 }
 
                                 @Override

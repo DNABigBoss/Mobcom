@@ -25,224 +25,235 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
                 <ImageView
                     android:id="@+id/imagejajanan"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="320dp"
                     android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/oreo" />
 
-            </LinearLayout>
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:padding="16dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp">
 
                 <TextView
                     android:id="@+id/namajajanan"
                     android:layout_width="wrap_content"
-                    android:layout_height="123dp"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:lineSpacingExtra="-8sp"
-                    android:paddingTop="10dp"
+                    android:textColor="@color/colorBlack"
                     android:text="@string/oreo_cheesecake"
-                    android:textSize="26sp"
-                    android:textStyle="bold"
-                    android:layout_weight="5"
+                    android:textSize="24sp"
+                    tools:ignore="NestedWeights" />
+
+                <ToggleButton
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:id="@+id/tgbFav"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:background="@drawable/fav_checked"
+                    android:textOff=""
+                    android:textOn=""/>
+
+                <TextView
+                    android:id="@+id/harga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:layout_below="@id/namajajanan"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="#898787"
+                    android:text="Rp.40.000"
+                    android:textSize="18sp"
                     tools:ignore="NestedWeights" />
 
                 <LinearLayout
+                    android:paddingTop="4dp"
+                    android:layout_below="@id/harga"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    tools:ignore="RtlSymmetry"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="10dp">
+                    android:layout_height="wrap_content">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="10dp">
-
-                        <ImageView
-                            android:id="@+id/buttonMulaimasak"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/populer"
-                            android:cropToPadding="false"
-                            android:src="@drawable/mulai" />
-                    </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/show"
+                        android:contentDescription="@string/dilihat" />
 
                     <TextView
+                        android:id="@+id/dilihat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="@string/mulai_memasak"
-                        android:textColor="@color/colorPrimary" />
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:text="2200"
+                        android:textColor="#898787"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/chat"
+                        android:layout_marginLeft="8dp"
+                        android:contentDescription="@string/diskusi" />
+
+                    <TextView
+                        android:id="@+id/resepDiskusiCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:text="2200"
+                        android:textColor="#898787"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/like3"
+                        android:contentDescription="@string/diskusi" />
+
+                    <TextView
+                        android:id="@+id/favorit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8dp"
+                        android:text="2200"
+                        android:textColor="#898787"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
-            </LinearLayout>
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#EDEDED"
-                android:padding="8dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_gravity = "center"
-                        android:layout_height="50dp"
-                        android:layout_weight="1">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            app:srcCompat="@drawable/show"
-                            android:contentDescription="@string/dilihat" />
-
-                        <TextView
-                            android:id="@+id/dilihat"
-                            android:layout_width="68dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="10dp"
-                            android:text="2200"
-                            android:textColor="#898787"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_gravity = "center"
-                        android:layout_height="50dp"
-                        tools:ignore="UseCompoundDrawables"
-                        android:layout_weight="1">
-
-                        <ToggleButton
-                            android:layout_gravity="center"
-                            android:id="@+id/tgbFav"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:background="@drawable/fav_checked"
-                            android:textOff=""
-                            android:textOn=""/>
-
-                        <TextView
-                            android:id="@+id/favorit"
-                            android:layout_width="68dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="10dp"
-                            android:text="2200"
-                            android:textColor="#898787"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/resepDiskusi"
                         android:layout_width="wrap_content"
-                        android:layout_gravity = "center"
+                        android:background="@color/colorAccent"
                         android:layout_height="50dp"
-                        tools:ignore="UseCompoundDrawables"
                         android:layout_weight="1"
-                        android:layout_marginEnd="20dp">
+                        >
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="10dp"
-                            app:srcCompat="@drawable/chat"
-                            android:contentDescription="@string/diskusi" />
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Diskusi"
+                           android:textColor="@color/colorWhite"
+                           android:textSize="16dp"
+                           android:layout_centerVertical="true"
+                           android:layout_centerHorizontal="true"
+                           android:layout_gravity="center_vertical"/>
+                    </RelativeLayout>
 
-                        <TextView
-                            android:id="@+id/resepDiskusiCount"
-                            android:layout_width="68dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="10dp"
-                            android:text="2200"
-                            android:textColor="#898787"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/buttonMulaimasak"
+                    android:layout_width="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mulai Memasak"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="16dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_vertical"/>
+                </RelativeLayout>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="34dp"
-                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/bahanbahan"
-                    android:layout_width="wrap_content"
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Bahan Bahan"
-                    android:textSize="24sp" />
-                <TextView
-                    android:id="@+id/penjelasanbahanbahan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="\n110 keping oreo, pisahkan dengan gula putihnya
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:id="@+id/bahanbahan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Bahan Bahan"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/penjelasanbahanbahan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="110 keping oreo, pisahkan dengan gula putihnya
 \n75 gr keju parut
 \n2 sdm kental manis putih
 \n2 sdm susu bubuk putih
 \n3 sdm gula halus/bubuk
 \n500 ml air untuk melarutkan 5 sdm tepung maizena dan 6 sdm air"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                        android:textSize="16sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="34dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="vertical">
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/caramembuat"
-                    android:layout_width="wrap_content"
+
+                <TableRow
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Cara Membuat"
-                    android:textSize="24sp" />
-                <TextView
-                    android:id="@+id/penjelasancaramembuat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="1. Tumbuk oreo bagian hitamnya hingga hancur dan cukup halus.
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/caramembuat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Cara Membuat"
+                        android:layout_weight="1"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/penjelasancaramembuat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="1. Tumbuk oreo bagian hitamnya hingga hancur dan cukup halus.
 
 \n\n2. Masak air hingga mendidih, masukkan gula putih dari oreo, keju parut, kental manis, susu bubuk dan gula halus, aduk rata.
 
 \n\n3. Jika sudah mendidih, tuangkan larutan maizena sedikit demi sedikit sambil diaduk-aduk hingga mengental dan jadi krim."
-                    android:textSize="18sp" />
-            </LinearLayout>
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

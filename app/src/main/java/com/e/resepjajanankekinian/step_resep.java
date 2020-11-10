@@ -71,7 +71,7 @@ public class step_resep extends AppCompatActivity {
 
 
         //View
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbarStep);
         toolbar.setTitle("Step Resep");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
