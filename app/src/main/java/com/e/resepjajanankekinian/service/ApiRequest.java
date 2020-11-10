@@ -135,7 +135,6 @@ public interface ApiRequest {
      * Delete data Bookmark
      */
     @Streaming
-    @FormUrlEncoded
-    @HTTP(method = "DELETE", path = "bookmark", hasBody = true)
+    @DELETE("bookmark/{user_id}/{resep_id}")
     Call<ResponseBody> deleteBookmark(@Field("user_id") Integer user_id, @Field("resep_id") Integer resep_id);
 }
