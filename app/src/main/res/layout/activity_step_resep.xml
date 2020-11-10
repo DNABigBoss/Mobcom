@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorAccent"
     tools:context=".step_resep">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarStep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -36,6 +37,7 @@
         android:layout_margin="24dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
+        android:textColor="@color/colorWhite"
         android:text="Swipe kekanan untuk melanjutkan, Ketuk icon suara untuk mendengarkan tutorial"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
