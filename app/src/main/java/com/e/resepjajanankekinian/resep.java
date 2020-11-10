@@ -196,7 +196,6 @@ public class resep extends AppCompatActivity {
                                             buttonFav.setChecked(false);
                                             break;
                                     }
-
                                 }
 
                                 @Override
