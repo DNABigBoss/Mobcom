@@ -57,20 +57,17 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"/>
-
-
-
-
     <!--    <Button-->
-<!--        android:id="@+id/lanjut"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:background="@drawable/btn_pinkbg"-->
-<!--        android:text="Lanjut Ke Step Berikutnya"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/design_default_color_background"-->
-<!--        android:textSize="16sp" />-->
+    <!--        android:id="@+id/lanjut"-->
+    <!--        android:layout_width="300dp"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:layout_marginTop="40dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:background="@drawable/btn_pinkbg"-->
+    <!--        android:text="Lanjut Ke Step Berikutnya"-->
+    <!--        android:textAllCaps="false"-->
+    <!--        android:textColor="@color/design_default_color_background"-->
+    <!--        android:textSize="16sp" />-->
+
 
 </LinearLayout>
