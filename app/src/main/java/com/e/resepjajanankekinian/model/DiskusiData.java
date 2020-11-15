@@ -14,16 +14,19 @@ public class DiskusiData {
     public Integer user_id;
     @SerializedName("nama")
     public String nama;
+    @SerializedName("foto")
+    public String foto;
     @SerializedName("disukai")
     public Integer disukai;
     @SerializedName("tanggal")
     public String tanggal;
 
-    public DiskusiData(Integer id, String isi, Integer user_id, String nama, Integer disukai, String tanggal) {
+    public DiskusiData(Integer id, String isi, Integer user_id, String nama, String foto, Integer disukai, String tanggal) {
         this.id = id;
         this.isi = isi;
         this.user_id = user_id;
         this.nama = nama;
+        this.foto = foto;
         this.disukai = disukai;
         this.tanggal = tanggal;
     }
@@ -58,6 +61,14 @@ public class DiskusiData {
 
     public void setNama(String nama) {
         this.nama = nama;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public Integer getDisukai() {
