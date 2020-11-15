@@ -79,10 +79,15 @@ public class login extends AppCompatActivity {
                                         break;
                                     case "400":
                                         Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
+                                    case "404":
+                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
+=======
                                         break;
                                     case "404":
                                         Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
                                         break;
+>>>>>>> d07e951529c7f8879a474efa7ee2c74eeab127ae
                                 }
                             }
 
@@ -106,10 +111,15 @@ public class login extends AppCompatActivity {
                                         break;
                                     case "400":
                                         Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
+                                    case "404":
+                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
+=======
                                         break;
                                     case "404":
                                         Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
                                         break;
+>>>>>>> d07e951529c7f8879a474efa7ee2c74eeab127ae
                                 }
                             }
 
@@ -138,7 +148,11 @@ public class login extends AppCompatActivity {
         Integer id = userDataList.get(0).getId();
         String foto = userDataList.get(0).getFoto();
         String idx = String.valueOf(id);
+<<<<<<< HEAD
+        sessionManager.createSession(nama, email, idx);
+=======
         sessionManager.createSession(nama, email, idx, foto);
+>>>>>>> d07e951529c7f8879a474efa7ee2c74eeab127ae
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

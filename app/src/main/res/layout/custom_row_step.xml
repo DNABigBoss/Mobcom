@@ -1,38 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:layout_gravity="center_vertical"
+    android:background="@color/colorWhite"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
     android:orientation="vertical">
-    <ToggleButton
-        android:id="@+id/buttonSound"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/sound_checked"
-        android:checked="false">
-    </ToggleButton>
-    <TextView
-        android:id="@+id/nomorstepresep"
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_medium"
-        android:textColor="@color/colorPrimary"
-        android:layout_gravity="center"
-        android:text="1"
-        android:textSize="48sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
+        android:layout_marginTop="20dp"
+        android:padding="8dp"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/nomorstepresep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/colorWhite"
+            android:text="1"
+            android:textSize="32sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="20dp"/>
+
+        <ToggleButton
+            android:id="@+id/buttonSound"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/sound_checked"
+            android:checked="false">
+
+        </ToggleButton>
+
+    </LinearLayout>
+
+
     <TextView
         android:id="@+id/stepresep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_medium"
         android:layout_gravity="center"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorPrimary"
         android:text="@string/step_resep_1"
+        android:justificationMode="inter_word"
         android:textSize="24sp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"/>
     <!--    <Button-->
@@ -46,5 +68,6 @@
     <!--        android:textAllCaps="false"-->
     <!--        android:textColor="@color/design_default_color_background"-->
     <!--        android:textSize="16sp" />-->
+
 
 </LinearLayout>
