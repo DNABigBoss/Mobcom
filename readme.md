@@ -1,5 +1,5 @@
-# Sprint 8
-3 November -> 10 November 2020 (Minggu ke-9 Mobile Computing 113)
+# Sprint 9
+11 November -> 18 November 2020 (Minggu ke-10 Mobile Computing 113)
 
 # Sprint Backlog
 Story | Task | Status| Contributor
