@@ -65,7 +65,9 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:hint="Tuliskan Komentar Anda "
-                        android:inputType="textPersonName" />
+                        android:inputType="textCapSentences|textMultiLine"
+                        android:maxLength="2000"
+                        android:maxLines="4"/>
 
                     <ImageView
                         android:id="@+id/send"

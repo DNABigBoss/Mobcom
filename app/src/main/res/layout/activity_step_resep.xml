@@ -19,7 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarStep">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/customRecyclerViewStep"
