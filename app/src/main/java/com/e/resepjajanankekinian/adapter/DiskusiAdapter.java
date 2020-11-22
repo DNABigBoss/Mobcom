@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.e.resepjajanankekinian.R;
 import com.e.resepjajanankekinian.model.DiskusiData;
+import com.e.resepjajanankekinian.profil;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -73,6 +74,13 @@ public class DiskusiAdapter extends RecyclerView.Adapter<DiskusiAdapter.CustomVi
         holder.textViewIsi.setText(diskusiData.getIsi());
         String tanggal = setTanggal(diskusiData.getTanggal());
         holder.textViewTanggal.setText(tanggal);
+        String foto = "https://resepjajanankekinian.my.id/assets/img/users/"+diskusiData.foto;
+        Picasso.Builder builder = new Picasso.Builder(context);
+        builder.downloader(new OkHttp3Downloader(context));
+        builder.build().load(foto)
+                .placeholder((R.drawable.ic_launcher_background))
+                .error(R.drawable.ic_launcher_background)
+                .into(holder.imageView);
 //        final Integer idx = diskusiData.getId();
     }
 

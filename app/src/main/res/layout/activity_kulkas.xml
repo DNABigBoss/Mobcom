@@ -45,8 +45,7 @@
             android:id="@+id/layoutToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal">
             <SearchView
                 android:id="@+id/search_bar_kulkas"
                 android:layout_width="match_parent"
