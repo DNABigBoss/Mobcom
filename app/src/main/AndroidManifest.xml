@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.e.resepjajanankekinian">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -11,7 +13,9 @@
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".edit_profil"></activity>
+        <activity android:name=".tambah_resep" android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".edit_profil" />
         <activity android:name=".selesai_daftar" />
         <activity android:name=".search_resep_bahan" />
         <activity android:name=".search" />
@@ -38,8 +42,10 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-    </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
 
 </manifest>

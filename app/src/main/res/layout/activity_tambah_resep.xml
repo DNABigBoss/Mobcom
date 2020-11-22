@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:background="#E5E5E5"
+    tools:context=".tambah_resep">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+<!--            <TextView-->
+<!--                android:id="@+id/TextViewTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="Tambah Resep Baru"-->
+<!--                android:fontFamily="@font/poppins_medium"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textSize="30sp"-->
+<!--                android:textStyle="bold">-->
+<!--            </TextView>-->
+
+<!--            <View-->
+<!--                android:id="@+id/divider"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginBottom="4dp"-->
+<!--                android:background="?android:attr/listDivider" />-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Nama Resep"/>
+
+            <EditText
+                android:id="@+id/daftarNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/input_bg"
+                android:ems="10"
+                android:hint="cth: Risol Kecap"
+                android:inputType="text"
+                android:paddingStart="30dp"
+                android:textSize="16sp"
+                />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#54CCCDD1"
+                android:drawableStart="@drawable/ic_action_plus"
+                android:padding="8dp"
+                android:paddingStart="50dp"
+                android:text="Tambah Gambar"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Bahan Bahan"/>
+
+            <EditText
+                android:id="@+id/tambahbahanbahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/input_bg"
+                android:ems="10"
+                android:hint="cth:\n30gram Gula Biang\n14bungkus gula pasir 1 kg"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:paddingStart="30dp"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Cara Membuat"/>
+
+            <EditText
+                android:id="@+id/tambahcaramembuat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/input_bg"
+                android:ems="10"
+                android:hint="cth:\n1. Tumbuk gula hingga halus\n2. Beri air 500dp"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:paddingStart="30dp"
+                android:textSize="16sp"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_pinkbg"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Tambah Resep"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+
