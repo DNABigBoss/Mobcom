@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorPrimaryDark"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".splash_screen">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         app:srcCompat="@drawable/logo"
         android:layout_gravity="center"
         tools:ignore="MissingConstraints" />
@@ -22,20 +22,22 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="26sp"
-        android:fontFamily="@font/poppins_medium"
+        android:textStyle="bold"
+        android:fontFamily="@font/varela_round"
         android:textColor="@color/colorWhite"
         android:textAlignment="center"
 
-        android:text="Resep Jajanan Kekinian"/>
+        android:text="Resep\nJajanan\nKekinian"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="14sp"
         android:fontFamily="@font/poppins_medium"
-        android:textColor="@color/colorPrimary"
+        android:text="Yuk Bikin Kue!"
         android:textAlignment="center"
-        android:text="Team D Mobile Computing 113 UNJ"/>
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp" />
 
 </LinearLayout>
