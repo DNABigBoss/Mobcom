@@ -51,13 +51,6 @@ public class BookmarkActivity extends AppCompatActivity {
         final TextView textViewKosong = findViewById(R.id.TextViewKosongBookmark);
         recyclerView = findViewById(R.id.customRecyclerViewBookmark);
 
-        btnBack = findViewById(R.id.btn_back);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goBack();
-            }
-        });
         /*
         * Prosess dulu
          */

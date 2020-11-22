@@ -83,15 +83,15 @@
                 android:text="Eh ini enak keliatannya, nnt dicoba dahjjwdkwqjd nsijqnsisiqsnswqnsins pengen banget bikin"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/balasDiskusi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_medium"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:text="Balas" />
+<!--            <TextView-->
+<!--                android:id="@+id/balasDiskusi"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:fontFamily="@font/poppins_medium"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="14sp"-->
+<!--                android:text="Balas" />-->
 
         </LinearLayout>
     </LinearLayout>
