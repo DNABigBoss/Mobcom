@@ -13,15 +13,13 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/profile_image"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_gravity="center"
             android:layout_marginTop="100dp"
-            android:src="@drawable/user"
-            app:civ_border_color="#FFF"
-            app:civ_border_width="2dp" />
+            android:src="@drawable/user" />
 
         <TextView
             android:id="@+id/username"
@@ -49,7 +47,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
             android:layout_gravity="center"
-            android:background="@drawable/btn_pinkbg"
+            android:background="@color/colorPrimary"
             android:text="Edit Profile"
             android:textAllCaps="false"
             android:textColor="@color/design_default_color_background"
@@ -63,7 +61,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:layout_gravity="center"
-            android:background="@drawable/btn_pinkbg"
+            android:background="@color/colorPrimary"
             android:text="Logout"
             android:textAllCaps="false"
             android:textColor="@color/design_default_color_background"

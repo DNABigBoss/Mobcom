@@ -145,8 +145,6 @@
 
             </RelativeLayout>
 
-
-
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,6 +171,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
+                        android:textColor="@color/colorBlack"
                         android:text="110 keping oreo, pisahkan dengan gula putihnya
 \n75 gr keju parut
 \n2 sdm kental manis putih
@@ -206,6 +205,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
+                        android:textColor="@color/colorBlack"
                         android:text="1. Tumbuk oreo bagian hitamnya hingga hancur dan cukup halus.
 
 \n\n2. Masak air hingga mendidih, masukkan gula putih dari oreo, keju parut, kental manis, susu bubuk dan gula halus, aduk rata.
@@ -246,7 +246,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent">
+            android:background="@color/colorPrimary">
 
             <TextView
                 android:layout_width="wrap_content"

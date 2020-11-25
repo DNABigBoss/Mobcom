@@ -1,5 +1,6 @@
 package com.e.resepjajanankekinian;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,14 +20,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.e.resepjajanankekinian.model.UserData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
+import com.e.resepjajanankekinian.service.CircleTransform;
 import com.e.resepjajanankekinian.service.SessionManager;
-import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -34,7 +36,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,8 +52,9 @@ public class edit_profil extends AppCompatActivity {
     String userName;
     String userEmail;
     Bitmap bitmap;
-    CircleImageView profile_image;
+    ImageView profile_image;
     ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+    CircleTransform circleTransform = new CircleTransform();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +64,10 @@ public class edit_profil extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetail();
-        userName = user.get(sessionManager.NAME);
-        userEmail = user.get(sessionManager.EMAIL);
-        userID = user.get(sessionManager.ID);
-        String userFoto = user.get(sessionManager.FOTO);
+        userName = user.get(SessionManager.NAME);
+        userEmail = user.get(SessionManager.EMAIL);
+        userID = user.get(SessionManager.ID);
+        String userFoto = user.get(SessionManager.FOTO);
 
         editTextName = findViewById(R.id.editTextName);
         editTextEmail = findViewById(R.id.editTextEmail);
@@ -76,12 +78,8 @@ public class edit_profil extends AppCompatActivity {
         editTextName.setText(userName);
         editTextEmail.setText(userEmail);
 
-        Picasso.Builder builder = new Picasso.Builder(edit_profil.this);
-        builder.downloader(new OkHttp3Downloader(edit_profil.this));
-        builder.build().load(userFoto)
-                .placeholder((R.drawable.user))
-                .error(R.drawable.user)
-                .into(profile_image);
+        Picasso.with(this).load(userFoto).placeholder((R.drawable.ic_launcher_background))
+                .error(R.drawable.user).transform(circleTransform).into(profile_image);
 
         editTextName.setFocusableInTouchMode(true);
         editTextEmail.setFocusableInTouchMode(true);
@@ -178,13 +176,13 @@ public class edit_profil extends AppCompatActivity {
                 Call<ResponseBody> call = apiRequest.putUser(id, name, email, pass, null, null);
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         progressDialog.dismiss();
                         openProfil(id, pass);
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         progressDialog.dismiss();
                         Toast.makeText(edit_profil.this, "Gagal mengupdate profil", Toast.LENGTH_SHORT).show();
                     }
@@ -231,13 +229,13 @@ public class edit_profil extends AppCompatActivity {
         Call<ResponseBody> call = apiRequest.putUser(id, null, null, pass, null, photo);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 progressDialog.dismiss();
                 openProfil(id, pass);
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(edit_profil.this, "Gagal mengupdate profil", Toast.LENGTH_SHORT).show();
             }
@@ -249,7 +247,7 @@ public class edit_profil extends AppCompatActivity {
         Call<List<UserData>> call = apiRequest.getUser(id, null,null, pass);
         call.enqueue(new Callback<List<UserData>>() {
             @Override
-            public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response) {
+            public void onResponse(@NonNull Call<List<UserData>> call, @NonNull Response<List<UserData>> response) {
                 List<UserData> userDataList = response.body();
                 String nama = userDataList.get(0).getNama();
                 String email = userDataList.get(0).getEmail();
@@ -264,7 +262,7 @@ public class edit_profil extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<UserData>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<UserData>> call, @NonNull Throwable t) {
 
             }
         });
@@ -274,7 +272,6 @@ public class edit_profil extends AppCompatActivity {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] imageByteArray = byteArrayOutputStream.toByteArray();
-        String encodedImage = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
-        return encodedImage;
+        return Base64.encodeToString(imageByteArray, Base64.DEFAULT);
     }
 }

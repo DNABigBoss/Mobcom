@@ -34,7 +34,7 @@ public class tambah_resep extends AppCompatActivity {
         setContentView(R.layout.activity_tambah_resep);
 
         // Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.tambahResepToolbar);
         toolbar.setTitle("Tambah Resep Baru");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);

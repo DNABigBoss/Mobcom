@@ -35,7 +35,7 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:textSize="16sp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorBlack"
                 android:layout_gravity="center"
                 android:text="kalo sqowudbudbwiudbuibdwi wijdboueb "
                 android:fontFamily="@font/varela_round"

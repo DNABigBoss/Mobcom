@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5E5E5"
+    android:background="@color/colorPrimary"
     tools:context=".daftar">
 
     <ImageView
@@ -27,7 +27,7 @@
         android:layout_marginTop="70dp"
         android:fontFamily="@font/varela_round"
         android:text="@string/daftar"
-        android:textColor="#000000"
+        android:textColor="@color/colorWhite"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="33dp"
         android:text="@string/login"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -119,7 +119,7 @@
         android:layout_width="343dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/btn_pinkbg"
+        android:background="@color/colorAccent"
         android:text="@string/daftar_sekarang"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"

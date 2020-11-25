@@ -2,7 +2,6 @@ package com.e.resepjajanankekinian.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.e.resepjajanankekinian.R;
 import com.e.resepjajanankekinian.model.DiskusiData;
-import com.e.resepjajanankekinian.profil;
-import com.jakewharton.picasso.OkHttp3Downloader;
+import com.e.resepjajanankekinian.service.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -32,6 +30,7 @@ import java.util.List;
 public class DiskusiAdapter extends RecyclerView.Adapter<DiskusiAdapter.CustomViewHolder> {
     private final List<DiskusiData> dataList;
     private final Context context;
+    CircleTransform circleTransform = new CircleTransform();
 
     public DiskusiAdapter(Context context, List<DiskusiData> dataList){
         this.context = context;
@@ -46,7 +45,6 @@ public class DiskusiAdapter extends RecyclerView.Adapter<DiskusiAdapter.CustomVi
         private final TextView textViewIsi;
         private final TextView textViewTanggal;
         private final ImageView imageView;
-        private final LinearLayout cardView;
 
         CustomViewHolder(View itemView){
             super(itemView);
@@ -54,7 +52,6 @@ public class DiskusiAdapter extends RecyclerView.Adapter<DiskusiAdapter.CustomVi
             textViewName = mView.findViewById(R.id.namaDiskusi);
             textViewIsi = mView.findViewById(R.id.komenDiskusi);
             imageView = mView.findViewById(R.id.imageViewDiskusi);
-            cardView = mView.findViewById(R.id.linearLayoutDiskusi);
             textViewTanggal = mView.findViewById(R.id.tanggalDiskusi);
         }
     }
@@ -74,13 +71,10 @@ public class DiskusiAdapter extends RecyclerView.Adapter<DiskusiAdapter.CustomVi
         holder.textViewIsi.setText(diskusiData.getIsi());
         String tanggal = setTanggal(diskusiData.getTanggal());
         holder.textViewTanggal.setText(tanggal);
-        String foto = "https://resepjajanankekinian.my.id/assets/img/users/"+diskusiData.foto;
-        Picasso.Builder builder = new Picasso.Builder(context);
-        builder.downloader(new OkHttp3Downloader(context));
-        builder.build().load(foto)
-                .placeholder((R.drawable.ic_launcher_background))
-                .error(R.drawable.ic_launcher_background)
-                .into(holder.imageView);
+        String foto = "https://resepjajanankekinian.my.id/assets/img/users/"+diskusiData.getFoto();
+        Picasso.with(context).load(foto).placeholder((R.drawable.ic_launcher_background))
+                .error(R.drawable.user).transform(circleTransform).into(holder.imageView);
+
 //        final Integer idx = diskusiData.getId();
     }
 

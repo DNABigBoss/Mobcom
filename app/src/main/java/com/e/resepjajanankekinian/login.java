@@ -1,5 +1,6 @@
 package com.e.resepjajanankekinian;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -24,8 +25,6 @@ import retrofit2.Response;
 
 public class login extends AppCompatActivity {
 
-    private TextView textView;
-    private Button button;
     private EditText editText;
     private EditText pass;
     ProgressDialog progressDialog;
@@ -42,8 +41,8 @@ public class login extends AppCompatActivity {
             startActivity(new Intent(login.this, MainActivity.class));
         }
 
-        textView = findViewById(R.id.daftar);
-        button = findViewById(R.id.login);
+        TextView textView = findViewById(R.id.daftar);
+        Button button = findViewById(R.id.login);
         editText = findViewById(R.id.editTextLogin);
         pass = findViewById(R.id.loginPass);
 
@@ -70,24 +69,18 @@ public class login extends AppCompatActivity {
                         Call<List<UserData>> call = apiRequest.getUser(null, null, txtLogin, txtPass);
                         call.enqueue(new Callback<List<UserData>>() {
                             @Override
-                            public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response) {
+                            public void onResponse(@NonNull Call<List<UserData>> call, @NonNull Response<List<UserData>> response) {
                                 progressDialog.dismiss();
                                 String code = String.valueOf(response.code());
-                                switch (code) {
-                                    case "200":
-                                        openMain(response.body());
-                                        break;
-                                    case "400":
-                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
-                                        break;
-                                    case "404":
-                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
-                                        break;
+                                if ("200".equals(code)) {
+                                    openMain(response.body());
+                                } else {
+                                    Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                             @Override
-                            public void onFailure(Call<List<UserData>> call, Throwable t) {
+                            public void onFailure(@NonNull Call<List<UserData>> call, @NonNull Throwable t) {
                                 progressDialog.dismiss();
                                 Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
                             }
@@ -97,24 +90,18 @@ public class login extends AppCompatActivity {
                         Call<List<UserData>> call = apiRequest.getUser(null, txtLogin, null, txtPass);
                         call.enqueue(new Callback<List<UserData>>() {
                             @Override
-                            public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response) {
+                            public void onResponse(@NonNull Call<List<UserData>> call, @NonNull Response<List<UserData>> response) {
                                 progressDialog.dismiss();
                                 String code = String.valueOf(response.code());
-                                switch (code) {
-                                    case "200":
-                                        openMain(response.body());
-                                        break;
-                                    case "400":
-                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
-                                        break;
-                                    case "404":
-                                        Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
-                                        break;
+                                if ("200".equals(code)) {
+                                    openMain(response.body());
+                                } else {
+                                    Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                             @Override
-                            public void onFailure(Call<List<UserData>> call, Throwable t) {
+                            public void onFailure(@NonNull Call<List<UserData>> call, @NonNull Throwable t) {
                                 progressDialog.dismiss();
                                 Toast.makeText(login.this, "Gagal Masuk", Toast.LENGTH_SHORT).show();
                             }
@@ -130,6 +117,7 @@ public class login extends AppCompatActivity {
     public void openDaftar(){
         Intent intent = new Intent(this, daftar.class);
         startActivity(intent);
+        finish();
     }
 
     public void openMain(List<UserData> userDataList){
