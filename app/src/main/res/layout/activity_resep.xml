@@ -178,7 +178,6 @@
 \n2 sdm susu bubuk putih
 \n3 sdm gula halus/bubuk
 \n500 ml air untuk melarutkan 5 sdm tepung maizena dan 6 sdm air"
-                        android:textColor="@color/colorBlack"
                         android:textSize="16sp"
                         app:lineHeight="30sp" />
 
@@ -211,7 +210,6 @@
 \n\n2. Masak air hingga mendidih, masukkan gula putih dari oreo, keju parut, kental manis, susu bubuk dan gula halus, aduk rata.
 
 \n\n3. Jika sudah mendidih, tuangkan larutan maizena sedikit demi sedikit sambil diaduk-aduk hingga mengental dan jadi krim."
-                        android:textColor="@color/colorBlack"
                         android:textSize="16sp"
                         app:lineHeight="30sp" />
 

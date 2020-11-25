@@ -20,7 +20,6 @@
         <activity android:name=".search_resep_bahan" />
         <activity android:name=".search" />
         <activity android:name=".step_resep" />
-        <activity android:name=".test" />
         <activity android:name=".profil" />
         <activity android:name=".kulkas" />
         <activity android:name=".BookmarkActivity" />
