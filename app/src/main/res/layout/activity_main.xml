@@ -136,7 +136,7 @@
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="@color/colorBlack"
-                app:itemIconTint="@color/colorAccent"/>
+                android:drawableTint="@color/colorAccent"/>
 
             <Button
                 android:id="@+id/buttonTambahResep"
@@ -155,7 +155,7 @@
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="@color/colorBlack"
-                app:itemIconTint="@color/colorAccent"/>
+                android:drawableTint="@color/colorAccent"/>
 
         </LinearLayout>
 
@@ -250,16 +250,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@color/colorWhite"
-        app:itemTextColor="@color/colorWhite"
+        app:itemBackground="@color/colorWhite"
+        app:itemIconTint="@color/colorPrimaryDark"
+        app:itemTextColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView"
         app:layout_constraintVertical_bias="1.0"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorWhite"
         app:menu="@menu/item_bottom_navigation"
         tools:ignore="MissingConstraints,NotSibling" />
 
