@@ -35,9 +35,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Main Activity";
-    private Adapter adapter;
     private RecyclerView recyclerView;
-    private Button button, buttonFav;
     ProgressDialog progressDialog;
     SessionManager sessionManager;
 
@@ -50,13 +48,14 @@ public class MainActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetail();
-        String userName = user.get(sessionManager.NAME);
+        String userName = user.get(SessionManager.NAME);
 
         TextView textViewPencarianSemuaBaru = findViewById(R.id.pencarianSemuaBaru);
         TextView textViewPencarianSemuaPopuler = findViewById(R.id.pencarianSemuaPopuler);
         TextView textViewUcapan = findViewById(R.id.textViewUcapan);
-        button = findViewById(R.id.search_bar);
-        buttonFav = findViewById(R.id.buttonFavorite);
+        Button button = findViewById(R.id.search_bar);
+        Button buttonFav = findViewById(R.id.buttonBookmark);
+        Button buttonTambahResep = findViewById(R.id.buttonTambahResep);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
 
@@ -83,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        buttonTambahResep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, tambah_resep.class));
+            }
+        });
+
         /* Ketika mengklik lihat semua yang terpopuler */
         textViewPencarianSemuaPopuler.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
          */
         call.enqueue(new Callback<List<ResepData>>() {
             @Override
-            public void onResponse(Call<List<ResepData>> call, final Response<List<ResepData>> response) {
+            public void onResponse(@NonNull Call<List<ResepData>> call, @NonNull final Response<List<ResepData>> response) {
                 Log.d(TAG, "server contacted and has file");
                 progressDialog.dismiss();
                 recyclerView = findViewById(R.id.customRecyclerView);
@@ -112,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<ResepData>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<ResepData>> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
                 Log.e(TAG, "error");
             }
@@ -178,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
     /**generate data list method()
      */
     private void generateDataList(List<ResepData> ResepDataList, RecyclerView recyclerView){
-        adapter = new Adapter(this, ResepDataList);
+        Adapter adapter = new Adapter(this, ResepDataList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

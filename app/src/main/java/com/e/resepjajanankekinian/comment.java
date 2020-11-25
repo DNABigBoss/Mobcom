@@ -1,10 +1,12 @@
 package com.e.resepjajanankekinian;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,12 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.e.resepjajanankekinian.adapter.Adapter;
 import com.e.resepjajanankekinian.adapter.DiskusiAdapter;
 import com.e.resepjajanankekinian.model.DiskusiData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
 import com.e.resepjajanankekinian.service.SessionManager;
+import com.e.resepjajanankekinian.service.CircleTransform;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,9 +40,9 @@ public class comment extends AppCompatActivity {
     Integer resep_id;
     ProgressDialog progressDialog;
     Toolbar toolbar;
-    private DiskusiAdapter adapter;
     private RecyclerView recyclerView;
     SessionManager sessionManager;
+    CircleTransform circleTransform = new CircleTransform();
     ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
 
     @Override
@@ -50,10 +53,9 @@ public class comment extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetail();
-        String userName = user.get(sessionManager.NAME);
-        String userEmail = user.get(sessionManager.EMAIL);
-        String userID = user.get(sessionManager.ID);
+        String userID = user.get(SessionManager.ID);
         final Integer user_id = Integer.valueOf(userID);
+        String userFoto = user.get(SessionManager.FOTO);
 
         final EditText editTextDiskusi = findViewById(R.id.editTextDiskusi);
         final ImageView imageViewSend = findViewById(R.id.send);
@@ -68,11 +70,16 @@ public class comment extends AppCompatActivity {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
+        ImageView imageView = findViewById(R.id.avatar1);
+        Picasso.with(this).load(userFoto).placeholder((R.drawable.ic_launcher_background))
+                .error(R.drawable.user).transform(circleTransform).into(imageView);
+
         Call<List<DiskusiData>> call = apiRequest.getDiskusi(null, resep_id);
 
         call.enqueue(new Callback<List<DiskusiData>>() {
+            @SuppressLint("SetTextI18n")
             @Override
-            public void onResponse(Call<List<DiskusiData>> call, Response<List<DiskusiData>> response) {
+            public void onResponse(@NonNull Call<List<DiskusiData>> call, @NonNull Response<List<DiskusiData>> response) {
                 progressDialog.dismiss();
                 String code = String.valueOf(response.code());
                 switch (code) {
@@ -88,7 +95,7 @@ public class comment extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<DiskusiData>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<DiskusiData>> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(comment.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
             }
@@ -106,13 +113,13 @@ public class comment extends AppCompatActivity {
                     progressDialog.setMessage("Loading....");
                     progressDialog.show();
 
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String date = dateFormat.format(Calendar.getInstance().getTime());
 
                     Call<ResponseBody> call1 = apiRequest.postDiskusi(komen, user_id, resep_id, 0, date);
                     call1.enqueue(new Callback<ResponseBody>() {
                         @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                             progressDialog.dismiss();
                             Toast.makeText(comment.this, "Berhasil menambahkan komen", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(comment.this, comment.class);
@@ -122,7 +129,7 @@ public class comment extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                             progressDialog.dismiss();
                             Toast.makeText(comment.this, "Gagal menambahkan komen", Toast.LENGTH_SHORT).show();
                         }
@@ -149,7 +156,7 @@ public class comment extends AppCompatActivity {
 
     private void generateDataList(List<DiskusiData> diskusiDataList) {
         recyclerView = findViewById(R.id.customRecyclerViewDiskusi);
-        adapter = new DiskusiAdapter(this, diskusiDataList);
+        DiskusiAdapter adapter = new DiskusiAdapter(this, diskusiDataList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(comment.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

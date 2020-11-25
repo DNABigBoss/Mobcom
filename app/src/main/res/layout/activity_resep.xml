@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E5E5E5"
     tools:context=".resep">
 
     <androidx.appcompat.widget.Toolbar
@@ -72,7 +71,7 @@
                     android:paddingTop="4dp"
                     android:layout_below="@id/namajajanan"
                     android:fontFamily="@font/poppins_medium"
-                    android:textColor="#898787"
+                    android:textColor="@color/colorBlack"
                     android:text="Rp.40.000"
                     android:textSize="18sp"
                     tools:ignore="NestedWeights" />
@@ -97,7 +96,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
                         android:text="2200"
-                        android:textColor="#898787"
+                        android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
 
                     <ImageView
@@ -115,7 +114,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
                         android:text="2200"
-                        android:textColor="#898787"
+                        android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
 
                     <ImageView
@@ -133,7 +132,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="8dp"
                         android:text="2200"
-                        android:textColor="#898787"
+                        android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -151,7 +150,7 @@
                     <RelativeLayout
                         android:id="@+id/resepDiskusi"
                         android:layout_width="wrap_content"
-                        android:background="@color/colorAccent"
+                        android:background="@color/colorPrimary"
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         >
@@ -170,7 +169,7 @@
                 <RelativeLayout
                     android:id="@+id/buttonMulaimasak"
                     android:layout_width="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/colorPrimaryDark"
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     >
@@ -214,6 +213,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
+                        android:textColor="@color/colorBlack"
                         android:text="110 keping oreo, pisahkan dengan gula putihnya
 \n75 gr keju parut
 \n2 sdm kental manis putih
@@ -244,6 +244,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
+                        android:textColor="@color/colorBlack"
                         android:text="1. Tumbuk oreo bagian hitamnya hingga hancur dan cukup halus.
 
 \n\n2. Masak air hingga mendidih, masukkan gula putih dari oreo, keju parut, kental manis, susu bubuk dan gula halus, aduk rata.

@@ -1,5 +1,6 @@
 package com.e.resepjajanankekinian;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -23,12 +24,9 @@ import retrofit2.Response;
 
 public class daftar extends AppCompatActivity {
 
-    private TextView textView;
-    private ImageView imageView;
     private EditText nama;
     private EditText email;
     private EditText pass;
-    private Button buttonDaftar;
     ProgressDialog progressDialog;
     SessionManager sessionManager;
 
@@ -43,12 +41,12 @@ public class daftar extends AppCompatActivity {
             startActivity(new Intent(daftar.this, MainActivity.class));
         }
 
-        textView = findViewById(R.id.login);
-        imageView = findViewById(R.id.x);
+        TextView textView = findViewById(R.id.login);
+        ImageView imageView = findViewById(R.id.x);
         nama = findViewById(R.id.daftarNama);
         email = findViewById(R.id.daftarEmail);
         pass = findViewById(R.id.daftarPass);
-        buttonDaftar = findViewById(R.id.buttonDaftar);
+        Button buttonDaftar = findViewById(R.id.buttonDaftar);
 
         buttonDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +65,7 @@ public class daftar extends AppCompatActivity {
                             Call<ResponseBody> call = apiRequest.postUser(namaPendaftar, emailPendaftar, passPendaftar);
                             call.enqueue(new Callback<ResponseBody>() {
                                 @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                                     progressDialog.dismiss();
                                     Toast.makeText(daftar.this, "Berhasil Membuat Akun", Toast.LENGTH_SHORT).show();
                                     openSelesaiDaftar(namaPendaftar, passPendaftar);
@@ -75,7 +73,7 @@ public class daftar extends AppCompatActivity {
                                 }
 
                                 @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                                     progressDialog.dismiss();
                                     Toast.makeText(daftar.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
                                 }
@@ -113,6 +111,7 @@ public class daftar extends AppCompatActivity {
     public void openLogin(){
         Intent intent = new Intent(this, login.class);
         startActivity(intent);
+        finish();
     }
 
     public void openSelesaiDaftar(String name, String pass) {

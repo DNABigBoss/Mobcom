@@ -1,12 +1,12 @@
-# Sprint 9
-11 November -> 18 November 2020 (Minggu ke-10 Mobile Computing 113)
+# Sprint 10
+19 November -> 25 November 2020 (Minggu ke-11 Mobile Computing 113)
 
 # Sprint Backlog
 Story | Task | Status| Contributor
 --- | --- | --- | ---
-Saya bisa mengedit komentar di diskusi saya | [Memperbaiki user interface edit komentar di diskusi](https://github.com/dwikimarbi/Mobcom/issues/38) | Complete | [Dwiki Sulthon Saputra Marbi](https://github.com/dwikimarbi)
-Saya bisa berdiskusi dengan pengguna lain mengenai resep yang saya ingin buat | [Menampilkan Foto Profil User di Diskusi](https://github.com/dwikimarbi/Mobcom/issues/39) | Complete | [Dwiki Sulthon Saputra Marbi](https://github.com/dwikimarbi)
-Saya bisa menambahkan resep | [Membuat Layout Tambah Resep](https://github.com/dwikimarbi/Mobcom/issues/40) | Complete | [Faqihuddin Al Farisi](https://github.com/falfisme)
-Saya bisa menambahkan resep | [Membuat Layout List Resep Yang Telah Ditambahkan](https://github.com/dwikimarbi/Mobcom/issues/41) | Complete | [Faqihuddin Al Farisi](https://github.com/falfisme)
-Saya bisa melihat daftar resep berdasarkan bahan yang saya miliki | [Membuat Get Resep Berdasarkan 2 Bahan](https://github.com/dwikimarbi/Mobcom/issues/37) | In Progress | [Razka Agniatara](https://github.com/Razka173)
-Saya bisa melihat daftar resep berdasarkan bahan yang saya miliki | [Membuat Card Pemilihan Bahan di Kulkas](https://github.com/dwikimarbi/Mobcom/issues/36) | In Progress | [Razka Agniatara](https://github.com/Razka173)
+Saya bisa menambahkan resep | [Membuat Tambah Data Resep User di REST API](https://github.com/dwikimarbi/Mobcom/issues/42) | In Progress | [Dwiki Sulthon Saputra Marbi](https://github.com/dwikimarbi)
+Saya bisa menambahkan resep | [Membuat Update Data Resep User di REST API](https://github.com/dwikimarbi/Mobcom/issues/43) | In Progress | [Dwiki Sulthon Saputra Marbi](https://github.com/dwikimarbi)
+Saya bisa melihat daftar resep berdasarkan bahan yang saya miliki | [Membetulkan Bug Daftar Resep ketika memilih bahan](https://github.com/dwikimarbi/Mobcom/issues/47) | In Progress | [Faqihuddin Al Farisi](https://github.com/falfisme)
+Saya bisa mengetahui syarat dan ketentuan aplikasi | [Membuat Halaman About Us](https://github.com/dwikimarbi/Mobcom/issues/45) | In Progress | [Faqihuddin Al Farisi](https://github.com/falfisme)
+Saya bisa menambahkan resep | [Membuat pengiriman data penambahan user](https://github.com/dwikimarbi/Mobcom/issues/46) | In Progress | [Razka Agniatara](https://github.com/Razka173)
+Saya bisa memverifikasi resep tambahan user | [Membuat Verifikasi Resep User](https://github.com/dwikimarbi/Mobcom/issues/44) | In Progress | [Razka Agniatara](https://github.com/Razka173)

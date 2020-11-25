@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
-        android:background="#ededed"
         android:orientation="horizontal"
         android:padding="8dp">
 
@@ -23,21 +22,12 @@
             android:orientation="vertical"
             android:paddingTop="8dp">
 
-            <androidx.cardview.widget.CardView
+            <ImageView
+                android:id="@+id/imageViewDiskusi"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:layout_weight="1"
-                android:padding="8dp"
-                app:cardCornerRadius="180dp">
-
-                <ImageView
-                    android:id="@+id/imageViewDiskusi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:cropToPadding="false"
-                    android:src="@drawable/user"/>
-
-            </androidx.cardview.widget.CardView>
+                android:cropToPadding="false"
+                android:src="@drawable/user"/>
 
 
         </LinearLayout>

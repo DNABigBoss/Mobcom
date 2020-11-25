@@ -25,10 +25,11 @@
 
                 <Button
                     android:id="@+id/search_bar"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_weight="40"
                     android:background="@drawable/rounded_white"
                     android:drawableLeft="@drawable/ic_action_search"
@@ -41,22 +42,22 @@
                     android:textAllCaps="false"
                     android:textColor="#828282" />
 
-                <Button
-                    android:id="@+id/buttonFavorite"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="16dp"
-                    android:background="@drawable/like2" />
+<!--                <Button-->
+<!--                    android:id="@+id/buttonFavorite"-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:background="@drawable/like2" />-->
 
-                <Button
-                    android:id="@+id/buttonTambahResep"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/ic_action_plus" />
+<!--                <Button-->
+<!--                    android:id="@+id/buttonTambahResep"-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:background="@drawable/ic_action_plus" />-->
 
             </LinearLayout>
         </LinearLayout>
@@ -119,6 +120,7 @@
             >
 
             <Button
+                android:id="@+id/buttonBookmark"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_marginStart="10dp"
@@ -137,6 +139,7 @@
                 app:itemIconTint="@color/colorAccent"/>
 
             <Button
+                android:id="@+id/buttonTambahResep"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_marginStart="6dp"
@@ -231,6 +234,7 @@
                     android:id="@+id/customRecyclerViewBaru"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="75dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -246,16 +250,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:itemBackground="@color/abuabu"
-        app:itemIconTint="@color/colorPrimaryDark"
-        app:itemTextColor="@color/colorPrimaryDark"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@color/colorWhite"
+        app:itemTextColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView"
         app:layout_constraintVertical_bias="1.0"
-        android:background="@color/abuabu"
+        android:background="@color/colorPrimary"
         app:menu="@menu/item_bottom_navigation"
         tools:ignore="MissingConstraints,NotSibling" />
 
