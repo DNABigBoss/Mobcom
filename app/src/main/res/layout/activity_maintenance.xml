@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:background="@color/colorWhite"
+    tools:context=".maintenance">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        tools:ignore="MissingConstraints" />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:maxWidth="340dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/masak2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela_round"
+        android:text="Ditunggu ya!"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:textSize="24sp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela_round"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:text="Tim kami sedang menyiapkannya fitur ini untuk anda!"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

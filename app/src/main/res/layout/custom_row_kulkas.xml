@@ -30,18 +30,19 @@
                         android:contentDescription="@string/populer">
                     </ImageView>
                 </androidx.cardview.widget.CardView>
+
                 <TextView
                     android:id="@+id/textViewNamaBahan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:text="@string/almond"
                     android:layout_gravity="center"
-                    android:layout_weight="10">
-                </TextView>
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="10"
+                    android:fontFamily="@font/varela_round"
+                    android:text="@string/almond"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
 <!--                <Button-->
 <!--                    android:id="@+id/add"-->
 <!--                    android:layout_width="32dp"-->

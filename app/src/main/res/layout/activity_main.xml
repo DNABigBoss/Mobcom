@@ -23,12 +23,24 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="42dp"
+                    android:maxHeight="42dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/resepjajanankekinianlogobaru"
+                    />
+
                 <Button
                     android:id="@+id/search_bar"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="40"
                     android:background="@drawable/rounded_white"

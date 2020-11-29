@@ -41,7 +41,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp">
+                >
 
                 <TextView
                     android:id="@+id/namajajanan"
@@ -50,6 +50,7 @@
                     android:fontFamily="@font/varela_round"
                     android:textColor="@color/colorBlack"
                     android:text="@string/oreo_cheesecake"
+                    android:layout_marginBottom="4dp"
                     android:textSize="24sp"
                     tools:ignore="NestedWeights" />
 
@@ -65,30 +66,102 @@
                     android:textOff=""
                     android:textOn=""/>
 
-                <TextView
-                    android:id="@+id/harga"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
                     android:layout_below="@id/namajajanan"
-                    android:fontFamily="@font/varela_round"
-                    android:textColor="@color/colorBlack"
-                    android:text="Rp.40.000"
-                    android:textSize="18sp"
-                    tools:ignore="NestedWeights" />
+                    android:id="@+id/biayaporsi"
+                    android:layout_marginBottom="8dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/estimasi"
+                        android:layout_weight="1"
+                        android:layout_below="@id/namajajanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/namajajanan"
+                            android:text="Estimasi Biaya"
+                            android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/harga"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="4dp"
+                            android:layout_toRightOf="@id/estimasi"
+                            android:fontFamily="@font/varela_round"
+                            android:textColor="@color/colorBlack"
+                            android:text="Rp.40.000"
+                            android:textSize="18sp"
+                            tools:ignore="NestedWeights" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:id="@+id/estimasiporsi"
+                        android:layout_toRightOf="@id/estimasi"
+                        android:layout_below="@id/namajajanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Estimasi Porsi"
+                            android:textSize="10sp"/>
+
+                        <TextView
+                            android:id="@+id/porsi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="4dp"
+                            android:fontFamily="@font/varela_round"
+                            android:textColor="@color/colorBlack"
+                            android:text="7-10 Pcs"
+                            android:textSize="18sp"
+                            tools:ignore="NestedWeights" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/biayaporsi"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
 
                 <LinearLayout
+                    android:id="@+id/angkaangka"
+                    android:layout_marginTop="4dp"
                     android:paddingTop="4dp"
-                    android:layout_below="@id/harga"
-                    android:layout_width="wrap_content"
+                    android:layout_below="@id/biayaporsi"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/show"
+                        android:layout_weight="1"
                         android:contentDescription="@string/dilihat"
                         app:tint="@color/colorAccent" />
 
@@ -98,6 +171,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
+                        android:layout_weight="1"
                         android:text="2200"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
@@ -105,6 +179,7 @@
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
+                        android:layout_weight="1"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/chat"
                         android:layout_marginLeft="20dp"
@@ -117,6 +192,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
+                        android:layout_weight="1"
                         android:text="2200"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
@@ -125,6 +201,7 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_marginLeft="20dp"
+                        android:layout_weight="1"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/like3"
                         android:contentDescription="@string/diskusi"
@@ -135,15 +212,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
                         android:text="2200"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
 
                 </LinearLayout>
 
+                <View
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/angkaangka"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
 
             </RelativeLayout>
+
+<!--            spasi-->
 
             <TableLayout
                 android:layout_width="match_parent"

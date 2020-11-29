@@ -77,7 +77,7 @@
                 android:id="@+id/search_bar_kulkas"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:queryHint="Punya bahan apa saja?"
+                android:queryHint="Kamu punya bahan apa?"
                 android:background="#fff"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
