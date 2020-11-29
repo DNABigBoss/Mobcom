@@ -63,6 +63,7 @@ public class resep extends AppCompatActivity {
         final TextView diskusicount = findViewById(R.id.resepDiskusiCount);
         final RelativeLayout resepdiskusi = findViewById(R.id.resepDiskusi);
 
+
         RelativeLayout mulaimemasak = findViewById(R.id.buttonMulaimasak);
 
         Bundle extras = getIntent().getExtras();

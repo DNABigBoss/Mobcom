@@ -18,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/x"
+        android:tint="@color/colorAccent"
         android:contentDescription="@string/keluar" />
 
     <TextView
@@ -50,9 +51,11 @@
 
     <EditText
         android:id="@+id/daftarNama"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/input_bg"
         android:ems="10"
         android:hint="@string/username"
@@ -68,8 +71,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_layout"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="10dp"
         app:passwordToggleEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/daftarEmail">
         <EditText
             android:id="@+id/daftarPass"
-            android:layout_width="344dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/input_bg"
@@ -98,9 +103,11 @@
 
     <EditText
         android:id="@+id/daftarEmail"
-        android:layout_width="343dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/input_bg"
         android:ems="10"
         android:hint="@string/email"
@@ -116,9 +123,11 @@
 
     <Button
         android:id="@+id/buttonDaftar"
-        android:layout_width="343dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/daftar_sekarang"
         android:textAllCaps="false"
