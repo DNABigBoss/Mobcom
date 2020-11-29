@@ -26,6 +26,8 @@
                     android:src="@drawable/oreocheesecake"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     android:contentDescription="@string/populer">
                 </ImageView>
             </androidx.cardview.widget.CardView>
@@ -61,11 +63,12 @@
                         android:layout_weight="1">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
                             android:layout_gravity="center"
                             app:srcCompat="@drawable/show"
-                            android:contentDescription="@string/dilihat" />
+                            android:contentDescription="@string/dilihat"
+                            app:tint="@color/colorAccent"/>
 
                         <TextView
                             android:id="@+id/dilihatSearchResep"
@@ -74,7 +77,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="5dp"
                             android:text="@string/_2200"
-                            android:textColor="#898787"
+                            android:textColor="@color/colorAccent"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -84,12 +87,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
                             android:layout_gravity="center"
                             android:layout_marginStart="10dp"
-                            app:srcCompat="@drawable/star"
-                            android:contentDescription="@string/favorit" />
+                            app:srcCompat="@drawable/like3"
+                            android:contentDescription="@string/favorit"
+                            app:tint="@color/colorAccent"/>
 
                         <TextView
                             android:id="@+id/favoritSearchResep"
@@ -98,7 +102,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="5dp"
                             android:text="@string/_2200"
-                            android:textColor="#898787"
+                            android:textColor="@color/colorAccent"
                             android:textSize="12sp" />
                     </LinearLayout>
 
