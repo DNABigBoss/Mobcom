@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".tambah_resep">
 
     <androidx.appcompat.widget.Toolbar
@@ -12,40 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        />
+        tools:ignore="MissingConstraints" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tambahResepToolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_marginTop="24dp"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-<!--            <TextView-->
-<!--                android:id="@+id/TextViewTitle"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:text="Tambah Resep Baru"-->
-<!--                android:fontFamily="@font/poppins_medium"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:textColor="#000000"-->
-<!--                android:textSize="30sp"-->
-<!--                android:textStyle="bold">-->
-<!--            </TextView>-->
-
-<!--            <View-->
-<!--                android:id="@+id/divider"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="1dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:layout_marginBottom="4dp"-->
-<!--                android:background="?android:attr/listDivider" />-->
+            android:layout_marginBottom="100dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/tambahResepToolbar">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -151,11 +131,12 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
+                android:layout_marginBottom="100dp"
                 />
 
         </LinearLayout>
 
     </ScrollView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
