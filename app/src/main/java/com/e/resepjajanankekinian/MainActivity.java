@@ -9,11 +9,14 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.e.resepjajanankekinian.adapter.Adapter;
 import com.e.resepjajanankekinian.model.ResepData;
@@ -36,8 +39,8 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Main Activity";
     private RecyclerView recyclerView;
-    ProgressDialog progressDialog;
     SessionManager sessionManager;
+    ProgressBar progressBar;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -46,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sessionManager = new SessionManager(this);
-        sessionManager.checkLogin();
+        if(!sessionManager.isLogin()) {
+            moveToLogin();
+        }
         HashMap<String, String> user = sessionManager.getUserDetail();
         String userName = user.get(SessionManager.NAME);
 
@@ -58,10 +63,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonTambahResep = findViewById(R.id.buttonTambahResep);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
-
-        progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("Loading....");
-        progressDialog.show();
+        progressBar = findViewById(R.id.progressbarmain);
 
         /*Create handle for the RetrofitInstance interface*/
         ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
@@ -112,14 +114,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<List<ResepData>> call, @NonNull final Response<List<ResepData>> response) {
                 Log.d(TAG, "server contacted and has file");
-                progressDialog.dismiss();
+                progressBar.setVisibility(View.GONE);
                 recyclerView = findViewById(R.id.customRecyclerView);
                 generateDataList(response.body(), recyclerView);
             }
 
             @Override
             public void onFailure(@NonNull Call<List<ResepData>> call, @NonNull Throwable t) {
-                progressDialog.dismiss();
+                progressBar.setVisibility(View.GONE);
                 Log.e(TAG, "error");
             }
         });
@@ -131,14 +133,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ResepData>> call, final Response<List<ResepData>> response) {
                 Log.d(TAG, "server contacted and has file");
-                progressDialog.dismiss();
+                progressBar.setVisibility(View.GONE);
                 recyclerView = findViewById(R.id.customRecyclerViewBaru);
                 generateDataList(response.body(), recyclerView);
             }
 
             @Override
             public void onFailure(Call<List<ResepData>> call, Throwable t) {
-                progressDialog.dismiss();
+                progressBar.setVisibility(View.GONE);
                 Log.e(TAG, "error");
             }
         });
@@ -175,6 +177,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+
     private void pencarianSemua(String id) {
         Intent intent = new Intent(MainActivity.this, search_resep_bahan.class);
         intent.putExtra("order", id);
@@ -190,5 +213,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-
+    private void moveToLogin() {
+        Intent intent = new Intent(MainActivity.this, login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        finish();
+    }
 }

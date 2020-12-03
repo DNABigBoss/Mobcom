@@ -40,4 +40,11 @@
     <string name="email">Email</string>
     <string name="daftar_sekarang">Daftar Sekarang</string>
     <string name="saya_senang_jika_menerima_informasi_dari_aplikasi_ini_seperti_promosi_dan_kabar_melalui_email">Saya senang jika menerima informasi dari aplikasi ini seperti promosi dan kabar melalui email</string>
+    <string name="sudah_punya_akun">Sudah Punya Akun? </string>
+    <string name="masuk_disini">Masuk Disini</string>
+    <string name="nameerror">Enter a valid name</string>
+    <string name="emailerror">Masukan email yang valid</string>
+    <string name="mobileerror">Enter a valid mobile</string>
+    <string name="dateerror">Enter a valid date</string>
+    <string name="ageerror">Enter a valid age</string>
 </resources>

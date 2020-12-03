@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.e.resepjajanankekinian">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,11 +17,12 @@
         android:largeHeap="true"
         android:roundIcon="@drawable/resepjajanankekinianlogobaru"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".maintenance"></activity>
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
+        <activity android:name=".maintenance" />
         <activity
             android:name=".tambah_resep"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".edit_profil" />
         <activity android:name=".selesai_daftar" />
         <activity android:name=".search_resep_bahan" />

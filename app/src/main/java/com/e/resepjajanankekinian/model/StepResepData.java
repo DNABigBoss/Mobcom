@@ -135,7 +135,7 @@ public class StepResepData {
         @SerializedName("waktu_memasak")
         public String waktu_memasak;
         @SerializedName("porsi")
-        public Integer porsi;
+        public String porsi;
         @SerializedName("harga")
         public Double harga;
         @SerializedName("favorit")
@@ -145,7 +145,7 @@ public class StepResepData {
         @SerializedName("gambar")
         public String gambar;
 
-        public DatumInfo(Integer id, String nama, String waktu_memasak, Integer porsi, Double harga, Integer favorit, Integer dilihat, String gambar) {
+        public DatumInfo(Integer id, String nama, String waktu_memasak, String porsi, Double harga, Integer favorit, Integer dilihat, String gambar) {
             this.id = id;
             this.nama = nama;
             this.waktu_memasak = waktu_memasak;
@@ -180,11 +180,11 @@ public class StepResepData {
             this.waktu_memasak = waktu_memasak;
         }
 
-        public Integer getPorsi() {
+        public String getPorsi() {
             return porsi;
         }
 
-        public void setPorsi(Integer porsi) {
+        public void setPorsi(String porsi) {
             this.porsi = porsi;
         }
 

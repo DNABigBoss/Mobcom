@@ -13,7 +13,7 @@ public class ResepData {
     @SerializedName("waktu_memasak")
     private String waktu_memasak;
     @SerializedName("porsi")
-    private Integer porsi;
+    private String porsi;
     @SerializedName("harga")
     private Double harga;
     @SerializedName("favorit")
@@ -23,7 +23,7 @@ public class ResepData {
     @SerializedName("gambar")
     private String gambar;
 
-    public ResepData(Integer id, String nama, String waktu_memasak, Integer porsi, Double harga, Integer favorit, Integer dilihat, String gambar) {
+    public ResepData(Integer id, String nama, String waktu_memasak, String porsi, Double harga, Integer favorit, Integer dilihat, String gambar) {
         this.id = id;
         this.nama = nama;
         this.waktu_memasak = waktu_memasak;
@@ -58,11 +58,11 @@ public class ResepData {
         this.waktu_memasak = waktu_memasak;
     }
 
-    public Integer getPorsi() {
+    public String getPorsi() {
         return porsi;
     }
 
-    public void setPorsi(Integer porsi) {
+    public void setPorsi(String porsi) {
         this.porsi = porsi;
     }
 
