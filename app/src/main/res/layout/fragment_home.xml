@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:id="@+id/layoutToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="42dp"
+                    android:maxHeight="42dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/resepjajanankekinianlogobaru"
+                    />
+
+                <Button
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="40"
+                    android:background="@drawable/rounded_white"
+                    android:drawableLeft="@drawable/ic_action_search"
+                    android:drawablePadding="2dp"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="30dp"
+                    android:singleLine="true"
+                    android:text="Cari resep yang kamu suka"
+                    android:textAllCaps="false"
+                    android:textColor="#828282" />
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/buttonFavorite"-->
+                <!--                    android:layout_width="24dp"-->
+                <!--                    android:layout_height="24dp"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:layout_marginStart="16dp"-->
+                <!--                    android:background="@drawable/like2" />-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/buttonTambahResep"-->
+                <!--                    android:layout_width="24dp"-->
+                <!--                    android:layout_height="24dp"-->
+                <!--                    android:layout_marginStart="8dp"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:layout_marginEnd="16dp"-->
+                <!--                    android:background="@drawable/ic_action_plus" />-->
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/textViewUcapan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/varela_round"
+                android:text="Selamat Hari Kamis, Blabla"
+                android:textColor="@color/colorWhite"
+                android:textSize="26sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                >
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_baseline_cake_24"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/varela_round"
+                    android:text="Mau masak apa hari ini?"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:isScrollContainer="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/abuabu"
+                android:orientation="horizontal"
+                >
+
+                <Button
+                    android:id="@+id/buttonBookmark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/rounded_white"
+                    android:drawableLeft="@drawable/bookmarkku_main"
+                    android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
+                    android:paddingEnd="8dp"
+                    android:singleLine="true"
+                    android:text="Bookmarkku"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    android:drawableTint="@color/colorAccent"/>
+
+                <Button
+                    android:id="@+id/buttonTambahResep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/rounded_white"
+                    android:drawableLeft="@drawable/plus_main"
+                    android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
+                    android:paddingEnd="8dp"
+                    android:singleLine="true"
+                    android:text="Tambah Resep Buatanku"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    android:drawableTint="@color/colorAccent"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:isScrollContainer="true"
+            android:id="@+id/scrollView">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/populer_minggu_ini"
+                        android:textSize="18sp"
+                        android:layout_weight="3"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/colorBlack"
+                        android:layout_gravity="center">
+                    </TextView>
+                    <TextView
+                        android:id="@+id/pencarianSemuaPopuler"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lihat_semua"
+                        android:textSize="14sp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@color/colorAccent"
+                        android:layout_gravity="center">
+                    </TextView>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/customRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Baru Ditambahkan"
+                        android:textSize="18sp"
+                        android:layout_weight="3"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/colorBlack"
+                        android:layout_gravity="center">
+                    </TextView>
+                    <TextView
+                        android:id="@+id/pencarianSemuaBaru"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lihat_semua"
+                        android:textSize="14sp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@color/colorAccent"
+                        android:layout_gravity="center">
+                    </TextView>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/customRecyclerViewBaru"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="75dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbarmain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background = "@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,14 +64,15 @@
             tools:ignore="RtlSymmetry" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password_layout"
+            android:id="@+id/password_layout_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_gravity="center"
-            tools:ignore="RtlSymmetry">
+            tools:ignore="RtlSymmetry"
+            app:passwordToggleEnabled="true">
             <EditText
                 android:id="@+id/loginPass"
                 android:layout_width="match_parent"
@@ -96,8 +97,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colorBlack"
             android:textSize="16sp"
+            android:textStyle="bold"
             android:layout_gravity="center"/>
 
         <LinearLayout
@@ -120,11 +122,11 @@
             <TextView
                 android:id="@+id/daftar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:fontFamily="@font/varela_round"
                 android:text="Daftar Disini"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:layout_weight="1"
                 android:textStyle="normal"
                 />

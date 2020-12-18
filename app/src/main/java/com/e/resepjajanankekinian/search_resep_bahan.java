@@ -31,8 +31,8 @@ public class search_resep_bahan extends AppCompatActivity {
     private SearchResepBahanAdapter adapter;
     private RecyclerView recyclerView;
     ProgressDialog progressDialog;
-    String bahan;
-    String order;
+    String bahan = null;
+    String order = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +46,10 @@ public class search_resep_bahan extends AppCompatActivity {
         searchView.setIconified(false);
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            if (extras.getString("bahan") == null || extras.getString("order") == null ) {
-                bahan = null;
-                order = null;
-            } else {
-                if (extras.getString("bahan") != null) bahan = extras.getString("bahan");
-                if (extras.getString("order") != null) order = extras.getString("order");
+            if (extras.getString("bahan") != null) {
+                bahan = extras.getString("bahan");
             }
+            if (extras.getString("order") != null) order = extras.getString("order");
         }
         progressDialog = new ProgressDialog(search_resep_bahan.this);
         progressDialog.setMessage("Loading....");

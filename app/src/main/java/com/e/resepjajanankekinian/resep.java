@@ -62,7 +62,9 @@ public class resep extends AppCompatActivity {
         final ToggleButton buttonFav = findViewById(R.id.tgbFav);
         final TextView diskusicount = findViewById(R.id.resepDiskusiCount);
         final RelativeLayout resepdiskusi = findViewById(R.id.resepDiskusi);
+        final TextView porsi = findViewById(R.id.porsi);
 
+        final Toolbar toolbar = findViewById(R.id.toolbar);
 
         RelativeLayout mulaimemasak = findViewById(R.id.buttonMulaimasak);
 
@@ -102,11 +104,15 @@ public class resep extends AppCompatActivity {
 
                 Integer dilihat_count = 0;
                 for (StepResepData.DatumInfo datumInfo : datumInfos) {
+                    toolbar.setTitle("Resep "+ datumInfo.getNama());
                     dilihat_count = datumInfo.getDilihat();
                     namajajanan.setText(datumInfo.getNama());
                     hargajajanan.setText(String.format("Rp. %s",datumInfo.getHarga()));
                     dilihat.setText(String.valueOf(dilihat_count));
                     favorit.setText(String.valueOf(datumInfo.getFavorit()));
+                    if (datumInfo.getPorsi() != null) {
+                        porsi.setText(datumInfo.getPorsi());
+                    }
                     Picasso.Builder builder = new Picasso.Builder(resep.this);
                     builder.downloader(new OkHttp3Downloader(resep.this));
                     builder.build().load(datumInfo.getGambar())
@@ -227,8 +233,6 @@ public class resep extends AppCompatActivity {
         });
 
         //View
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Resep");
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
