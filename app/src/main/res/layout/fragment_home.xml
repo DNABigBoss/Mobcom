@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,22 +54,22 @@
                     android:textAllCaps="false"
                     android:textColor="#828282" />
 
-<!--                <Button-->
-<!--                    android:id="@+id/buttonFavorite"-->
-<!--                    android:layout_width="24dp"-->
-<!--                    android:layout_height="24dp"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:background="@drawable/like2" />-->
+                <!--                <Button-->
+                <!--                    android:id="@+id/buttonFavorite"-->
+                <!--                    android:layout_width="24dp"-->
+                <!--                    android:layout_height="24dp"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:layout_marginStart="16dp"-->
+                <!--                    android:background="@drawable/like2" />-->
 
-<!--                <Button-->
-<!--                    android:id="@+id/buttonTambahResep"-->
-<!--                    android:layout_width="24dp"-->
-<!--                    android:layout_height="24dp"-->
-<!--                    android:layout_marginStart="8dp"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:background="@drawable/ic_action_plus" />-->
+                <!--                <Button-->
+                <!--                    android:id="@+id/buttonTambahResep"-->
+                <!--                    android:layout_width="24dp"-->
+                <!--                    android:layout_height="24dp"-->
+                <!--                    android:layout_marginStart="8dp"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:layout_marginEnd="16dp"-->
+                <!--                    android:background="@drawable/ic_action_plus" />-->
 
             </LinearLayout>
         </LinearLayout>
@@ -106,15 +106,15 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:src="@drawable/ic_baseline_cake_24"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/varela_round"
-                android:text="Mau masak apa hari ini?"
-                android:textColor="@color/colorWhite"
-                android:textSize="18sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/varela_round"
+                    android:text="Mau masak apa hari ini?"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -124,52 +124,52 @@
             android:isScrollContainer="true"
             >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/abuabu"
-            android:orientation="horizontal"
-            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/abuabu"
+                android:orientation="horizontal"
+                >
 
-            <Button
-                android:id="@+id/buttonBookmark"
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/rounded_white"
-                android:drawableLeft="@drawable/bookmarkku_main"
-                android:drawablePadding="4dp"
-                android:paddingLeft="8dp"
-                android:paddingEnd="8dp"
-                android:singleLine="true"
-                android:text="Bookmarkku"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:textColor="@color/colorBlack"
-                android:drawableTint="@color/colorAccent"/>
+                <Button
+                    android:id="@+id/buttonBookmark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/rounded_white"
+                    android:drawableLeft="@drawable/bookmarkku_main"
+                    android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
+                    android:paddingEnd="8dp"
+                    android:singleLine="true"
+                    android:text="Bookmarkku"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    android:drawableTint="@color/colorAccent"/>
 
-            <Button
-                android:id="@+id/buttonTambahResep"
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/rounded_white"
-                android:drawableLeft="@drawable/plus_main"
-                android:drawablePadding="4dp"
-                android:paddingLeft="8dp"
-                android:paddingEnd="8dp"
-                android:singleLine="true"
-                android:text="Tambah Resep Buatanku"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:textColor="@color/colorBlack"
-                android:drawableTint="@color/colorAccent"/>
+                <Button
+                    android:id="@+id/buttonTambahResep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/rounded_white"
+                    android:drawableLeft="@drawable/plus_main"
+                    android:drawablePadding="4dp"
+                    android:paddingLeft="8dp"
+                    android:paddingEnd="8dp"
+                    android:singleLine="true"
+                    android:text="Tambah Resep Buatanku"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorBlack"
+                    android:drawableTint="@color/colorAccent"/>
 
-        </LinearLayout>
+            </LinearLayout>
 
         </ScrollView>
 
@@ -268,25 +268,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:itemBackground="@color/colorWhite"
-        app:itemIconTint="@color/colorPrimaryDark"
-        app:itemTextColor="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView"
-        app:layout_constraintVertical_bias="1.0"
-        android:background="@color/colorWhite"
-        app:menu="@menu/item_bottom_navigation"
-        app:labelVisibilityMode="labeled"
-        tools:ignore="MissingConstraints,NotSibling" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

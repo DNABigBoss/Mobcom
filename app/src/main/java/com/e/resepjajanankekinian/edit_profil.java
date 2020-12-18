@@ -17,6 +17,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +63,8 @@ public class edit_profil extends AppCompatActivity {
     ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
     CircleTransform circleTransform = new CircleTransform();
     private static final int STORAGE_PERMISSION_CODE = 101;
+    String foto;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +84,7 @@ public class edit_profil extends AppCompatActivity {
         Button buttonSave = findViewById(R.id.buttonSaveEditProfile);
         TextView ubahFoto = findViewById(R.id.ubahFoto);
         profile_image = findViewById(R.id.profile_image);
+        progressBar = findViewById(R.id.progressbareditprofile);
 
         editTextName.setText(userName);
         editTextEmail.setText(userEmail);
@@ -107,13 +113,8 @@ public class edit_profil extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String pass = editTextPass.getText().toString().trim();
+                        progressBar.setVisibility(View.VISIBLE);
                         saveEdit(pass);
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
                     }
                 });
                 AlertDialog alertDialog = builder.create();
@@ -155,15 +156,11 @@ public class edit_profil extends AppCompatActivity {
         String email = editTextEmail.getText().toString().trim();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         final Integer id = Integer.valueOf(userID);
-        String foto;
-        if (bitmap != null) {
-            foto = getStringImage(bitmap);
-        } else {
-            foto = null;
-        }
+
+        if (!foto.isEmpty()) uploadPicture(userID, getStringImage(bitmap), pass);
 
         if (email.matches(emailPattern)) {
-            Call<ResponseBody> call = apiRequest.putUser(id, name, email, pass, null, foto);
+            Call<ResponseBody> call = apiRequest.putUser(id, name, email, pass, null, null);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -197,11 +194,36 @@ public class edit_profil extends AppCompatActivity {
             Uri filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                foto = getStringImage(bitmap);
                 profile_image.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void uploadPicture(final String userID, String photo, final String pass) {
+        progressDialog = new ProgressDialog(edit_profil.this);
+        progressDialog.setMessage("Uploading...");
+        progressDialog.show();
+
+        final Integer id = Integer.valueOf(userID);
+
+        Call<ResponseBody> call = apiRequest.putUser(id, null, null, pass, null, photo);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                progressDialog.dismiss();
+                openProfil(id, pass);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(edit_profil.this, "Gagal mengupdate profil", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void openProfil(Integer id, String pass) {
@@ -221,6 +243,7 @@ public class edit_profil extends AppCompatActivity {
                 String idx = String.valueOf(id);
                 sessionManager.refresh();
                 sessionManager.createSession(nama, email, idx, foto);
+                progressBar.setVisibility(View.GONE);
                 startActivity(new Intent(edit_profil.this, profil.class));
                 finish();
                 Toast.makeText(edit_profil.this, "Berhasil mengupdate profil", Toast.LENGTH_SHORT).show();
@@ -250,7 +273,7 @@ public class edit_profil extends AppCompatActivity {
                     new String[]{permission},
                     requestCode);
         } else {
-            chooseFile();
+            checkPass();
         }
     }
 
@@ -270,7 +293,7 @@ public class edit_profil extends AppCompatActivity {
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                chooseFile();
+                checkPass();
             } else {
                 Toast.makeText(this,
                         "Storage Permission Denied",
@@ -279,4 +302,25 @@ public class edit_profil extends AppCompatActivity {
             }
         }
     }
+
+    private void checkPass() {
+        LayoutInflater layoutInflater = LayoutInflater.from(edit_profil.this);
+        View popupInputDialogView = layoutInflater.inflate(R.layout.popup_input_dialog, null);
+        final EditText editTextPass = popupInputDialogView.findViewById(R.id.editPass);
+        AlertDialog.Builder builder = new AlertDialog.Builder(edit_profil.this);
+        builder.setCancelable(true);
+        builder.setTitle("Edit Profil");
+        builder.setMessage("Masukkan Password");
+        builder.setView(popupInputDialogView);
+        builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                pass = editTextPass.getText().toString().trim();
+                chooseFile();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 }

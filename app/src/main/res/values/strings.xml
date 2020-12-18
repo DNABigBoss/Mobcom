@@ -47,4 +47,8 @@
     <string name="mobileerror">Enter a valid mobile</string>
     <string name="dateerror">Enter a valid date</string>
     <string name="ageerror">Enter a valid age</string>
+    <string name="title_activity_menu">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
