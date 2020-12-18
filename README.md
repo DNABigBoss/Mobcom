@@ -26,6 +26,7 @@ Ide kami dalam pembuatan aplikasi ini adalah meningkatnya tren masak-memasak pad
 * [Sprint 7](https://github.com/dwikimarbi/Mobcom/tree/sprint7)
 * [Sprint 8](https://github.com/dwikimarbi/Mobcom/tree/sprint8)
 * [Sprint 9](https://github.com/dwikimarbi/Mobcom/tree/sprint9)
-* [Sprint 10](https://github.com/dwikimarbi/Mobcom/tree/sprint10):new:
-* [Sprint 11](https://github.com/dwikimarbi/Mobcom/tree/sprint11)
+* [Sprint 10](https://github.com/dwikimarbi/Mobcom/tree/sprint10)
+* [Sprint 11](https://github.com/dwikimarbi/Mobcom/tree/sprint11):new:
+* [Sprint 12](https://github.com/dwikimarbi/Mobcom/tree/sprint12):construction:
 
