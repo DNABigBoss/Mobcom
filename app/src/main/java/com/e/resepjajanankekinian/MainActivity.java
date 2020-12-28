@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     SessionManager sessionManager;
     ProgressBar progressBar;
+    private String userId;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         }
         HashMap<String, String> user = sessionManager.getUserDetail();
         String userName = user.get(SessionManager.NAME);
+        userId = user.get(SessionManager.ID);
 
         TextView textViewPencarianSemuaBaru = findViewById(R.id.pencarianSemuaBaru);
         TextView textViewPencarianSemuaPopuler = findViewById(R.id.pencarianSemuaPopuler);
@@ -67,13 +71,24 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbarmain);
 
         /*Create handle for the RetrofitInstance interface*/
-        ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
         Call<List<ResepData>> call = apiRequest.getResep(null, null, null, 10, "dilihat");
         Call<List<ResepData>> call1 = apiRequest.getResep(null, null, null, 10, "id");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Call<ResponseBody> responseBodyCall = createLog("melihat pencarian", "watch");
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    }
+                });
                 startActivity(new Intent(MainActivity.this, search.class));
             }
         });
@@ -81,7 +96,18 @@ public class MainActivity extends AppCompatActivity {
         buttonFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
+                Call<ResponseBody> responseBodyCall = createLog("melihat bookmark", "watch");
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
+                    }
+                });
             }
         });
 
@@ -157,20 +183,16 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                String menu = String.valueOf(item.getTitle());
                 switch (item.getItemId()){
-                    case R.id.home:
-                        break;
                     case R.id.kulkas:
-                        startActivity(new Intent(MainActivity.this, kulkas.class));
-                        finish();
+                        movebottomnav(kulkas.class, menu);
                         break;
                     case R.id.bookmark:
-                        startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
-                        finish();
+                        movebottomnav(BookmarkActivity.class, menu);
                         break;
                     case R.id.profile:
-                        startActivity(new Intent(MainActivity.this, profil.class));
-                        finish();
+                        movebottomnav(profil.class, menu);
                         break;
                 }
                 return true;
@@ -182,6 +204,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Call<ResponseBody> responseBodyCall = createLog("menekan tombol kembali", "click");
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
@@ -199,16 +234,29 @@ public class MainActivity extends AppCompatActivity {
         }, 2000);
     }
 
-    private void pencarianSemua(String id) {
-        Intent intent = new Intent(MainActivity.this, search_resep_bahan.class);
-        intent.putExtra("order", id);
-        startActivity(intent);
+    private void pencarianSemua(final String id) {
+        Call<ResponseBody> responseBodyCall = createLog("mencari resep "+id, "search");
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Intent intent = new Intent(MainActivity.this, search_resep_bahan.class);
+                intent.putExtra("order", id);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Intent intent = new Intent(MainActivity.this, search_resep_bahan.class);
+                intent.putExtra("order", id);
+                startActivity(intent);
+            }
+        });
     }
 
     /**generate data list method()
      */
     private void generateDataList(List<ResepData> ResepDataList, RecyclerView recyclerView){
-        Adapter adapter = new Adapter(this, ResepDataList);
+        Adapter adapter = new Adapter(this, ResepDataList, userId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -219,5 +267,28 @@ public class MainActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         finish();
+    }
+
+    private Call<ResponseBody> createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        return responseBodyCall;
+    }
+
+    private void movebottomnav(final Class aClass, String menu) {
+        Call<ResponseBody> responseBodyCall = createLog("menekan menu "+menu, "click");
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                startActivity(new Intent(MainActivity.this, aClass));
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                startActivity(new Intent(MainActivity.this, aClass));
+                finish();
+            }
+        });
     }
 }

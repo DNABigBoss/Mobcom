@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -18,10 +19,13 @@ import com.e.resepjajanankekinian.adapter.BahanAdapter;
 import com.e.resepjajanankekinian.model.BahanData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
+import com.e.resepjajanankekinian.service.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,11 +33,19 @@ import retrofit2.Response;
 public class kulkas extends AppCompatActivity {
     BahanAdapter adapter;
     ProgressDialog progressDialog;
+    String userId;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kulkas);
+
+        sessionManager = new SessionManager(this);
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        String userName = user.get(SessionManager.NAME);
+        userId = user.get(SessionManager.ID);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.kulkas);
 
@@ -79,20 +91,16 @@ public class kulkas extends AppCompatActivity {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                String menu = String.valueOf(item.getTitle());
                 switch (item.getItemId()){
                     case R.id.home:
-                        startActivity(new Intent(kulkas.this, MainActivity.class));
-                        finish();
-                        break;
-                    case R.id.kulkas:
+                        movebottomnav(MainActivity.class, menu);
                         break;
                     case R.id.bookmark:
-                        startActivity(new Intent(kulkas.this, BookmarkActivity.class));
-                        finish();
+                        movebottomnav(BookmarkActivity.class, menu);
                         break;
                     case R.id.profile:
-                        startActivity(new Intent(kulkas.this, profil.class));
-                        finish();
+                        movebottomnav(profil.class, menu);
                         break;
                 }
                 return true;
@@ -102,7 +110,7 @@ public class kulkas extends AppCompatActivity {
 
     private void generateDataList(List<BahanData> list) {
         RecyclerView recyclerView = findViewById(R.id.customRecyclerViewKulkas);
-        adapter = new BahanAdapter(this, list);
+        adapter = new BahanAdapter(this, list, userId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(kulkas.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -113,6 +121,19 @@ public class kulkas extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Call<ResponseBody> responseBodyCall = createLog("menekan tombol kembali", "click");
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
@@ -121,12 +142,34 @@ public class kulkas extends AppCompatActivity {
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
-        new Handler().postDelayed(new Runnable() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
 
             @Override
             public void run() {
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
+    }
+    private Call<ResponseBody> createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        return responseBodyCall;
+    }
+
+    private void movebottomnav(final Class aClass, String menu) {
+        Call<ResponseBody> responseBodyCall = createLog("menekan menu "+menu, "click");
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                startActivity(new Intent(kulkas.this, aClass));
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                startActivity(new Intent(kulkas.this, aClass));
+                finish();
+            }
+        });
     }
 }
