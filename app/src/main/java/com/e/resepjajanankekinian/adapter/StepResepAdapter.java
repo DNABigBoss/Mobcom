@@ -17,22 +17,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.e.resepjajanankekinian.R;
 import com.e.resepjajanankekinian.model.StepResepData;
+import com.e.resepjajanankekinian.service.ApiClient;
+import com.e.resepjajanankekinian.service.ApiRequest;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by Dwiki Sulthon Saputra Marbi on 11/10/2020.
  */
 public class StepResepAdapter extends RecyclerView.Adapter<StepResepAdapter.CustomViewHolder> {
-    private List<StepResepData.DatumStep> datumStep;
     private Context context;
+    private List<StepResepData.DatumStep> datumStep;
+    private String userId;
 
-    public StepResepAdapter(Context context, List<StepResepData.DatumStep> datumStep){
+    public StepResepAdapter(Context context, List<StepResepData.DatumStep> datumStep, String userId) {
         this.context = context;
         this.datumStep = datumStep;
+        this.userId = userId;
     }
 
     static class CustomViewHolder extends RecyclerView.ViewHolder{
@@ -85,6 +94,7 @@ public class StepResepAdapter extends RecyclerView.Adapter<StepResepAdapter.Cust
         holder.buttonSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createLog("menekan tombol suara", "click");
                 if (holder.buttonSound.isChecked()) {
                     holder.buttonSound.setChecked(true);
                     holder.t1.speak(dataStep.getIntruksi(),TextToSpeech.QUEUE_FLUSH, null, "");
@@ -101,5 +111,20 @@ public class StepResepAdapter extends RecyclerView.Adapter<StepResepAdapter.Cust
     @Override
     public int getItemCount() {
         return datumStep.size();
+    }
+
+    private void createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
     }
 }

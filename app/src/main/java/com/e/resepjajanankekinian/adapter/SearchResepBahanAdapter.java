@@ -15,22 +15,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.e.resepjajanankekinian.R;
 import com.e.resepjajanankekinian.model.ResepData;
 import com.e.resepjajanankekinian.resep;
+import com.e.resepjajanankekinian.service.ApiClient;
+import com.e.resepjajanankekinian.service.ApiRequest;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by Dwiki Sulthon Saputra Marbi on 14/10/2020.
  */
 public class SearchResepBahanAdapter extends RecyclerView.Adapter<SearchResepBahanAdapter.CustomViewHolder> {
-    private final List<ResepData> dataList;
     private final Context context;
+    private final List<ResepData> dataList;
+    private final String userId;
 
-    public SearchResepBahanAdapter(Context context, List<ResepData> dataList){
+
+    public SearchResepBahanAdapter(Context context, List<ResepData> dataList, String userId) {
         this.context = context;
         this.dataList = dataList;
+        this.userId = userId;
     }
+
     static class CustomViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
 
@@ -61,7 +72,8 @@ public class SearchResepBahanAdapter extends RecyclerView.Adapter<SearchResepBah
     @Override
     public void onBindViewHolder(SearchResepBahanAdapter.CustomViewHolder holder, int position) {
         ResepData ResepData = dataList.get(position);
-        holder.textViewName.setText(ResepData.getNama());
+        final String nama = ResepData.getNama();
+        holder.textViewName.setText(nama);
         holder.textViewDilihat.setText(String.valueOf(ResepData.getDilihat()));
         holder.textViewFavorit.setText(String.valueOf(ResepData.getFavorit()));
         final Integer idx = ResepData.getId();
@@ -74,6 +86,7 @@ public class SearchResepBahanAdapter extends RecyclerView.Adapter<SearchResepBah
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createLog("melihat resep "+nama, "watch");
                 Intent intent = new Intent(context, resep.class);
                 intent.putExtra("id", idx);
                 context.startActivity(intent);
@@ -84,5 +97,20 @@ public class SearchResepBahanAdapter extends RecyclerView.Adapter<SearchResepBah
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    private void createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
     }
 }

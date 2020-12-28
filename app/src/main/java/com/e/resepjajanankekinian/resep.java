@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,6 +41,7 @@ public class resep extends AppCompatActivity {
     Integer resep_id;
     Integer user_id;
     ApiRequest apiRequest;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,8 @@ public class resep extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetail();
-        String ids = user.get(SessionManager.ID);
-        user_id = Integer.valueOf(ids);
+        userId = user.get(SessionManager.ID);
+        user_id = Integer.valueOf(userId);
 
         final TextView namajajanan = findViewById(R.id.namajajanan);
         final TextView hargajajanan = findViewById(R.id.harga);
@@ -77,6 +79,7 @@ public class resep extends AppCompatActivity {
         mulaimemasak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createLog("menekan tombol mulai memasak", "click");
                 Intent intent = new Intent(resep.this, step_resep.class);
                 intent.putExtra("id", resep_id);
                 startActivity(intent);
@@ -174,7 +177,8 @@ public class resep extends AppCompatActivity {
                 progressDialog = new ProgressDialog(resep.this);
                 progressDialog.setMessage("Loading....");
                 progressDialog.show();
-                new Handler().postDelayed(new Runnable() {
+                createLog("menekan tombol bookmark", "click");
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         if (buttonFav.isChecked()) {
@@ -183,6 +187,7 @@ public class resep extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     progressDialog.dismiss();
+                                    createLog("menambahkan bookmark", "add");
                                     Toast.makeText(resep.this, "Berhasil menjadi favorit", Toast.LENGTH_SHORT).show();
                                     buttonFav.setChecked(true);
                                 }
@@ -201,6 +206,7 @@ public class resep extends AppCompatActivity {
                                     String code = String.valueOf(response.code());
                                     if ("202".equals(code)) {
                                         progressDialog.dismiss();
+                                        createLog("menghapus bookmark", "delete");
                                         Toast.makeText(resep.this, "Fav Dihapus", Toast.LENGTH_SHORT).show();
                                         buttonFav.setChecked(false);
                                     } else {
@@ -226,6 +232,7 @@ public class resep extends AppCompatActivity {
         resepdiskusi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createLog("menekan tombol diskusi", "click");
                 Intent intent = new Intent(resep.this, comment.class);
                 intent.putExtra("resep_id", resep_id);
                 startActivity(intent);
@@ -241,9 +248,24 @@ public class resep extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createLog("menekan tombol kembali", "click");
                 finish();
             }
         });
     }
 
+    private void createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
+    }
 }

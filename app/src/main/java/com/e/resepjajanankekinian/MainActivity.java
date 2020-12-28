@@ -78,17 +78,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<ResponseBody> responseBodyCall = createLog("melihat pencarian", "watch");
-                responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    }
-                });
+                createLog("melihat pencarian", "watch");
                 startActivity(new Intent(MainActivity.this, search.class));
             }
         });
@@ -96,24 +86,15 @@ public class MainActivity extends AppCompatActivity {
         buttonFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<ResponseBody> responseBodyCall = createLog("melihat bookmark", "watch");
-                responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
-                    }
-                });
+                createLog("melihat bookmark", "watch");
+                startActivity(new Intent(MainActivity.this, BookmarkActivity.class));
             }
         });
 
         buttonTambahResep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createLog("menekan menu tambah resep", "click");
                 startActivity(new Intent(MainActivity.this, tambah_resep.class));
             }
         });
@@ -204,18 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Call<ResponseBody> responseBodyCall = createLog("menekan tombol kembali", "click");
-        responseBodyCall.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
+        createLog("menekan tombol kembali", "click");
 
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
@@ -235,22 +205,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void pencarianSemua(final String id) {
-        Call<ResponseBody> responseBodyCall = createLog("mencari resep "+id, "search");
-        responseBodyCall.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Intent intent = new Intent(MainActivity.this, search_resep_bahan.class);
-                intent.putExtra("order", id);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Intent intent = new Intent(MainActivity.this, search_resep_bahan.class);
-                intent.putExtra("order", id);
-                startActivity(intent);
-            }
-        });
+        createLog("mencari resep "+id, "search");
+        Intent intent = new Intent(MainActivity.this, search_resep_bahan.class);
+        intent.putExtra("order", id);
+        startActivity(intent);
     }
 
     /**generate data list method()
@@ -269,26 +227,24 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private Call<ResponseBody> createLog(String action, String type){
+    private void createLog(String action, String type){
         final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
         Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
-        return responseBodyCall;
-    }
-
-    private void movebottomnav(final Class aClass, String menu) {
-        Call<ResponseBody> responseBodyCall = createLog("menekan menu "+menu, "click");
         responseBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                startActivity(new Intent(MainActivity.this, aClass));
-                finish();
+
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                startActivity(new Intent(MainActivity.this, aClass));
-                finish();
             }
         });
+    }
+
+    private void movebottomnav(final Class aClass, String menu) {
+        createLog("menekan menu " + menu, "click");
+        startActivity(new Intent(MainActivity.this, aClass));
+        finish();
     }
 }
