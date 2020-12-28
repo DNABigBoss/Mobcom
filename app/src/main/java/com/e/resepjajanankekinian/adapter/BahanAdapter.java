@@ -18,12 +18,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.e.resepjajanankekinian.R;
 import com.e.resepjajanankekinian.model.BahanData;
 import com.e.resepjajanankekinian.search_resep_bahan;
+import com.e.resepjajanankekinian.service.ApiClient;
+import com.e.resepjajanankekinian.service.ApiRequest;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Dwiki Sulthon Saputra Marbi on 12/10/2020.
@@ -32,10 +39,12 @@ public class BahanAdapter extends RecyclerView.Adapter<BahanAdapter.CustomViewHo
     private final List<BahanData> dataList;
     private final List<BahanData> dataListCopy;
     private final Context context;
+    private final String userId;
 
-    public BahanAdapter(Context context, List<BahanData> dataList){
+    public BahanAdapter(Context context, List<BahanData> dataList, String userId){
         this.context = context;
         this.dataList = dataList;
+        this.userId = userId;
         dataListCopy = new ArrayList<>(dataList);
     }
 
@@ -109,6 +118,18 @@ public class BahanAdapter extends RecyclerView.Adapter<BahanAdapter.CustomViewHo
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Call<ResponseBody> responseBodyCall = createLog("mencari resep dengan bahan "+nama, "search");
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
                 Intent intent = new Intent(context, search_resep_bahan.class);
                 intent.putExtra("bahan", nama);
                 context.startActivity(intent);
@@ -119,5 +140,11 @@ public class BahanAdapter extends RecyclerView.Adapter<BahanAdapter.CustomViewHo
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    private Call<ResponseBody> createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        return responseBodyCall;
     }
 }

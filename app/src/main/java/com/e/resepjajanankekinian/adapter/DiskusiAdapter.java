@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.e.resepjajanankekinian.R;
 import com.e.resepjajanankekinian.model.DiskusiData;
+import com.e.resepjajanankekinian.service.ApiClient;
+import com.e.resepjajanankekinian.service.ApiRequest;
 import com.e.resepjajanankekinian.service.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -24,17 +26,22 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+
 /**
  * Created by Dwiki Sulthon Saputra Marbi on 25/10/2020.
  */
 public class DiskusiAdapter extends RecyclerView.Adapter<DiskusiAdapter.CustomViewHolder> {
-    private final List<DiskusiData> dataList;
     private final Context context;
+    private final List<DiskusiData> dataList;
+    private final String userId;
     CircleTransform circleTransform = new CircleTransform();
 
-    public DiskusiAdapter(Context context, List<DiskusiData> dataList){
+    public DiskusiAdapter(Context context, List<DiskusiData> dataList, String userId) {
         this.context = context;
         this.dataList = dataList;
+        this.userId = userId;
     }
 
     static class CustomViewHolder extends RecyclerView.ViewHolder{
@@ -105,5 +112,11 @@ public class DiskusiAdapter extends RecyclerView.Adapter<DiskusiAdapter.CustomVi
             return "null";
         }
         return "null";
+    }
+
+    private Call<ResponseBody> createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        return responseBodyCall;
     }
 }

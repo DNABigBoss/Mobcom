@@ -17,10 +17,17 @@ import android.widget.TextView;
 import com.e.resepjajanankekinian.R;
 import com.e.resepjajanankekinian.model.ResepData;
 import com.e.resepjajanankekinian.resep;
+import com.e.resepjajanankekinian.service.ApiClient;
+import com.e.resepjajanankekinian.service.ApiRequest;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -29,10 +36,12 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
     private final List<ResepData> dataList;
     private final Context context;
+    private final String userId;
 
-    public Adapter(Context context, List<ResepData> dataList){
+    public Adapter(Context context, List<ResepData> dataList, String userId){
         this.context = context;
         this.dataList = dataList;
+        this.userId = userId;
     }
 
     static class CustomViewHolder extends RecyclerView.ViewHolder{
@@ -63,7 +72,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
     @Override
     public void onBindViewHolder(Adapter.CustomViewHolder holder, int position) {
         ResepData ResepData = dataList.get(position);
-        holder.textViewName.setText(ResepData.getNama());
+        final String nama = ResepData.getNama();
+        holder.textViewName.setText(nama);
         final Integer idx = ResepData.getId();
         Picasso.Builder builder = new Picasso.Builder(context);
         builder.downloader(new OkHttp3Downloader(context));
@@ -74,9 +84,22 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, resep.class);
-                intent.putExtra("id", idx);
-                context.startActivity(intent);
+                Call<ResponseBody> responseBodyCall = createLog("melihat resep "+nama, "watch");
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Intent intent = new Intent(context, resep.class);
+                        intent.putExtra("id", idx);
+                        context.startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Intent intent = new Intent(context, resep.class);
+                        intent.putExtra("id", idx);
+                        context.startActivity(intent);
+                    }
+                });
             }
         });
     }
@@ -84,5 +107,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    private Call<ResponseBody> createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        return responseBodyCall;
     }
 }

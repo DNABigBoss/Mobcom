@@ -99,6 +99,14 @@ public interface ApiRequest {
     Call<ResponseBody> postDiskusi(@Field("isi") String isi, @Field("user_id") Integer user_id, @Field("resep_id") Integer resep_id, @Field("disukai") Integer disukai, @Field("tanggal") String tanggal);
 
     /*
+     * Post data log
+     */
+    @Streaming
+    @FormUrlEncoded
+    @POST("log")
+    Call<ResponseBody> postLog(@Field("user_id") String user_id,@Field("action") String action, @Field("type") String type);
+
+    /*
      * Put data resep
      */
     @Streaming
