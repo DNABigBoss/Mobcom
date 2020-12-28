@@ -4,6 +4,7 @@ import com.e.resepjajanankekinian.model.BahanData;
 import com.e.resepjajanankekinian.model.BahanData2;
 import com.e.resepjajanankekinian.model.DiskusiData;
 import com.e.resepjajanankekinian.model.ResepData;
+import com.e.resepjajanankekinian.model.ResepUserData;
 import com.e.resepjajanankekinian.model.StepResepData;
 import com.e.resepjajanankekinian.model.UserData;
 
@@ -112,7 +113,7 @@ public interface ApiRequest {
     @Streaming
     @FormUrlEncoded
     @POST("usersresep")
-    Call<ResponseBody> postResepUsers(@Field("id_users") Integer id_users, @Field("nama") String nama, @Field("waktu_memasak") String waktu_memasak, @Field("porsi") String porsi, @Field("harga") String harga, @Field("dilihat") Integer dilihat, @Field("favorit") Integer favorit, @Field("gambar") String gambar);
+    Call<ResepUserData> postResepUsers(@Field("id_users") Integer id_users, @Field("nama") String nama, @Field("waktu_memasak") String waktu_memasak, @Field("porsi") String porsi, @Field("harga") String harga, @Field("dilihat") Integer dilihat, @Field("favorit") Integer favorit, @Field("gambar") String gambar);
 
     /*
      * Post data usersbahan
