@@ -20,9 +20,12 @@ import com.e.resepjajanankekinian.adapter.StepResepAdapter;
 import com.e.resepjajanankekinian.model.StepResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
+import com.e.resepjajanankekinian.service.SessionManager;
 
+import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,11 +37,18 @@ public class step_resep extends AppCompatActivity {
     Integer id;
     List<StepResepData.DatumStep> datumSteps;
     TextToSpeech t1;
+    SessionManager sessionManager;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_resep);
+
+        sessionManager = new SessionManager(this);
+        sessionManager.checkLogin();
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        userId = user.get(SessionManager.ID);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -81,6 +91,7 @@ public class step_resep extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createLog("menekan tombol kembali", "click");
                 finish();
             }
         });
@@ -97,9 +108,24 @@ public class step_resep extends AppCompatActivity {
 
     private void generateDataList(List<StepResepData.DatumStep> stepResepData) {
         recyclerView = findViewById(R.id.customRecyclerViewStep);
-        adapter = new StepResepAdapter(this, stepResepData);
+        adapter = new StepResepAdapter(this, stepResepData, userId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(step_resep.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
     }
 }

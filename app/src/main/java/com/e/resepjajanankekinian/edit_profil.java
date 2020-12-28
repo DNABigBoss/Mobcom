@@ -54,7 +54,7 @@ public class edit_profil extends AppCompatActivity {
     ProgressDialog progressDialog;
     EditText editTextName;
     EditText editTextEmail;
-    String userID;
+    String userId;
     String pass;
     String userName;
     String userEmail;
@@ -76,7 +76,7 @@ public class edit_profil extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         userName = user.get(SessionManager.NAME);
         userEmail = user.get(SessionManager.EMAIL);
-        userID = user.get(SessionManager.ID);
+        userId = user.get(SessionManager.ID);
         String userFoto = user.get(SessionManager.FOTO);
 
         editTextName = findViewById(R.id.editTextName);
@@ -101,6 +101,7 @@ public class edit_profil extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createLog("menekan tombol simpan edit profil", "click");
                 LayoutInflater layoutInflater = LayoutInflater.from(edit_profil.this);
                 View popupInputDialogView = layoutInflater.inflate(R.layout.popup_input_dialog, null);
                 final EditText editTextPass = popupInputDialogView.findViewById(R.id.editPass);
@@ -125,6 +126,7 @@ public class edit_profil extends AppCompatActivity {
         ubahFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createLog("menekan tombol edit foto profil", "click");
                 checkPermission(
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         STORAGE_PERMISSION_CODE);
@@ -142,6 +144,7 @@ public class edit_profil extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createLog("menekan tombol kembali", "click");
                 finish();
             }
         });
@@ -155,9 +158,9 @@ public class edit_profil extends AppCompatActivity {
         String name = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        final Integer id = Integer.valueOf(userID);
+        final Integer id = Integer.valueOf(userId);
 
-        if (!foto.isEmpty()) uploadPicture(userID, getStringImage(bitmap), pass);
+        if (!foto.isEmpty()) uploadPicture(userId, getStringImage(bitmap), pass);
 
         if (email.matches(emailPattern)) {
             Call<ResponseBody> call = apiRequest.putUser(id, name, email, pass, null, null);
@@ -165,6 +168,7 @@ public class edit_profil extends AppCompatActivity {
                 @Override
                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                     progressDialog.dismiss();
+                    createLog("mengupdate profil", "update");
                     openProfil(id, pass);
                 }
 
@@ -202,12 +206,12 @@ public class edit_profil extends AppCompatActivity {
         }
     }
 
-    private void uploadPicture(final String userID, String photo, final String pass) {
+    private void uploadPicture(final String userId, String photo, final String pass) {
         progressDialog = new ProgressDialog(edit_profil.this);
         progressDialog.setMessage("Uploading...");
         progressDialog.show();
 
-        final Integer id = Integer.valueOf(userID);
+        final Integer id = Integer.valueOf(userId);
 
         Call<ResponseBody> call = apiRequest.putUser(id, null, null, pass, null, photo);
         call.enqueue(new Callback<ResponseBody>() {
@@ -321,6 +325,21 @@ public class edit_profil extends AppCompatActivity {
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    private void createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
     }
 
 }

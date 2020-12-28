@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.e.resepjajanankekinian.R;
 import com.e.resepjajanankekinian.model.ResepData;
 import com.e.resepjajanankekinian.resep;
+import com.e.resepjajanankekinian.service.ApiClient;
+import com.e.resepjajanankekinian.service.ApiRequest;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -24,17 +26,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class PencarianAdapter extends RecyclerView.Adapter<PencarianAdapter.MyViewHolder> implements Filterable {
 
     private final List<ResepData> reseps;
     private final List<ResepData> resepscopy;
     private final Context context;
-    //private final String userId;
+    private final String userId;
 
-    public PencarianAdapter(List<ResepData> reseps, Context context){
+    public PencarianAdapter(List<ResepData> reseps, Context context, String userId){
         this.reseps = reseps;
         this.context = context;
-        //this.userId = userId;
+        this.userId = userId;
         resepscopy = new ArrayList<>(reseps);
     }
 
@@ -93,7 +100,8 @@ public class PencarianAdapter extends RecyclerView.Adapter<PencarianAdapter.MyVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.nama.setText(reseps.get(position).getNama());
+        final String nama = reseps.get(position).getNama();
+        holder.nama.setText(nama);
         Picasso.Builder builder = new Picasso.Builder(context);
         builder.downloader(new OkHttp3Downloader(context));
         builder.build().load(reseps.get(position).getGambar())
@@ -103,6 +111,7 @@ public class PencarianAdapter extends RecyclerView.Adapter<PencarianAdapter.MyVi
         holder.cardView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                createLog("melihat resep "+nama, "watch");
                 Intent intent = new Intent(context, resep.class);
                 intent.putExtra("id", reseps.get(position).getId());
                 context.startActivity(
@@ -116,6 +125,21 @@ public class PencarianAdapter extends RecyclerView.Adapter<PencarianAdapter.MyVi
     @Override
     public int getItemCount() {
         return reseps.size();
+    }
+
+    private void createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
     }
 
 }

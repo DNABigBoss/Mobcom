@@ -17,9 +17,12 @@ import com.e.resepjajanankekinian.adapter.PencarianAdapter;
 import com.e.resepjajanankekinian.model.ResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
+import com.e.resepjajanankekinian.service.SessionManager;
 
+import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,11 +34,18 @@ public class search extends AppCompatActivity {
     private PencarianAdapter adapter;
     private ApiRequest apiRequest;
     ProgressBar progressBar;
+    SessionManager sessionManager;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        sessionManager = new SessionManager(this);
+        sessionManager.checkLogin();
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        userId = user.get(SessionManager.ID);
 
         progressBar = findViewById(R.id.progress);
 
@@ -45,6 +55,7 @@ public class search extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) { // ketika sdh selesai / enter
                 adapter.getFilter().filter(query);
+                createLog("mencari resep", "search");
                 return false;
             }
 
@@ -96,9 +107,24 @@ public class search extends AppCompatActivity {
 
     private void generateDataList(List<ResepData> Userlist){
         recyclerView = findViewById(R.id.recycler);
-        adapter = new PencarianAdapter(Userlist, this);
+        adapter = new PencarianAdapter(Userlist, this, userId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(search.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
     }
 }

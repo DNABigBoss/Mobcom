@@ -84,18 +84,7 @@ public class profil extends AppCompatActivity {
         buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<ResponseBody> responseBodyCall = createLog("menekan tombol edit profil", "click");
-                responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                    }
-                });
+                createLog("menekan tombol edit profil", "click");
                 startActivity(new Intent(profil.this, edit_profil.class));
             }
         });
@@ -104,36 +93,14 @@ public class profil extends AppCompatActivity {
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<ResponseBody> responseBodyCall = createLog("menekan tombol logout", "click");
-                responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                    }
-                });
+                createLog("menekan tombol logout", "click");
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(profil.this);
                 alertDialogBuilder.setMessage("Apakah anda yakin ingin keluar?");
                 alertDialogBuilder.setPositiveButton("Ya",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
-                                Call<ResponseBody> responseBodyCall = createLog("logout", "logout");
-                                responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                                    @Override
-                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                                    }
-                                });
+                                createLog("logout", "logout");
                                 sessionManager.logout();
                             }
                         });
@@ -141,18 +108,7 @@ public class profil extends AppCompatActivity {
                 alertDialogBuilder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Call<ResponseBody> responseBodyCall = createLog("menekan batal logout", "click");
-                        responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                            @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                            }
-                        });
+                        createLog("menekan batal logout", "click");
                     }
                 });
                 AlertDialog alertDialog = alertDialogBuilder.create();
@@ -165,18 +121,7 @@ public class profil extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Call<ResponseBody> responseBodyCall = createLog("menekan tombol kembali", "click");
-        responseBodyCall.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
+        createLog("menekan tombol kembali", "click");
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
@@ -194,26 +139,24 @@ public class profil extends AppCompatActivity {
         }, 2000);
     }
 
-    private Call<ResponseBody> createLog(String action, String type){
+    private void createLog(String action, String type){
         final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
         Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
-        return responseBodyCall;
-    }
-
-    private void movebottomnav(final Class aClass, String menu) {
-        Call<ResponseBody> responseBodyCall = createLog("menekan menu "+menu, "click");
         responseBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                startActivity(new Intent(profil.this, aClass));
-                finish();
+
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                startActivity(new Intent(profil.this, aClass));
-                finish();
             }
         });
+    }
+
+    private void movebottomnav(final Class aClass, String menu) {
+        createLog("menekan menu " + menu, "click");
+        startActivity(new Intent(profil.this, aClass));
+        finish();
     }
 }

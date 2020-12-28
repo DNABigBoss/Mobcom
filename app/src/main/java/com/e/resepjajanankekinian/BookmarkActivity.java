@@ -121,18 +121,7 @@ public class BookmarkActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Call<ResponseBody> responseBodyCall = createLog("menekan tombol kembali", "click");
-        responseBodyCall.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
+        createLog("menekan tombol kembali", "click");
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
@@ -150,26 +139,24 @@ public class BookmarkActivity extends AppCompatActivity {
         }, 2000);
     }
 
-    private Call<ResponseBody> createLog(String action, String type){
+    private void createLog(String action, String type){
         final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
         Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
-        return responseBodyCall;
-    }
-
-    private void movebottomnav(final Class aClass, String menu) {
-        Call<ResponseBody> responseBodyCall = createLog("menekan menu "+menu, "click");
         responseBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                startActivity(new Intent(BookmarkActivity.this, aClass));
-                finish();
+
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                startActivity(new Intent(BookmarkActivity.this, aClass));
-                finish();
             }
         });
+    }
+
+    private void movebottomnav(final Class aClass, String menu) {
+        createLog("menekan menu " + menu, "click");
+        startActivity(new Intent(BookmarkActivity.this, aClass));
+        finish();
     }
 }
