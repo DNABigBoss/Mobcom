@@ -1,6 +1,7 @@
 package com.e.resepjajanankekinian.service;
 
 import com.e.resepjajanankekinian.model.BahanData;
+import com.e.resepjajanankekinian.model.BahanData2;
 import com.e.resepjajanankekinian.model.DiskusiData;
 import com.e.resepjajanankekinian.model.ResepData;
 import com.e.resepjajanankekinian.model.StepResepData;
@@ -54,6 +55,13 @@ public interface ApiRequest {
     Call<List<BahanData>> getAllBahan(@Query("order") String order);
 
     /*
+     * Get data semua bahan 2
+     */
+    @Streaming
+    @GET("bahan")
+    Call<List<BahanData2>> getBahan2();
+
+    /*  
      * Get data user
      */
     @Streaming
@@ -97,6 +105,31 @@ public interface ApiRequest {
     @FormUrlEncoded
     @POST("diskusi")
     Call<ResponseBody> postDiskusi(@Field("isi") String isi, @Field("user_id") Integer user_id, @Field("resep_id") Integer resep_id, @Field("disukai") Integer disukai, @Field("tanggal") String tanggal);
+
+    /*
+     * Post data usersresep
+     */
+    @Streaming
+    @FormUrlEncoded
+    @POST("usersresep")
+    Call<ResponseBody> postResepUsers(@Field("id_users") Integer id_users, @Field("nama") String nama, @Field("waktu_memasak") String waktu_memasak, @Field("porsi") String porsi, @Field("harga") String harga, @Field("dilihat") Integer dilihat, @Field("favorit") Integer favorit, @Field("gambar") String gambar);
+
+    /*
+     * Post data usersbahan
+     */
+    @Streaming
+    @FormUrlEncoded
+    @POST("usersbahan")
+    Call<ResponseBody> postUsersBahan(@Field("bahan_id") Integer bahan_id, @Field("takaran") String takaran, @Field("resep_users_id") Integer resep_users_id);
+
+    /*
+     * Post data usersstep
+     */
+    @Streaming
+    @FormUrlEncoded
+    @POST("usersstep")
+    Call<ResponseBody> postUsersStep(@Field("nomor_step") Integer nomor_step, @Field("intruksi") String intruksi, @Field("resep_users_id") Integer resep_users_id);
+
 
     /*
      * Put data resep

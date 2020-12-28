@@ -13,10 +13,14 @@
         android:roundIcon="@drawable/resepjajanankekinianlogobaru"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".maintenance"></activity>
+        <activity android:name=".cobacoba">
+
+        </activity>
+        <activity android:name=".maintenance" />
         <activity
             android:name=".tambah_resep"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan">
+        </activity>
         <activity android:name=".edit_profil" />
         <activity android:name=".selesai_daftar" />
         <activity android:name=".search_resep_bahan" />
@@ -34,6 +38,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".resep"

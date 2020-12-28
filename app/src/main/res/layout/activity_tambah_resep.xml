@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tambah_resep">
+    tools:context=".tambah_resep"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tambahResepToolbar"
@@ -16,7 +17,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tambahResepToolbar">
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,16 +28,73 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/tambahResepToolbar">
 
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/colorBlack"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/gambar_resep"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"/>
+
+                <LinearLayout
+                    android:id="@+id/ubahFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/tambah_gambar_icon"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_action_addphoto"/>
+                    <TextView
+                        android:id="@+id/tambah_gambar_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tambah Gambar"
+                        android:paddingTop="4dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorWhite"
+                        />
+                </LinearLayout>
+            </FrameLayout>
+<!--            <Button-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="180dp"-->
+<!--                android:layout_marginLeft="8dp"-->
+<!--                android:layout_marginRight="8dp"-->
+<!--                android:background="#54CCCDD1"-->
+<!--                android:drawableTop="@drawable/ic_action_addphoto"-->
+<!--                android:text="Tambah Gambar"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:drawablePadding="2dip"-->
+<!--                android:paddingLeft="30dip"-->
+<!--                android:paddingRight="26dip"-->
+<!--                android:textSize="16sp" />-->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:fontFamily="@font/varela_round"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
                 android:text="Nama Resep"/>
 
             <EditText
-                android:id="@+id/daftarNama"
+                android:id="@+id/namaresep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -51,24 +109,32 @@
                 android:textSize="16sp"
                 />
 
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
-                android:background="#54CCCDD1"
-                android:drawableStart="@drawable/ic_action_plus"
-                android:padding="8dp"
-                android:paddingStart="50dp"
-                android:text="Tambah Gambar"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:fontFamily="@font/varela_round"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="Porsi"/>
 
-
+            <EditText
+                android:id="@+id/porsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/input_bg"
+                android:ems="10"
+                android:hint="cth: 5-7 Pcs"
+                android:inputType="text"
+                android:paddingStart="30dp"
+                android:textSize="16sp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,10 +142,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Bahan Bahan"/>
+                android:fontFamily="@font/varela_round"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="Estimasi Biaya Pembuatan"/>
 
             <EditText
-                android:id="@+id/tambahbahanbahan"
+                android:id="@+id/biaya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -88,9 +157,8 @@
                 android:layout_marginRight="8dp"
                 android:background="@drawable/input_bg"
                 android:ems="10"
-                android:hint="cth:\n30gram Gula Biang\n14bungkus gula pasir 1 kg"
-                android:inputType="textMultiLine"
-                android:lines="5"
+                android:hint="cth: Rp. 20.000"
+                android:inputType="text"
                 android:paddingStart="30dp"
                 android:textSize="16sp"
                 />
@@ -98,13 +166,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Cara Membuat"/>
+                android:fontFamily="@font/varela_round"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="Estimasi Lama Pembuatan"/>
 
             <EditText
-                android:id="@+id/tambahcaramembuat"
+                android:id="@+id/waktu_memasak"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -113,14 +184,113 @@
                 android:layout_marginRight="8dp"
                 android:background="@drawable/input_bg"
                 android:ems="10"
-                android:hint="cth:\n1. Tumbuk gula hingga halus\n2. Beri air 500dp"
-                android:inputType="textMultiLine"
-                android:lines="5"
+                android:hint="cth: 20 Menit"
+                android:inputType="text"
                 android:paddingStart="30dp"
                 android:textSize="16sp"
                 />
 
+
+            <View
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/varela_round"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="Bahan Bahan"/>
+
+                <LinearLayout
+                    android:id="@+id/parentBahanBahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/buttonTambahBahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:text="+ Tambah Bahan" >
+                </Button>
+
+<!--            <EditText-->
+<!--                android:id="@+id/tambahbahanbahan"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="16dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginLeft="8dp"-->
+<!--                android:layout_marginRight="8dp"-->
+<!--                android:background="@drawable/input_bg"-->
+<!--                android:ems="10"-->
+<!--                android:hint="cth:\n30gram Gula Biang\n14bungkus gula pasir 1 kg"-->
+<!--                android:inputType="textMultiLine"-->
+<!--                android:lines="5"-->
+<!--                android:paddingStart="30dp"-->
+<!--                android:textSize="16sp"-->
+<!--                />-->
+
+            <View
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/varela_round"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:text="Cara Membuat"/>
+
+            <LinearLayout
+                android:id="@+id/parentCara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+            </LinearLayout>
+
             <Button
+                android:id="@+id/buttonTambahCara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:text="+ Tambah Step Pembuatan" >
+            </Button>
+
+<!--            <EditText-->
+<!--                android:id="@+id/tambahcaramembuat"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="16dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginLeft="8dp"-->
+<!--                android:layout_marginRight="8dp"-->
+<!--                android:background="@drawable/input_bg"-->
+<!--                android:ems="10"-->
+<!--                android:hint="cth:\n1. Tumbuk gula hingga halus\n2. Beri air 500dp"-->
+<!--                android:inputType="textMultiLine"-->
+<!--                android:lines="5"-->
+<!--                android:paddingStart="30dp"-->
+<!--                android:textSize="16sp"-->
+<!--                />-->
+
+            <Button
+                android:id="@+id/buttontambahresep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
@@ -138,5 +308,5 @@
 
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
 
