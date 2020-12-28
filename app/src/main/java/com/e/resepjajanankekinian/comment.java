@@ -44,6 +44,7 @@ public class comment extends AppCompatActivity {
     SessionManager sessionManager;
     CircleTransform circleTransform = new CircleTransform();
     ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,8 @@ public class comment extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetail();
-        String userID = user.get(SessionManager.ID);
-        final Integer user_id = Integer.valueOf(userID);
+        userId = user.get(SessionManager.ID);
+        final Integer user_id = Integer.valueOf(userId);
         String userFoto = user.get(SessionManager.FOTO);
 
         final EditText editTextDiskusi = findViewById(R.id.editTextDiskusi);
@@ -107,6 +108,18 @@ public class comment extends AppCompatActivity {
         imageViewSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Call<ResponseBody> responseBodyCall = createLog("menekan tombol tambah komen", "click");
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
                 String komen = editTextDiskusi.getText().toString().trim();
                 if (komen != null && komen.length() != 0) {
                     progressDialog = new ProgressDialog(comment.this);
@@ -121,6 +134,18 @@ public class comment extends AppCompatActivity {
                         @Override
                         public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                             progressDialog.dismiss();
+                            Call<ResponseBody> responseBodyCall = createLog("menambah komen", "add");
+                            responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                                }
+                            });
                             Toast.makeText(comment.this, "Berhasil menambahkan komen", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(comment.this, comment.class);
                             intent.putExtra("resep_id", resep_id);
@@ -149,6 +174,18 @@ public class comment extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Call<ResponseBody> responseBodyCall = createLog("menekan tombol kembali", "click");
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
                 finish();
             }
         });
@@ -156,9 +193,15 @@ public class comment extends AppCompatActivity {
 
     private void generateDataList(List<DiskusiData> diskusiDataList) {
         recyclerView = findViewById(R.id.customRecyclerViewDiskusi);
-        DiskusiAdapter adapter = new DiskusiAdapter(this, diskusiDataList);
+        DiskusiAdapter adapter = new DiskusiAdapter(this, diskusiDataList, userId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(comment.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    private Call<ResponseBody> createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userId, action, type);
+        return responseBodyCall;
     }
 }

@@ -117,7 +117,6 @@ public class login extends AppCompatActivity {
     public void openDaftar(){
         Intent intent = new Intent(this, daftar.class);
         startActivity(intent);
-        finish();
     }
 
     public void openMain(List<UserData> userDataList){

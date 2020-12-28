@@ -257,6 +257,18 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressbarmain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background = "@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -273,6 +285,7 @@
         app:layout_constraintVertical_bias="1.0"
         android:background="@color/colorWhite"
         app:menu="@menu/item_bottom_navigation"
+        app:labelVisibilityMode="labeled"
         tools:ignore="MissingConstraints,NotSibling" />
 
 

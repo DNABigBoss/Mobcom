@@ -129,7 +129,14 @@ public interface ApiRequest {
     @FormUrlEncoded
     @POST("usersstep")
     Call<ResponseBody> postUsersStep(@Field("nomor_step") Integer nomor_step, @Field("intruksi") String intruksi, @Field("resep_users_id") Integer resep_users_id);
-
+  
+    /*
+     * Post data log
+     */
+    @Streaming
+    @FormUrlEncoded
+    @POST("log")
+    Call<ResponseBody> postLog(@Field("user_id") String user_id,@Field("action") String action, @Field("type") String type);
 
     /*
      * Put data resep
@@ -168,6 +175,7 @@ public interface ApiRequest {
      * Delete data Bookmark
      */
     @Streaming
-    @DELETE("bookmark/{user_id}/{resep_id}")
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "bookmark", hasBody = true)
     Call<ResponseBody> deleteBookmark(@Field("user_id") Integer user_id, @Field("resep_id") Integer resep_id);
 }
