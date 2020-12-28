@@ -29,12 +29,12 @@ public class PencarianAdapter extends RecyclerView.Adapter<PencarianAdapter.MyVi
     private final List<ResepData> reseps;
     private final List<ResepData> resepscopy;
     private final Context context;
-    private final String userId;
+    //private final String userId;
 
-    public PencarianAdapter(List<ResepData> reseps, Context context, String userId){
+    public PencarianAdapter(List<ResepData> reseps, Context context){
         this.reseps = reseps;
         this.context = context;
-        this.userId = userId;
+        //this.userId = userId;
         resepscopy = new ArrayList<>(reseps);
     }
 

@@ -43,6 +43,7 @@ import com.e.resepjajanankekinian.adapter.PencarianAdapter;
 import com.e.resepjajanankekinian.model.BahanData;
 import com.e.resepjajanankekinian.model.BahanData2;
 import com.e.resepjajanankekinian.model.ResepData;
+import com.e.resepjajanankekinian.model.ResepUserData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
 import com.e.resepjajanankekinian.service.SessionManager;
@@ -90,6 +91,9 @@ public class tambah_resep extends AppCompatActivity {
 
     List<EditText> allEds = new ArrayList<EditText>(); //bahan
     List<EditText> allEdsStep = new ArrayList<EditText>(); //step
+
+    private ArrayList<String> bahan;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +156,7 @@ public class tambah_resep extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetail();
-        String userID = user.get(SessionManager.ID);
+        userID = user.get(SessionManager.ID);
         final Integer user_id = Integer.valueOf(userID);
 
         final EditText et_namaresep = findViewById(R.id.namaresep);
@@ -160,6 +164,22 @@ public class tambah_resep extends AppCompatActivity {
         final EditText et_biaya = findViewById(R.id.biaya);
         final EditText et_waktu = findViewById(R.id.waktu_memasak);
         final Button buttontambahresep = findViewById(R.id.buttontambahresep);
+
+//        Call<List<BahanData2>> call = apiRequest.getBahan2();
+//        call.enqueue(new Callback<List<com.e.resepjajanankekinian.model.BahanData2>>() {
+//            @Override
+//            public void onResponse(Call<List<com.e.resepjajanankekinian.model.BahanData2>> call, Response<List<com.e.resepjajanankekinian.model.BahanData2>> response) {
+//                BahanData2 = response.body();
+//                for(com.e.resepjajanankekinian.model.BahanData2 bahanData2 : BahanData2) {
+//                 bahan.add(bahanData2.getNama());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<com.e.resepjajanankekinian.model.BahanData2>> call, Throwable t) {
+//
+//            }
+//        });
 
         /*
         Tambah data
@@ -181,29 +201,30 @@ public class tambah_resep extends AppCompatActivity {
                     progressDialog.setMessage("Loading....");
                     progressDialog.show();
 
-                    Call<ResponseBody> call = apiRequest.postResepUsers(user_id, namaresep, waktu_memasak, porsi, biaya, 0, 0, uploadgambar);
-                    call.enqueue(new Callback<ResponseBody>() {
+                    Call<ResepUserData> call = apiRequest.postResepUsers(user_id, namaresep, waktu_memasak, porsi, biaya, 0, 0, uploadgambar);
+                    call.enqueue(new Callback<ResepUserData>() {
                         @Override
-                        public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                        public void onResponse(@NonNull Call<ResepUserData> call, @NonNull Response<ResepUserData> response) {
 
                             // data bahan bahan
+
+                            ResepUserData resepUserData = response.body();
+                            Integer resep_user_id = resepUserData.getId();
 
                             String[] strings = new String[allEds.size()];
 
                             for( int i=0; i < allEds.size(); i++){
                                 strings[i] = allEds.get(i).getText().toString();
-                                Call<ResponseBody> call2 = apiRequest.postUsersBahan(i, strings[i], 1 );
+                                Call<ResponseBody> call2 = apiRequest.postUsersBahan(i+1, strings[i], resep_user_id );
                                 call2.enqueue(new Callback<ResponseBody>() {
                                     @Override
                                     public void onResponse(@NonNull Call<ResponseBody> call2, @NonNull Response<ResponseBody> response) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(tambah_resep.this, "Berhasil menambahkan bahan resep", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(tambah_resep.this, "Berhasil menambahkan bahan resep", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
                                     public void onFailure(@NonNull Call<ResponseBody> call2, @NonNull Throwable t) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(tambah_resep.this, "Gagal menambahkan bahan resep", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(tambah_resep.this, "Gagal menambahkan bahan resep", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -215,24 +236,24 @@ public class tambah_resep extends AppCompatActivity {
 
                             for( int i=0; i < allEdsStep.size(); i++){
                                 strings2[i] = allEdsStep.get(i).getText().toString();
-                                Call<ResponseBody> call3 = apiRequest.postUsersStep(i, strings2[i], 1 );
+                                Call<ResponseBody> call3 = apiRequest.postUsersStep(i+1, strings2[i], resep_user_id);
                                 call3.enqueue(new Callback<ResponseBody>() {
                                     @Override
                                     public void onResponse(@NonNull Call<ResponseBody> call3, @NonNull Response<ResponseBody> response) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(tambah_resep.this, "Berhasil menambahkan step resep", Toast.LENGTH_SHORT).show();
+                                        //progressDialog.dismiss();
+                                        //Toast.makeText(tambah_resep.this, "Berhasil menambahkan step resep", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
                                     public void onFailure(@NonNull Call<ResponseBody> call3, @NonNull Throwable t) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(tambah_resep.this, "Gagal menambahkan step resep", Toast.LENGTH_SHORT).show();
+                                        //progressDialog.dismiss();
+                                        //Toast.makeText(tambah_resep.this, "Gagal menambahkan step resep", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
 
                             //data stepcara abis
-
+                            createLog("Menambah Resep", "add");
                             progressDialog.dismiss();
                             Toast.makeText(tambah_resep.this, "Berhasil menambahkan resep", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(tambah_resep.this, MainActivity.class);
@@ -241,7 +262,7 @@ public class tambah_resep extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                        public void onFailure(@NonNull Call<ResepUserData> call, @NonNull Throwable t) {
                             progressDialog.dismiss();
                             Toast.makeText(tambah_resep.this, "Gagal menambahkan resep", Toast.LENGTH_SHORT).show();
                         }
@@ -250,7 +271,7 @@ public class tambah_resep extends AppCompatActivity {
             }
         });
 
-    };
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -379,4 +400,19 @@ public class tambah_resep extends AppCompatActivity {
 //        //spinner.setAdapter(adapter);
 //        parentLayout.addView(spinner);
 //    }
+
+    private void createLog(String action, String type){
+        final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
+        Call<ResponseBody> responseBodyCall = apiRequest.postLog(userID, action, type);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
+        });
+    }
 }
