@@ -121,7 +121,7 @@ public interface ApiRequest {
     @Streaming
     @FormUrlEncoded
     @POST("usersbahan")
-    Call<ResponseBody> postUsersBahan(@Field("bahan_id") Integer bahan_id, @Field("takaran") String takaran, @Field("resep_users_id") Integer resep_users_id);
+    Call<ResponseBody> postUsersBahan(@Field("nama_bahan") String nama_bahan, @Field("takaran") String takaran, @Field("resep_users_id") Integer resep_users_id);
 
     /*
      * Post data usersstep
