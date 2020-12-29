@@ -82,7 +82,7 @@ public class tambah_resep extends AppCompatActivity {
     private Button buttonView, buttonViewCara;
     private LinearLayout parentLayout, parentCara;
     private List<BahanData2> BahanData2;
-    private int hint=0, hintcara=0;
+    private int hint=0, hinttakaran=0, hintcara=0;
 
     private static final String[] NUMBER = new String[] {
             "One", "Two", "Three", "Four", "Five",
@@ -90,6 +90,7 @@ public class tambah_resep extends AppCompatActivity {
     };
 
     List<EditText> allEds = new ArrayList<EditText>(); //bahan
+    List<EditText> allEdsTakaran = new ArrayList<EditText>(); //takaran bahan
     List<EditText> allEdsStep = new ArrayList<EditText>(); //step
 
     private ArrayList<String> bahan;
@@ -126,6 +127,7 @@ public class tambah_resep extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 createEditTextView();
+                createEditTextViewTakaran();
             }
         });
 
@@ -212,10 +214,12 @@ public class tambah_resep extends AppCompatActivity {
                             Integer resep_user_id = resepUserData.getId();
 
                             String[] strings = new String[allEds.size()];
+                            String[] stringsTakaran = new String[allEdsTakaran.size()];
 
                             for( int i=0; i < allEds.size(); i++){
                                 strings[i] = allEds.get(i).getText().toString();
-                                Call<ResponseBody> call2 = apiRequest.postUsersBahan(i+1, strings[i], resep_user_id );
+                                stringsTakaran[i] = allEdsTakaran.get(i).getText().toString();
+                                Call<ResponseBody> call2 = apiRequest.postUsersBahan(strings[i], stringsTakaran[i] , resep_user_id );
                                 call2.enqueue(new Callback<ResponseBody>() {
                                     @Override
                                     public void onResponse(@NonNull Call<ResponseBody> call2, @NonNull Response<ResponseBody> response) {
@@ -317,37 +321,38 @@ public class tambah_resep extends AppCompatActivity {
         edittTxt.setPadding(16,16,30,16);
         edittTxt.setTextSize(0x10);
         edittTxt.setBackgroundResource(R.drawable.input_bg);
+        edittTxt.setTextColor(getResources().getColor(R.color.colorBlack));
         edittTxt.setInputType(InputType.TYPE_CLASS_TEXT);
         edittTxt.setInputType(InputType.TYPE_CLASS_TEXT);
         edittTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
         edittTxt.setId(hint);
 
-
-        //String[] items = new String[]{"1", "2", "three"};
-
-//        ApiRequest apiRequest2 = ApiClient.getRetrofitInstance().create(ApiRequest.class);
-//        Call<List<BahanData2>> call4 = apiRequest2.getBahan2();
-//        call4.enqueue(new Callback<List<BahanData2>>() {
-//            @Override
-//            public void onResponse(@NonNull Call<List<BahanData2>> call4, @NonNull Response<List<BahanData2>> response) {
-//                List<BahanData2> bahanData = response.body().
-//                resource.getClass();
-//                Spinner spinner = new Spinner(tambah_resep.this);
-//                spinner.setAdapter(resource);
-//                parentLayout.addView(spinner);
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call<List<BahanData2>> call4, @NonNull Throwable t) {
-//                progressDialog.dismiss();
-//                Toast.makeText(tambah_resep.this, "Gagal Memuat", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-        //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-
         parentLayout.addView(edittTxt);
-        //fetchBahan();
+    }
+
+    //takaran
+    protected void createEditTextViewTakaran() {
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams (
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        params.setMargins(8,8,8, 24);
+        EditText edittTxt2 = new EditText(this);
+        allEdsTakaran.add(edittTxt2);
+        hinttakaran++;
+        edittTxt2.setHint("Takaran Bahan "+ hinttakaran + " cth: 1 kg");
+        edittTxt2.setLayoutParams(params);
+        edittTxt2.setEms(10);
+        edittTxt2.setPadding(16,16,30,16);
+        edittTxt2.setTextSize(0x10);
+        edittTxt2.setBackgroundResource(R.drawable.input_bg);
+        edittTxt2.setTextColor(getResources().getColor(R.color.colorBlack));
+        edittTxt2.setInputType(InputType.TYPE_CLASS_TEXT);
+        edittTxt2.setInputType(InputType.TYPE_CLASS_TEXT);
+        edittTxt2.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+        edittTxt2.setId(hinttakaran);
+
+        parentLayout.addView(edittTxt2);
     }
 
     // tambah data cara
@@ -365,6 +370,7 @@ public class tambah_resep extends AppCompatActivity {
         edittTxt.setEms(10);
         edittTxt.setPadding(16,16,30,16);
         edittTxt.setTextSize(0x10);
+        edittTxt.setTextColor(getResources().getColor(R.color.colorBlack));
         edittTxt.setBackgroundResource(R.drawable.input_bg);
         edittTxt.setInputType(InputType.TYPE_CLASS_TEXT);
         edittTxt.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -373,33 +379,6 @@ public class tambah_resep extends AppCompatActivity {
         parentCara.addView(edittTxt);
     }
 
-//    public void fetchBahan(){
-//        apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
-//        Call<List<BahanData>> call = apiRequest.getAllBahan("asc");
-//
-//        call.enqueue(new Callback<List<BahanData>>() {
-//            @Override
-//            public void onResponse(Call<List<BahanData>> call, Response<List<BahanData>> response) {
-//                //progressBar.setVisibility(View.GONE);
-//                BahanData = response.body();
-//                generateDataList(BahanData);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<BahanData>> call, Throwable t) {
-//                //progressBar.setVisibility((View.GONE));
-//                Toast.makeText(tambah_resep.this, "Error on :" + t.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-//
-//    private void generateDataList(List<BahanData> Userlist){
-//        List<BahanData> adapter = new ArrayList<>(Userlist);
-//        System.out.println(adapter);
-//        Spinner spinner = new Spinner(tambah_resep.this);
-//        //spinner.setAdapter(adapter);
-//        parentLayout.addView(spinner);
-//    }
 
     private void createLog(String action, String type){
         final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);

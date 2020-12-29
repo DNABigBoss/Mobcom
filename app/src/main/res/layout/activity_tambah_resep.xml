@@ -17,6 +17,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="10"
        >
 
         <LinearLayout
@@ -103,6 +104,7 @@
                 android:layout_marginRight="8dp"
                 android:background="@drawable/input_bg"
                 android:ems="10"
+                android:textColor="@color/colorBlack"
                 android:hint="cth: Risol Kecap"
                 android:inputType="text"
                 android:paddingStart="30dp"
@@ -125,6 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
+                android:textColor="@color/colorBlack"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -152,6 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
+                android:textColor="@color/colorBlack"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -184,6 +188,7 @@
                 android:layout_marginRight="8dp"
                 android:background="@drawable/input_bg"
                 android:ems="10"
+                android:textColor="@color/colorBlack"
                 android:hint="cth: 20 Menit"
                 android:inputType="text"
                 android:paddingStart="30dp"
@@ -289,24 +294,29 @@
 <!--                android:textSize="16sp"-->
 <!--                />-->
 
-            <Button
-                android:id="@+id/buttontambahresep"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="16dp"
-                android:text="Tambah Resep"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:layout_marginBottom="100dp"
-                />
+
 
         </LinearLayout>
 
     </ScrollView>
+
+        <Button
+            android:id="@+id/buttontambahresep"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Tambah Resep"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            />
+
+
 
 </LinearLayout>
 
