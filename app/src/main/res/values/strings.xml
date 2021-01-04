@@ -16,7 +16,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="populer">Populer Minggu Ini</string>
-    <string name="populer_minggu_ini">Populer Minggu Ini</string>
+    <string name="populer_minggu_ini">Jajanan Populer</string>
     <string name="lihat_semua">Lihat Semua</string>
     <string name="oreo_cheesecake">Oreo Cheesecake</string>
     <string name="pencarian_terakhirmu">Pencarian Terakhirmu</string>

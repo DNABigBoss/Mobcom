@@ -111,13 +111,13 @@ public class step_resep extends AppCompatActivity {
     private void generateDataList(List<StepResepData.DatumStep> stepResepData) {
         recyclerView = findViewById(R.id.customRecyclerViewStep);
         adapter = new StepResepAdapter(this, stepResepData, userId);
-        //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(step_resep.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(new ScrollingLinearLayoutManager(step_resep.this, LinearLayoutManager.HORIZONTAL, false, 5000));
-        //recyclerView.setLayoutManager(layoutManager);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(step_resep.this, LinearLayoutManager.HORIZONTAL, false);
+        //recyclerView.setLayoutManager(new ScrollingLinearLayoutManager(step_resep.this, LinearLayoutManager.HORIZONTAL, false, 5000));
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        Integer itemCount =recyclerView.getAdapter().getItemCount();
-        Toast.makeText(step_resep.this, String.valueOf(itemCount), Toast.LENGTH_SHORT).show();
-        recyclerView.smoothScrollToPosition(itemCount);
+//        Integer itemCount =recyclerView.getAdapter().getItemCount();
+//        Toast.makeText(step_resep.this, String.valueOf(itemCount), Toast.LENGTH_SHORT).show();
+//        recyclerView.smoothScrollToPosition(itemCount);
     }
 
     private void createLog(String action, String type){
