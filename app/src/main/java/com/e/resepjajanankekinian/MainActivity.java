@@ -2,6 +2,7 @@ package com.e.resepjajanankekinian;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Button;
@@ -26,10 +28,13 @@ import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
 import com.e.resepjajanankekinian.service.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.jakewharton.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -45,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
     SessionManager sessionManager;
     ProgressBar progressBar;
     private String userId;
+    List<ResepData> resepDataBaru;
+    TextView textViewIklan;
+    ImageView imageViewIklan;
+    String namaResepIklan;
+    Integer idResepIklan;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -69,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
         progressBar = findViewById(R.id.progressbarmain);
+        textViewIklan = findViewById(R.id.textViewIklan);
+        imageViewIklan = findViewById(R.id.imageViewIklan);
+        CardView cardViewIklan = findViewById(R.id.cardViewIklan);
 
         /*Create handle for the RetrofitInstance interface*/
         final ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
@@ -116,6 +129,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /*
+        Recyler View Baru ditambahkan
+         */
+        call1.enqueue(new Callback<List<ResepData>>() {
+            @Override
+            public void onResponse(Call<List<ResepData>> call, final Response<List<ResepData>> response) {
+                Log.d(TAG, "server contacted and has file");
+                progressBar.setVisibility(View.GONE);
+                recyclerView = findViewById(R.id.customRecyclerViewBaru);
+                generateDataList(response.body(), recyclerView);
+                resepDataBaru = response.body();
+                memuatiklan();
+            }
+
+            @Override
+            public void onFailure(Call<List<ResepData>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Log.e(TAG, "error");
+            }
+        });
+
+
+        /*
         Recyler View Populer
          */
         call.enqueue(new Callback<List<ResepData>>() {
@@ -134,24 +169,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        Recyler View Baru ditambahkan
-         */
-        call1.enqueue(new Callback<List<ResepData>>() {
+        cardViewIklan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<List<ResepData>> call, final Response<List<ResepData>> response) {
-                Log.d(TAG, "server contacted and has file");
-                progressBar.setVisibility(View.GONE);
-                recyclerView = findViewById(R.id.customRecyclerViewBaru);
-                generateDataList(response.body(), recyclerView);
-            }
-
-            @Override
-            public void onFailure(Call<List<ResepData>> call, Throwable t) {
-                progressBar.setVisibility(View.GONE);
-                Log.e(TAG, "error");
+            public void onClick(View view) {
+                createLog("melihat resep "+namaResepIklan, "watch");
+                Intent intent = new Intent(MainActivity.this, resep.class);
+                intent.putExtra("id", idResepIklan);
+                startActivity(intent);
             }
         });
+
 
         /*
         Text view ucapan
@@ -179,6 +206,23 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void memuatiklan() {
+        Collections.shuffle(resepDataBaru);
+        for (ResepData resepData : resepDataBaru) {
+            idResepIklan = resepData.getId();
+            namaResepIklan = resepData.getNama();
+            String txt = "Kuy Nyoba Bikin " + namaResepIklan + "!";
+            textViewIklan.setText(txt);
+            Picasso.Builder builder = new Picasso.Builder(MainActivity.this);
+            builder.downloader(new OkHttp3Downloader(MainActivity.this));
+            builder.build().load(resepData.getGambar())
+                    .placeholder((R.drawable.ic_launcher_background))
+                    .error(R.drawable.ic_launcher_background)
+                    .into(imageViewIklan);
+            break;
+        }
     }
 
     boolean doubleBackToExitPressedOnce = false;

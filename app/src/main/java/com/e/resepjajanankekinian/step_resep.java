@@ -20,6 +20,7 @@ import com.e.resepjajanankekinian.adapter.StepResepAdapter;
 import com.e.resepjajanankekinian.model.StepResepData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
+import com.e.resepjajanankekinian.service.ScrollingLinearLayoutManager;
 import com.e.resepjajanankekinian.service.SessionManager;
 
 import java.util.HashMap;
@@ -39,6 +40,7 @@ public class step_resep extends AppCompatActivity {
     TextToSpeech t1;
     SessionManager sessionManager;
     String userId;
+    ScrollingLinearLayoutManager scrollingLinearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +112,12 @@ public class step_resep extends AppCompatActivity {
         recyclerView = findViewById(R.id.customRecyclerViewStep);
         adapter = new StepResepAdapter(this, stepResepData, userId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(step_resep.this, LinearLayoutManager.HORIZONTAL, false);
+        //recyclerView.setLayoutManager(new ScrollingLinearLayoutManager(step_resep.this, LinearLayoutManager.HORIZONTAL, false, 5000));
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+//        Integer itemCount =recyclerView.getAdapter().getItemCount();
+//        Toast.makeText(step_resep.this, String.valueOf(itemCount), Toast.LENGTH_SHORT).show();
+//        recyclerView.smoothScrollToPosition(itemCount);
     }
 
     private void createLog(String action, String type){

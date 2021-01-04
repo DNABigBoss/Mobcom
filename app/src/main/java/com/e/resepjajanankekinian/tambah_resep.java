@@ -22,6 +22,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,9 @@ import com.e.resepjajanankekinian.model.ResepUserData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
 import com.e.resepjajanankekinian.service.SessionManager;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -65,11 +69,8 @@ import retrofit2.Response;
 
 import static android.R.layout.simple_spinner_dropdown_item;
 
-public class tambah_resep extends AppCompatActivity {
+public class tambah_resep extends AppCompatActivity implements Validator.ValidationListener {
 
-    AutoCompleteTextView textIn;
-    Button buttonAdd;
-    LinearLayout container;
     TextView reList, info, tambah_gambar_tv;
     Bitmap bitmap;
     ImageView gambar_resep, tambah_gambar_icon;
@@ -77,7 +78,7 @@ public class tambah_resep extends AppCompatActivity {
     ApiRequest apiRequest = ApiClient.getRetrofitInstance().create(ApiRequest.class);
     ProgressDialog progressDialog;
     ProgressBar progressBar;
-    BahanAdapter adapter;
+    Validator validator;
 
     private Button buttonView, buttonViewCara;
     private LinearLayout parentLayout, parentCara;
@@ -90,11 +91,22 @@ public class tambah_resep extends AppCompatActivity {
     };
 
     List<EditText> allEds = new ArrayList<EditText>(); //bahan
-    List<EditText> allEdsTakaran = new ArrayList<EditText>(); //takaran bahan
-    List<EditText> allEdsStep = new ArrayList<EditText>(); //step
+    @NotEmpty List<EditText> allEdsTakaran = new ArrayList<EditText>(); //takaran bahan
+    @NotEmpty List<EditText> allEdsStep = new ArrayList<EditText>(); //step
 
-    private ArrayList<String> bahan;
-    private String userID;
+    String userID;
+    Integer user_id;
+
+    @NotEmpty
+    private EditText et_namaresep;
+    @NotEmpty
+    private EditText et_porsi;
+    @NotEmpty
+    private EditText et_biaya;
+    @NotEmpty
+    private EditText et_waktu;
+
+    private static final String TAG = "Tambah Resep";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,29 +171,17 @@ public class tambah_resep extends AppCompatActivity {
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetail();
         userID = user.get(SessionManager.ID);
-        final Integer user_id = Integer.valueOf(userID);
+        user_id = Integer.valueOf(userID);
 
-        final EditText et_namaresep = findViewById(R.id.namaresep);
-        final EditText et_porsi = findViewById(R.id.porsi);
-        final EditText et_biaya = findViewById(R.id.biaya);
-        final EditText et_waktu = findViewById(R.id.waktu_memasak);
+        et_namaresep = findViewById(R.id.namaresep);
+        et_porsi = findViewById(R.id.porsi);
+        et_biaya = findViewById(R.id.biaya);
+        et_waktu = findViewById(R.id.waktu_memasak);
         final Button buttontambahresep = findViewById(R.id.buttontambahresep);
 
-//        Call<List<BahanData2>> call = apiRequest.getBahan2();
-//        call.enqueue(new Callback<List<com.e.resepjajanankekinian.model.BahanData2>>() {
-//            @Override
-//            public void onResponse(Call<List<com.e.resepjajanankekinian.model.BahanData2>> call, Response<List<com.e.resepjajanankekinian.model.BahanData2>> response) {
-//                BahanData2 = response.body();
-//                for(com.e.resepjajanankekinian.model.BahanData2 bahanData2 : BahanData2) {
-//                 bahan.add(bahanData2.getNama());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<com.e.resepjajanankekinian.model.BahanData2>> call, Throwable t) {
-//
-//            }
-//        });
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         /*
         Tambah data
@@ -189,89 +189,13 @@ public class tambah_resep extends AppCompatActivity {
         buttontambahresep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String namaresep = " ", porsi = " ", biaya = " ", waktu_memasak = " ", uploadgambar = " ";
-
-                namaresep = et_namaresep.getText().toString().trim();
-                porsi = et_porsi.getText().toString().trim();
-                biaya = et_biaya.getText().toString().trim();
-                waktu_memasak = et_waktu.getText().toString().trim();
-                uploadgambar = getStringImage(bitmap);
-
-
-                if (namaresep != null && namaresep.length() != 0) {
-                    progressDialog = new ProgressDialog(tambah_resep.this);
-                    progressDialog.setMessage("Loading....");
-                    progressDialog.show();
-
-                    Call<ResepUserData> call = apiRequest.postResepUsers(user_id, namaresep, waktu_memasak, porsi, biaya, 0, 0, uploadgambar);
-                    call.enqueue(new Callback<ResepUserData>() {
-                        @Override
-                        public void onResponse(@NonNull Call<ResepUserData> call, @NonNull Response<ResepUserData> response) {
-
-                            // data bahan bahan
-
-                            ResepUserData resepUserData = response.body();
-                            Integer resep_user_id = resepUserData.getId();
-
-                            String[] strings = new String[allEds.size()];
-                            String[] stringsTakaran = new String[allEdsTakaran.size()];
-
-                            for( int i=0; i < allEds.size(); i++){
-                                strings[i] = allEds.get(i).getText().toString();
-                                stringsTakaran[i] = allEdsTakaran.get(i).getText().toString();
-                                Call<ResponseBody> call2 = apiRequest.postUsersBahan(strings[i], stringsTakaran[i] , resep_user_id );
-                                call2.enqueue(new Callback<ResponseBody>() {
-                                    @Override
-                                    public void onResponse(@NonNull Call<ResponseBody> call2, @NonNull Response<ResponseBody> response) {
-                                        //Toast.makeText(tambah_resep.this, "Berhasil menambahkan bahan resep", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    @Override
-                                    public void onFailure(@NonNull Call<ResponseBody> call2, @NonNull Throwable t) {
-                                        //Toast.makeText(tambah_resep.this, "Gagal menambahkan bahan resep", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-
-                            //data bahan abis
-
-                            //data step cara
-                            String[] strings2 = new String[allEdsStep.size()];
-
-                            for( int i=0; i < allEdsStep.size(); i++){
-                                strings2[i] = allEdsStep.get(i).getText().toString();
-                                Call<ResponseBody> call3 = apiRequest.postUsersStep(i+1, strings2[i], resep_user_id);
-                                call3.enqueue(new Callback<ResponseBody>() {
-                                    @Override
-                                    public void onResponse(@NonNull Call<ResponseBody> call3, @NonNull Response<ResponseBody> response) {
-                                        //progressDialog.dismiss();
-                                        //Toast.makeText(tambah_resep.this, "Berhasil menambahkan step resep", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    @Override
-                                    public void onFailure(@NonNull Call<ResponseBody> call3, @NonNull Throwable t) {
-                                        //progressDialog.dismiss();
-                                        //Toast.makeText(tambah_resep.this, "Gagal menambahkan step resep", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-
-                            //data stepcara abis
-                            createLog("Menambah Resep", "add");
-                            progressDialog.dismiss();
-                            Toast.makeText(tambah_resep.this, "Berhasil menambahkan resep", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(tambah_resep.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-
-                        @Override
-                        public void onFailure(@NonNull Call<ResepUserData> call, @NonNull Throwable t) {
-                            progressDialog.dismiss();
-                            Toast.makeText(tambah_resep.this, "Gagal menambahkan resep", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else Toast.makeText(tambah_resep.this, "Resep tidak bisa kosong", Toast.LENGTH_SHORT).show();
+                try {
+                    validator.validate();
+                } catch (Exception e) {
+                    // This will catch any exception, because they are all descended from Exception
+                    String message = "Error " + e.getMessage();
+                    Log.e(TAG, message);
+                }
             }
         });
 
@@ -393,5 +317,107 @@ public class tambah_resep extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
             }
         });
+    }
+
+    @Override
+    public void onValidationSucceeded() {
+        if (bitmap != null) {
+            Toast.makeText(tambah_resep.this, "Masukkan Gambar Resep", Toast.LENGTH_SHORT).show();
+        } else if (allEds.isEmpty()) {
+            Toast.makeText(tambah_resep.this, "Bahan Tidak Bisa Kosong", Toast.LENGTH_SHORT).show();
+        } else if (allEdsStep.isEmpty()) {
+            Toast.makeText(tambah_resep.this, "Step Tidak Bisa Kosong", Toast.LENGTH_SHORT).show();
+        }  else {
+            String namaresep = " ", porsi = " ", biaya = " ", waktu_memasak = " ", uploadgambar = " ";
+
+            namaresep = et_namaresep.getText().toString().trim();
+            porsi = et_porsi.getText().toString().trim();
+            biaya = et_biaya.getText().toString().trim();
+            waktu_memasak = et_waktu.getText().toString().trim();
+            if (bitmap != null) uploadgambar = getStringImage(bitmap);
+
+            progressDialog = new ProgressDialog(tambah_resep.this);
+            progressDialog.setMessage("Loading....");
+            progressDialog.show();
+
+            Call<ResepUserData> call = apiRequest.postResepUsers(user_id, namaresep, waktu_memasak, porsi, biaya, 0, 0, uploadgambar);
+            call.enqueue(new Callback<ResepUserData>() {
+                @Override
+                public void onResponse(@NonNull Call<ResepUserData> call, @NonNull Response<ResepUserData> response) {
+
+                    // data bahan bahan
+
+                    ResepUserData resepUserData = response.body();
+                    Integer resep_user_id = resepUserData.getId();
+
+                    String[] strings = new String[allEds.size()];
+                    String[] stringsTakaran = new String[allEdsTakaran.size()];
+
+                    for( int i=0; i < allEds.size(); i++){
+                        strings[i] = allEds.get(i).getText().toString();
+                        stringsTakaran[i] = allEdsTakaran.get(i).getText().toString();
+                        Call<ResponseBody> call2 = apiRequest.postUsersBahan(strings[i], stringsTakaran[i] , resep_user_id );
+                        call2.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(@NonNull Call<ResponseBody> call2, @NonNull Response<ResponseBody> response) {
+                            }
+
+                            @Override
+                            public void onFailure(@NonNull Call<ResponseBody> call2, @NonNull Throwable t) {
+                            }
+                        });
+                    }
+
+                    //data bahan abis
+
+                    //data step cara
+                    String[] strings2 = new String[allEdsStep.size()];
+
+                    for( int i=0; i < allEdsStep.size(); i++){
+                        strings2[i] = allEdsStep.get(i).getText().toString();
+                        Call<ResponseBody> call3 = apiRequest.postUsersStep(i+1, strings2[i], resep_user_id);
+                        call3.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(@NonNull Call<ResponseBody> call3, @NonNull Response<ResponseBody> response) {
+                            }
+
+                            @Override
+                            public void onFailure(@NonNull Call<ResponseBody> call3, @NonNull Throwable t) {
+                            }
+                        });
+                    }
+
+                    //data stepcara abis
+                    createLog("Menambah Resep", "add");
+                    progressDialog.dismiss();
+                    Toast.makeText(tambah_resep.this, "Berhasil menambahkan resep", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(tambah_resep.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<ResepUserData> call, @NonNull Throwable t) {
+                    progressDialog.dismiss();
+                    Toast.makeText(tambah_resep.this, "Gagal menambahkan resep", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

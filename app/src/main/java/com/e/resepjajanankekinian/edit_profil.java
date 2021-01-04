@@ -21,6 +21,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -36,6 +37,10 @@ import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
 import com.e.resepjajanankekinian.service.CircleTransform;
 import com.e.resepjajanankekinian.service.SessionManager;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -48,12 +53,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class edit_profil extends AppCompatActivity {
+public class edit_profil extends AppCompatActivity implements Validator.ValidationListener {
 
     SessionManager sessionManager;
     ProgressDialog progressDialog;
-    EditText editTextName;
-    EditText editTextEmail;
+    @NotEmpty EditText editTextName;
+    @NotEmpty @Email EditText editTextEmail;
+    @NotEmpty EditText editTextPass;
     String userId;
     String pass;
     String userName;
@@ -65,6 +71,9 @@ public class edit_profil extends AppCompatActivity {
     private static final int STORAGE_PERMISSION_CODE = 101;
     String foto;
     ProgressBar progressBar;
+    String uploadgambar;
+    Validator validator;
+    private static final String TAG = "login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +104,9 @@ public class edit_profil extends AppCompatActivity {
         editTextName.setFocusableInTouchMode(true);
         editTextEmail.setFocusableInTouchMode(true);
 
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
         InputMethodManager imm = (InputMethodManager) getSystemService(edit_profil.INPUT_METHOD_SERVICE);
         imm.showSoftInput(editTextName, InputMethodManager.SHOW_IMPLICIT);
 
@@ -104,7 +116,7 @@ public class edit_profil extends AppCompatActivity {
                 createLog("menekan tombol simpan edit profil", "click");
                 LayoutInflater layoutInflater = LayoutInflater.from(edit_profil.this);
                 View popupInputDialogView = layoutInflater.inflate(R.layout.popup_input_dialog, null);
-                final EditText editTextPass = popupInputDialogView.findViewById(R.id.editPass);
+                editTextPass = popupInputDialogView.findViewById(R.id.editPass);
                 AlertDialog.Builder builder = new AlertDialog.Builder(edit_profil.this);
                 builder.setCancelable(true);
                 builder.setTitle("Edit Profil");
@@ -113,9 +125,13 @@ public class edit_profil extends AppCompatActivity {
                 builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String pass = editTextPass.getText().toString().trim();
-                        progressBar.setVisibility(View.VISIBLE);
-                        saveEdit(pass);
+                        try {
+                            validator.validate();
+                        } catch (Exception e) {
+                            // This will catch any exception, because they are all descended from Exception
+                            String message = "Error " + e.getMessage();
+                            Log.e(TAG, message);
+                        }
                     }
                 });
                 AlertDialog alertDialog = builder.create();
@@ -155,33 +171,42 @@ public class edit_profil extends AppCompatActivity {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
-        String name = editTextName.getText().toString().trim();
-        String email = editTextEmail.getText().toString().trim();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        final String name = editTextName.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         final Integer id = Integer.valueOf(userId);
+        if (bitmap != null) uploadgambar = getStringImage(bitmap);
 
-        if (!foto.isEmpty()) uploadPicture(userId, getStringImage(bitmap), pass);
-
-        if (email.matches(emailPattern)) {
-            Call<ResponseBody> call = apiRequest.putUser(id, name, email, pass, null, null);
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                    progressDialog.dismiss();
-                    createLog("mengupdate profil", "update");
-                    openProfil(id, pass);
+        Call<List<UserData>> responseBodyCall = apiRequest.getUser(id, null, null, pass);
+        responseBodyCall.enqueue(new Callback<List<UserData>>() {
+            @Override
+            public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response) {
+                progressDialog.dismiss();
+                String code = String.valueOf(response.code());
+                if ("200".equals(code)) {
+                    Call<ResponseBody> callx = apiRequest.putUser(id, name, email, pass, null, uploadgambar);
+                    callx.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                            createLog("mengupdate profil", "update");
+                            openProfil(id, pass);
+                        }
+                        @Override
+                        public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                            Toast.makeText(edit_profil.this, "Gagal mengupdate profil", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(edit_profil.this, "Password Salah", Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                    progressDialog.dismiss();
-                    Toast.makeText(edit_profil.this, "Gagal mengupdate profil", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            progressDialog.dismiss();
-            Toast.makeText(edit_profil.this, "Masukkan email yang valid", Toast.LENGTH_SHORT).show();
-        }
+            @Override
+            public void onFailure(Call<List<UserData>> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(edit_profil.this, "Password Salah", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void chooseFile() {
@@ -198,11 +223,11 @@ public class edit_profil extends AppCompatActivity {
             Uri filePath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                foto = getStringImage(bitmap);
-                profile_image.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            foto = getStringImage(bitmap);
+            profile_image.setImageBitmap(bitmap);
         }
     }
 
@@ -213,12 +238,12 @@ public class edit_profil extends AppCompatActivity {
 
         final Integer id = Integer.valueOf(userId);
 
-        Call<ResponseBody> call = apiRequest.putUser(id, null, null, pass, null, photo);
+        Call<ResponseBody> call = apiRequest.putFoto(id, pass, photo);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 progressDialog.dismiss();
-                openProfil(id, pass);
+                Toast.makeText(edit_profil.this, "Berhasil mengupdate foto", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -245,7 +270,6 @@ public class edit_profil extends AppCompatActivity {
                 Integer id = userDataList.get(0).getId();
                 String foto = userDataList.get(0).getFoto();
                 String idx = String.valueOf(id);
-                sessionManager.refresh();
                 sessionManager.createSession(nama, email, idx, foto);
                 progressBar.setVisibility(View.GONE);
                 startActivity(new Intent(edit_profil.this, profil.class));
@@ -277,7 +301,7 @@ public class edit_profil extends AppCompatActivity {
                     new String[]{permission},
                     requestCode);
         } else {
-            checkPass();
+            chooseFile();
         }
     }
 
@@ -297,7 +321,7 @@ public class edit_profil extends AppCompatActivity {
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                checkPass();
+                chooseFile();
             } else {
                 Toast.makeText(this,
                         "Storage Permission Denied",
@@ -342,4 +366,24 @@ public class edit_profil extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onValidationSucceeded() {
+        String pass = editTextPass.getText().toString().trim();
+        saveEdit(pass);
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 }
