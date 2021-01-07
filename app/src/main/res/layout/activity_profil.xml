@@ -56,6 +56,19 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/buttonListResep"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimaryDark"
+            android:text="Resep Yang Telah Kamu Buat"
+            android:textAllCaps="false"
+            android:textColor="@color/design_default_color_background"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/buttonLogout"
@@ -63,7 +76,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:layout_gravity="center"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorAccent"
             android:text="Logout"
             android:textAllCaps="false"
             android:textColor="@color/design_default_color_background"

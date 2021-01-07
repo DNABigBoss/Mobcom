@@ -89,6 +89,15 @@ public class profil extends AppCompatActivity {
             }
         });
 
+        Button button_listresep = findViewById(R.id.buttonListResep);
+        button_listresep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createLog("melihat list resep user", "click");
+                startActivity(new Intent(profil.this, list_resep.class));
+            }
+        });
+
         Button button_logout = findViewById(R.id.buttonLogout);
         button_logout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -84,6 +84,21 @@ public interface ApiRequest {
     Call<List<DiskusiData>> getDiskusi(@Query("id") Integer id, @Query("resep_id") Integer resep_id);
 
     /*
+     * Get data users resep
+     */
+    @Streaming
+    @GET("usersresep")
+    Call<List<ResepUserData>> getUserresep(@Query("id") Integer id, @Query("nama") String nama, @Query("bahan") String bahan, @Query("limit") Integer limit, @Query("order") String order, @Query("id_users") Integer id_users);
+
+    /*
+     * Get data users resep
+     */
+    @Streaming
+    @GET("usersresep")
+    Call<ResepUserData> getDetailUserresep(@Query("id") Integer id);
+
+
+    /*
      * Post data user
      */
     @Streaming

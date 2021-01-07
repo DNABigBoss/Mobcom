@@ -19,6 +19,7 @@ import com.e.resepjajanankekinian.service.ApiRequest;
 import com.e.resepjajanankekinian.service.SessionManager;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 import java.util.List;
@@ -29,7 +30,7 @@ import retrofit2.Response;
 
 public class login extends AppCompatActivity implements Validator.ValidationListener {
 
-    @NotEmpty private EditText editText;
+    @NotEmpty @Email private EditText editText;
     @NotEmpty private EditText pass;
     ProgressDialog progressDialog;
     SessionManager sessionManager;
@@ -103,7 +104,7 @@ public class login extends AppCompatActivity implements Validator.ValidationList
         String txtLogin = editText.getText().toString().trim();
         String txtPass = pass.getText().toString().trim();
 
-        Call<List<UserData>> call = apiRequest.getUser(null, txtLogin, null, txtPass);
+        Call<List<UserData>> call = apiRequest.getUser(null, null, txtLogin, txtPass);
         call.enqueue(new Callback<List<UserData>>() {
             @Override
             public void onResponse(@NonNull Call<List<UserData>> call, @NonNull Response<List<UserData>> response) {
