@@ -1,6 +1,11 @@
 # Mobcom - Resep Jajanan Kekinian :pizza: :hamburger: :fries:
 Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113. 
 
+## Link Download Aplikasi :inbox_tray:
+[Download Now](bit.ly/resepjajanankekinian)
+
+## Tentang Resep Jajanan Kekinian :mag:
+
 Ide kami dalam pembuatan aplikasi ini adalah meningkatnya tren masak-memasak pada era pandemi seperti ini, dikarenakan masyarakat lebih aktif di rumah bersama keluarga. Masyarakat lebih sering mencari resep masakan di youtube, bisa dilihat pada video yang berkaitan dengan resep-resep masakan  di youtube mendulang view yang banyak akhir-akhir ini.  karena banyaknya macam-macam video dan artikel mengenai berbagai jenis masakan sehingga tidak terstrukturnya jenis jenis masakan yang ada, aplikasi ini dapat membantu masyarakat dalam memasak masakan yang sejenis guna mempermudah pencarian pemakainya. Aplikasi ini sekiranya dapat juga memulihkan perekonomian keluarga bagi mereka yang terdampak agar dapat berjualan di sekitar rumahnya demi memenuhi kebutuhan harian
 
 ## Author :construction_worker: :construction_worker: :construction_worker:
@@ -28,5 +33,4 @@ Ide kami dalam pembuatan aplikasi ini adalah meningkatnya tren masak-memasak pad
 * [Sprint 9](https://github.com/dwikimarbi/Mobcom/tree/sprint9)
 * [Sprint 10](https://github.com/dwikimarbi/Mobcom/tree/sprint10)
 * [Sprint 11](https://github.com/dwikimarbi/Mobcom/tree/sprint11):new:
-* [Sprint 12](https://github.com/dwikimarbi/Mobcom/tree/sprint12):construction:
 
