@@ -4,7 +4,7 @@ Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113.
 ## Link Download Aplikasi :inbox_tray:
 [Download Now](https://bit.ly/resepjajanankekinian)
 
-## Link Download final_report.pdf
+## Link Download final_report.pdf :file:
 [Download Pdf](https://unjac-my.sharepoint.com/:b:/g/personal/faqihuddinalfarisi_1313617025_mhs_unj_ac_id/EdOL1JwNU5hJrreJyKdx7NcBTFVzJUlYhWWjF37XCATK1g?e=XWIRXU)
 
 ## Tentang Resep Jajanan Kekinian :mag:
@@ -36,6 +36,6 @@ Ide kami dalam pembuatan aplikasi ini adalah meningkatnya tren masak-memasak pad
 * [Sprint 9](https://github.com/dwikimarbi/Mobcom/tree/sprint9)
 * [Sprint 10](https://github.com/dwikimarbi/Mobcom/tree/sprint10)
 * [Sprint 11](https://github.com/dwikimarbi/Mobcom/tree/sprint11)
-* [Final](https://github.com/dwikimarbi/Mobcom/tree/final):new:
+* [Final](https://github.com/dwikimarbi/Mobcom/tree/final) :new:
 
 
