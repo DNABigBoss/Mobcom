@@ -2,7 +2,7 @@
 Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113. 
 
 ## Link Download Aplikasi :inbox_tray:
-[Download Now](bit.ly/resepjajanankekinian)
+[Download Now](https://bit.ly/resepjajanankekinian)
 
 ## Link Download final_report.pdf
 [Download Pdf](https://unjac-my.sharepoint.com/:b:/g/personal/faqihuddinalfarisi_1313617025_mhs_unj_ac_id/EdOL1JwNU5hJrreJyKdx7NcBTFVzJUlYhWWjF37XCATK1g?e=XWIRXU)
