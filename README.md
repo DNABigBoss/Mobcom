@@ -4,6 +4,9 @@ Repositori ini dibuat untuk memenuhi tugas mata kuliah Mobile Computing 113.
 ## Link Download Aplikasi :inbox_tray:
 [Download Now](bit.ly/resepjajanankekinian)
 
+## Link Download final_report.pdf
+[Download Pdf](https://unjac-my.sharepoint.com/:b:/g/personal/faqihuddinalfarisi_1313617025_mhs_unj_ac_id/EdOL1JwNU5hJrreJyKdx7NcBTFVzJUlYhWWjF37XCATK1g?e=XWIRXU)
+
 ## Tentang Resep Jajanan Kekinian :mag:
 
 Ide kami dalam pembuatan aplikasi ini adalah meningkatnya tren masak-memasak pada era pandemi seperti ini, dikarenakan masyarakat lebih aktif di rumah bersama keluarga. Masyarakat lebih sering mencari resep masakan di youtube, bisa dilihat pada video yang berkaitan dengan resep-resep masakan  di youtube mendulang view yang banyak akhir-akhir ini.  karena banyaknya macam-macam video dan artikel mengenai berbagai jenis masakan sehingga tidak terstrukturnya jenis jenis masakan yang ada, aplikasi ini dapat membantu masyarakat dalam memasak masakan yang sejenis guna mempermudah pencarian pemakainya. Aplikasi ini sekiranya dapat juga memulihkan perekonomian keluarga bagi mereka yang terdampak agar dapat berjualan di sekitar rumahnya demi memenuhi kebutuhan harian
