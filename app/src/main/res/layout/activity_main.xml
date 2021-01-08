@@ -236,16 +236,24 @@
                                     android:textColor="@color/colorWhite"
                                     android:textSize="22sp"
                                     android:textStyle="bold"/>
-                                <ImageView
-                                    android:id="@+id/imageViewIklan"
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/cView"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:contentDescription="@string/populer"
-                                    android:scaleType="centerCrop"
-                                    android:adjustViewBounds="true"
-                                    android:cropToPadding="false"
-                                    android:src="@drawable/oreocheesecake"
-                                    />
+                                    android:layout_height="200dp"
+                                    app:cardCornerRadius="16dp"
+                                    app:cardBackgroundColor="@color/colorPrimaryDark">
+                                    <ImageView
+                                        android:id="@+id/imageViewIklan"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:contentDescription="@string/populer"
+                                        android:scaleType="centerCrop"
+                                        android:adjustViewBounds="true"
+                                        android:cropToPadding="false"
+                                        android:src="@drawable/oreocheesecake"
+                                        />
+                                </androidx.cardview.widget.CardView>
+
                             </LinearLayout>
 
                         </androidx.cardview.widget.CardView>

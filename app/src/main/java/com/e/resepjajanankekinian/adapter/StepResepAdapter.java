@@ -100,6 +100,7 @@ public class StepResepAdapter extends RecyclerView.Adapter<StepResepAdapter.Cust
                     holder.t1.speak(dataStep.getIntruksi(),TextToSpeech.QUEUE_FLUSH, null, "");
                 } else {
                     holder.buttonSound.setChecked(false);
+                    holder.t1.stop();
                 }
             }
         });

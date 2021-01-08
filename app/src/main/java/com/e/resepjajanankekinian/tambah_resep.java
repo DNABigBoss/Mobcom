@@ -17,6 +17,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -321,9 +323,7 @@ public class tambah_resep extends AppCompatActivity implements Validator.Validat
 
     @Override
     public void onValidationSucceeded() {
-        if (bitmap != null) {
-            Toast.makeText(tambah_resep.this, "Masukkan Gambar Resep", Toast.LENGTH_SHORT).show();
-        } else if (allEds.isEmpty()) {
+        if (allEds.isEmpty()) {
             Toast.makeText(tambah_resep.this, "Bahan Tidak Bisa Kosong", Toast.LENGTH_SHORT).show();
         } else if (allEdsStep.isEmpty()) {
             Toast.makeText(tambah_resep.this, "Step Tidak Bisa Kosong", Toast.LENGTH_SHORT).show();
@@ -391,7 +391,7 @@ public class tambah_resep extends AppCompatActivity implements Validator.Validat
                     createLog("Menambah Resep", "add");
                     progressDialog.dismiss();
                     Toast.makeText(tambah_resep.this, "Berhasil menambahkan resep", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(tambah_resep.this, MainActivity.class);
+                    Intent intent = new Intent(tambah_resep.this, list_resep.class);
                     startActivity(intent);
                     finish();
                 }
@@ -419,5 +419,27 @@ public class tambah_resep extends AppCompatActivity implements Validator.Validat
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        createLog("menekan tombol kembali", "click");
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

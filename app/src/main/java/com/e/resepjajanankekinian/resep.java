@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.e.resepjajanankekinian.model.StepResepData;
+import com.e.resepjajanankekinian.model.UserData;
 import com.e.resepjajanankekinian.service.ApiClient;
 import com.e.resepjajanankekinian.service.ApiRequest;
 import com.e.resepjajanankekinian.service.SessionManager;
@@ -65,6 +66,7 @@ public class resep extends AppCompatActivity {
         final TextView diskusicount = findViewById(R.id.resepDiskusiCount);
         final RelativeLayout resepdiskusi = findViewById(R.id.resepDiskusi);
         final TextView porsi = findViewById(R.id.porsi);
+        final TextView resepby = findViewById(R.id.id_users);
 
         final Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -122,6 +124,26 @@ public class resep extends AppCompatActivity {
                             .placeholder((R.drawable.ic_launcher_background))
                             .error(R.drawable.ic_launcher_background)
                             .into(imagejajanan);
+                    String resep_by = datumInfo.getId_users();
+                    if (resep_by == null) resepby.setText("Admin");
+                    else {
+                        Call<List<UserData>> userDataCall = apiRequest.getUser(Integer.valueOf(resep_by), null, null,null);
+                        userDataCall.enqueue(new Callback<List<UserData>>() {
+                            @Override
+                            public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response) {
+                                List<UserData> userData = response.body();
+                                for (UserData userData1: userData) {
+                                    resepby.setText(userData1.getNama());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<UserData>> call, Throwable t) {
+
+                            }
+                        });
+                    }
+
                 }
 
                 String bahanbahan = "";
